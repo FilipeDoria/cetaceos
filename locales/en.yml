@@ -1,0 +1,21 @@
+button:
+  about: About
+  back: Back
+  go: GO
+  home: Home
+  records: Records
+  toggle_dark: Toggle dark mode
+  toggle_langs: Change languages
+general:
+  name: Sightings ICNF
+  short_name: Sightings
+  title: Sightings ICNF
+intro:
+  aka: Also known as
+  desc: Sightings of animals report page. ICNF Madeira
+  dynamic-route: Demo of dynamic route
+  hi: Hi, {name}!
+  whats-the-company-name: What is the company name?
+  whats-the-ship-name: What is the ship name?
+  whats-your-name: What's your name?
+not-found: Not found
