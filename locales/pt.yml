@@ -7,6 +7,8 @@ button:
   records: Registos
   toggle_dark: Alternar modo escuro
   toggle_langs: Mudar de idioma
+cetacean:
+  odontocetos: Odontocetos
 general:
   name: Avistamentos ICNF
   short_name: Avistamentos

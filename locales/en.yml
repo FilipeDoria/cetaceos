@@ -7,6 +7,9 @@ button:
   records: Records
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
+cetacean:
+  misticetos: Misticetos
+  odontocetos: Odontocetos
 general:
   name: Sightings ICNF
   short_name: Sightings

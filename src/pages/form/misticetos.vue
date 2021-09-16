@@ -1,15 +1,5 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/user'
-
-const user = useUserStore()
-const name = ref(user.savedName)
-
 const router = useRouter()
-const go = () => {
-  if (name.value)
-    router.push(`/hi/${encodeURIComponent(name.value)}`)
-}
-
 const { t } = useI18n()
 </script>
 
@@ -27,9 +17,8 @@ const { t } = useI18n()
 
     <div class="py-4" />
 
-    <p>A new form will appear on this page</p>
+    <p>Misticetos Form here</p>
   </div>
-  <router-view />
   <div>
     <button
       class="btn m-3 text-sm mt-8"
@@ -42,5 +31,5 @@ const { t } = useI18n()
 
 <route lang="yaml">
 meta:
-  layout: index
+  layout: default
 </route>
