@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/user'
+import { useUserStore } from '~/stores/form'
 
 const user = useUserStore()
 const name = ref(user.savedName)
 
 const router = useRouter()
-const go = () => {
-  if (name.value)
-    router.push(`/hi/${encodeURIComponent(name.value)}`)
-}
 
 const { t } = useI18n()
 </script>
@@ -25,9 +21,14 @@ const { t } = useI18n()
       <em class="text-sm opacity-75">{{ t('intro.desc') }}</em>
     </p>
 
-    <div class="py-4" />
-
-    <p>A new form will appear on this page</p>
+    <div>
+      <router-link class="btn m-3 text-sm mt-8" to="/form" :title="t('button.newForm')">
+        {{ t('button.newForm') }}
+      </router-link>
+      <router-link class="btn m-3 text-sm mt-8" to="/records" :title="t('button.records')">
+        {{ t('button.records') }}
+      </router-link>
+    </div>
   </div>
 </template>
 
