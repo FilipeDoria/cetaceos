@@ -11,24 +11,12 @@ const { t } = useI18n()
 
 <template>
   <div>
-    <p class="text-4xl">
-      <carbon-campsite class="inline-block" />
-    </p>
-    <p>
-      {{ t('general.title') }}
-    </p>
-    <p>
-      <em class="text-sm opacity-75">{{ t('intro.desc') }}</em>
-    </p>
-
-    <div>
-      <router-link class="btn m-3 text-sm mt-8" to="/form" :title="t('button.newForm')">
-        {{ t('button.newForm') }}
-      </router-link>
-      <router-link class="btn m-3 text-sm mt-8" to="/records" :title="t('button.records')">
-        {{ t('button.records') }}
-      </router-link>
-    </div>
+    <router-link class="btn m-3 text-sm mt-8" to="/form" :title="t('button.newForm')">
+      {{ t('button.newForm') }}
+    </router-link>
+    <router-link class="btn m-3 text-sm mt-8" to="/records" :title="t('button.records')">
+      {{ t('button.records') }}
+    </router-link>
   </div>
 </template>
 
