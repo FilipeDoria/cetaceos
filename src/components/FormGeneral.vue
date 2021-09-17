@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script>
 export default {
   data() {
     return {
@@ -24,7 +24,7 @@ export default {
     handleSubmit() {
       // to save form items on local storage to userData variable
       localStorage.setItem('userData', JSON.stringify(this.formValues))
-      console.log(`Form values saved on localStorage: ${localStorage.getItem('userData')}`)
+      // console.log(`Form values saved on localStorage: ${localStorage.getItem('userData')}`)
     },
     loadInitialData(form) {
       navigator.geolocation.getCurrentPosition((pos) => {
