@@ -1,6 +1,7 @@
 button:
   about: Sobre
   back: Voltar
+  getLocation: Obter Localização
   go: Ir
   home: Início
   newForm: Novo Formulário

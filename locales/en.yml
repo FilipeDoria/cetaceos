@@ -1,6 +1,7 @@
 button:
   about: About
   back: Back
+  getLocation: Get Location
   go: GO
   home: Home
   newForm: New Form
