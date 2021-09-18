@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Odontocetos form here</p>
+    <p>Odontocetos Page here</p>
   </div>
 </template>
 

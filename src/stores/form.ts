@@ -10,6 +10,15 @@ export const useUserStore = defineStore('user', () => {
   const usedNames = computed(() => Array.from(previousNames.value))
   const otherNames = computed(() => usedNames.value.filter(name => name !== savedName.value))
 
+  const company = ref('')
+  const ship = ref('')
+  let longitude
+  let latitude
+  const seaConditions = ref('')
+  let date
+  let time
+  const valid = false
+
   /**
    * Changes the current name of the user and saves the one that was used
    * before.
@@ -27,6 +36,14 @@ export const useUserStore = defineStore('user', () => {
     setNewName,
     otherNames,
     savedName,
+    company,
+    ship,
+    longitude,
+    latitude,
+    seaConditions,
+    date,
+    time,
+    valid,
   }
 })
 
