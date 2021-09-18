@@ -53,12 +53,11 @@ form.ship = 'Cetus'
 <template>
   <div class="p-1">
     <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+      <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
       <input
         id="input"
         v-model="form.company"
         :placeholder="t('intro.whats-the-company-name')"
-        :aria-label="t('intro.whats-your-name')"
         type="text"
         autocomplete="false"
         p="x-4 y-2"
@@ -70,12 +69,11 @@ form.ship = 'Cetus'
       >
     </div>
     <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+      <label class="hidden" for="input">{{ t('intro.whats-the-ship-name') }}</label>
       <input
         id="input"
         v-model="form.ship"
         :placeholder="t('intro.whats-the-ship-name')"
-        :aria-label="t('intro.whats-your-name')"
         type="text"
         autocomplete="false"
         p="x-4 y-2"
@@ -87,12 +85,11 @@ form.ship = 'Cetus'
       >
     </div>
     <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+      <label class="hidden" for="input">{{ t('intro.select-date') }}</label>
       <input
         id="input"
         v-model="form.date"
-        :placeholder="t('intro.whats-the-ship-name')"
-        :aria-label="t('intro.whats-your-name')"
+        :placeholder="t('intro.select-date')"
         type="date"
         autocomplete="false"
         p="x-4 y-2"
@@ -104,12 +101,11 @@ form.ship = 'Cetus'
       >
     </div>
     <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+      <label class="hidden" for="input">{{ t('intro.select-time') }}</label>
       <input
         id="input"
         v-model="form.time"
-        :placeholder="t('intro.whats-the-ship-name')"
-        :aria-label="t('intro.whats-your-name')"
+        :placeholder="t('intro.select-time')"
         type="time"
         autocomplete="false"
         p="x-4 y-2"
@@ -121,47 +117,44 @@ form.ship = 'Cetus'
       >
     </div>
     <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
-      <input
-        id="input"
-        v-model="form.latitude"
-        :placeholder="t('intro.whats-the-latitude')"
-        :aria-label="t('intro.whats-your-name')"
-        type="number"
-        autocomplete="false"
-        p="x-4 y-2"
-        w="250px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-      >
-    </div>
-    <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
-      <input
-        id="input"
-        v-model="form.longitude"
-        :placeholder="t('intro.whats-the-longitude')"
-        :aria-label="t('intro.whats-your-name')"
-        type="number"
-        autocomplete="false"
-        p="x-4 y-2"
-        w="250px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-      >
-    </div>
-    <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+      <label class="hidden" for="input">{{ t('intro.whats-the-sea-like') }}</label>
       <input
         id="input"
         v-model="form.seaConditions"
         :placeholder="t('intro.whats-the-sea-like')"
-        :aria-label="t('intro.whats-your-name')"
         type="options"
+        autocomplete="false"
+        p="x-4 y-2"
+        w="250px"
+        text="center"
+        bg="transparent"
+        border="~ rounded gray-200 dark:gray-700"
+        outline="none active:none"
+      >
+    </div>
+    <div class="py-1">
+      <label class="hidden" for="input">{{ t('intro.whats-the-latitude') }}</label>
+      <input
+        id="input"
+        v-model="form.latitude"
+        :placeholder="t('intro.whats-the-latitude')"
+        type="number"
+        autocomplete="false"
+        p="x-4 y-2"
+        w="250px"
+        text="center"
+        bg="transparent"
+        border="~ rounded gray-200 dark:gray-700"
+        outline="none active:none"
+      >
+    </div>
+    <div class="py-1">
+      <label class="hidden" for="input">{{ t('intro.whats-the-longitude') }}</label>
+      <input
+        id="input"
+        v-model="form.longitude"
+        :placeholder="t('intro.whats-the-longitude')"
+        type="number"
         autocomplete="false"
         p="x-4 y-2"
         w="250px"

@@ -20,6 +20,7 @@ intro:
   desc: Sightings of animals report page. ICNF Madeira
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
+  select-date: Select a data
   whats-the-company-name: What is the company name?
   whats-the-ship-name: What is the ship name?
   whats-your-name: What's your name?

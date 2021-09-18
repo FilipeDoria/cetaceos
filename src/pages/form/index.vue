@@ -3,6 +3,7 @@ const { t } = useI18n()
 </script>
 
 <template>
+  <p>{{ t('cetacean.choose-animal-class') }}</p>
   <div>
     <router-link class="btn m-3 text-sm mt-8" to="/form/odontocetos" :title="t('cetacean.odontocetos')">
       {{ t('cetacean.odontocetos') }}
