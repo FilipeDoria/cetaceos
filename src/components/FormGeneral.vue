@@ -185,7 +185,7 @@ form.ship = 'Cetus'
       </button>
       <button
         class="m-3 text-sm btn"
-        :disabled="!form.seaConditions"
+        :disabled="!form.seaConditions || !form.latitude || !form.date || !form.time || !form.ship || !form.company"
         @click="go"
       >
         {{ t('button.go') }}
