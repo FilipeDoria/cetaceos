@@ -31,6 +31,7 @@ function success(pos) {
   const crd = pos.coords
   form.latitude = pos.coords.latitude.toFixed(5)
   form.longitude = pos.coords.longitude.toFixed(5)
+  message.value = ''
 }
 
 function error(err) {
