@@ -5,6 +5,7 @@ button:
   go: GO
   home: Home
   newForm: New Form
+  position: Get position
   records: Records
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
@@ -22,6 +23,9 @@ intro:
   hi: Hi, {name}!
   select-date: Select a data
   whats-the-company-name: What is the company name?
+  whats-the-latitude: What's the latitude?
+  whats-the-longitude: What's the longitude?
+  whats-the-sea-like: How does the sea like?
   whats-the-ship-name: What is the ship name?
   whats-your-name: What's your name?
 not-found: Not found
