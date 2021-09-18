@@ -16,7 +16,7 @@ const go = () => {
 }
 
 function getPosition() {
-  message.value = 'Getting coordinates'
+  message.value = 'Getting coordinates...'
   const options = {
     enableHighAccuracy: true,
     timeout: 10000,
@@ -29,22 +29,25 @@ function getPosition() {
 
 function success(pos) {
   const crd = pos.coords
-  console.log('Your current position is:')
-  console.log(`Latitude : ${crd.latitude}`)
-  console.log(`Longitude: ${crd.longitude}`)
-  console.log(`More or less ${crd.accuracy} meters.`)
-  message.value = `More or less ${crd.accuracy} meters.`
-  console.log(message)
   form.latitude = pos.coords.latitude.toFixed(5)
   form.longitude = pos.coords.longitude.toFixed(5)
 }
 
 function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`)
   message.value = err.message
 }
 
 const { t } = useI18n()
+
+const options = [
+  { text: '0 - Calmo (< 1 Kmh)', value: '0' },
+  { text: '1 - Aragem (1 - 5 Km/h)', value: '1' },
+  { text: '2 - Brisa Leve (6 - 11 Km/h)', value: '2' },
+  { text: '3 - Brisa Fraca (12 - 19 Km/h)', value: '3' },
+  { text: '4 - Brisa Moderada (20 - 28 Km/h)', value: '4' },
+  { text: '5 - Brisa Forte (29 - 38 Km/h)Two', value: '5' },
+  { text: '6 - Vento Fresco (39 - 49 Km/h)', value: '6' },
+]
 
 form.company = 'H2O Madeira'
 form.ship = 'Cetus'
@@ -118,19 +121,26 @@ form.ship = 'Cetus'
     </div>
     <div class="py-1">
       <label class="hidden" for="input">{{ t('intro.whats-the-sea-like') }}</label>
-      <input
-        id="input"
+      <select
+        id=""
         v-model="form.seaConditions"
-        :placeholder="t('intro.whats-the-sea-like')"
-        type="options"
-        autocomplete="false"
+        name=""
+        type="select"
         p="x-4 y-2"
         w="250px"
         text="center"
         bg="transparent"
         border="~ rounded gray-200 dark:gray-700"
         outline="none active:none"
+        required
       >
+        <option value="" disabled select hidden>
+          {{ t('intro.whats-the-sea-like') }}
+        </option>
+        <option v-for="option in options" :key="option.value" :value="option.value">
+          {{ option.text }}
+        </option>
+      </select>
     </div>
     <div class="py-1">
       <label class="hidden" for="input">{{ t('intro.whats-the-latitude') }}</label>
@@ -164,6 +174,7 @@ form.ship = 'Cetus'
         outline="none active:none"
       >
     </div>
+    {{ message }}
 
     <div>
       <button
@@ -180,7 +191,6 @@ form.ship = 'Cetus'
         {{ t('button.go') }}
       </button>
     </div>
-    {{ message }}
     <span v-if="form.valid">
       Form values saved on localStorage:
       {{ form.company }}
