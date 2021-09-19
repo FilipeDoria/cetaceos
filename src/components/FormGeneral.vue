@@ -56,6 +56,7 @@ form.ship = 'Cetus'
 
 <template>
   <div class="p-1">
+    {{ t('form.header-message') }}
     <div class="py-1">
       <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
       <input

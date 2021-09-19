@@ -11,15 +11,17 @@ button:
   toggle_langs: Change languages
 cetacean:
   choose-animal-class: Choose an animal class
-  misticetos: Misticetos
-  odontocetos: Odontocetos
+  misticetos: Mysticetis
+  odontocetos: Odontocetis
+form:
+  header-message: Please register as much information as possible
 general:
-  name: Sightings ICNF
+  name: Sightings
   short_name: Sightings
-  title: Sightings ICNF
+  title: Sightings
 intro:
   aka: Also known as
-  desc: Sightings of animals report page. ICNF Madeira
+  desc: Sightings of animals report page.
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
   select-date: Select a data

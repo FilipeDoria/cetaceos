@@ -11,14 +11,17 @@ button:
   toggle_langs: Mudar de idioma
 cetacean:
   choose-animal-class: Escolhe uma classe
-  odontocetos: Odontocetos
+  misticetos: Mysticetis
+  odontocetos: Odontocetis
+form:
+  header-message: Por favor registe o máximo de informação possível.
 general:
-  name: Avistamentos ICNF
+  name: Avistamentos
   short_name: Avistamentos
-  title: Avistamentos ICNF
+  title: Avistamentos
 intro:
   aka: Também conhecido como
-  desc: Página de registo de avistamentos de animais. ICNF Madeira
+  desc: Página de registo de avistamentos de animais.
   dynamic-route: Demonstração de rota dinâmica
   hi: Olá, {name}!
   whats-the-latitude: Qual é a latitude?
