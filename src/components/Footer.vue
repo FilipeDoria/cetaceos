@@ -8,12 +8,15 @@ const toggleLocales = () => {
   const locales = availableLocales
   locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
 }
+
+const path = computed(() => router.currentRoute.value.path)
 </script>
 
 <template>
   <nav class="text-xl mt-6">
     <div>
       <button
+        v-if="path !== '/'"
         class="btn m-3 text-sm mt-8 bg-gray-600"
         @click="router.back()"
       >

@@ -29,8 +29,7 @@ function getPosition() {
 
 function success(pos) {
   const crd = pos.coords
-  form.latitude = pos.coords.latitude.toFixed(5)
-  form.longitude = pos.coords.longitude.toFixed(5)
+  convertDMS(crd.latitude, crd.longitude)
   message.value = ''
 }
 
@@ -52,10 +51,34 @@ const options = [
 
 form.company = 'H2O Madeira'
 form.ship = 'Cetus'
+
+function toDegreesMinutesAndSeconds(coordinate) {
+  const absolute = Math.abs(coordinate)
+  const degrees = Math.floor(absolute)
+  const minutesNotTruncated = (absolute - degrees) * 60
+  const minutes = Math.floor(minutesNotTruncated)
+  const seconds = ((minutesNotTruncated - minutes) * 60).toFixed(3)
+  coordinate = `${degrees}° ${minutes}'${seconds}"`
+  return coordinate
+}
+
+function convertDMS(lat, lng) {
+  let DMSLatitude = lat >= 0 ? 'N ' : 'S '
+  const latitude = toDegreesMinutesAndSeconds(lat)
+  DMSLatitude = DMSLatitude + latitude
+  form.latitude = DMSLatitude
+
+  let DMSLongitude = lng >= 0 ? 'E ' : 'W '
+  const longitude = toDegreesMinutesAndSeconds(lng)
+  DMSLongitude = DMSLongitude + longitude
+  form.longitude = DMSLongitude
+}
+
 </script>
 
 <template>
   <div class="p-1">
+    {{ t('form.header-message') }}
     <div class="py-1">
       <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
       <input
@@ -149,7 +172,7 @@ form.ship = 'Cetus'
         id="input"
         v-model="form.latitude"
         :placeholder="t('intro.whats-the-latitude')"
-        type="number"
+        type="string"
         autocomplete="false"
         p="x-4 y-2"
         w="250px"
@@ -165,7 +188,7 @@ form.ship = 'Cetus'
         id="input"
         v-model="form.longitude"
         :placeholder="t('intro.whats-the-longitude')"
-        type="number"
+        type="string"
         autocomplete="false"
         p="x-4 y-2"
         w="250px"

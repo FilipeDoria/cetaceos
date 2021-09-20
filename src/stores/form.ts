@@ -12,8 +12,8 @@ export const useUserStore = defineStore('user', () => {
 
   const company = ref('')
   const ship = ref('')
-  let longitude
-  let latitude
+  const longitude = ref('')
+  const latitude = ref('')
   const seaConditions = ref('')
   let date
   let time
