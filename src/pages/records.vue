@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import XLSX from 'xlsx'
-import { useUserStore } from '~/stores/user'
-
-const user = useUserStore()
-const name = ref(user.savedName)
-
-const router = useRouter()
 
 // const savedForm = JSON.parse(localStorage.getItem('formData'))
 const form = [
@@ -18,34 +11,22 @@ const form = [
 const { t } = useI18n()
 
 function exportData() {
-  const head = Object.keys(form[0])
-  const data = head
+  let csvString = [] // initializing the final form string for the excel
+  const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
+  head.forEach((key, index) =>
+    (index === Object.values(head).length - 1) ? csvString += `${key}` : csvString += `${key},`,
+  )
+  csvString += '\n'
 
-  const row = [
-    { key1: 1, key2: 2, key3: 3, key4: 4 },
-    { key1: 2, key2: 5, key3: 6, key4: 7 },
-    { key1: 3, key2: 2, key3: 3, key4: 4 },
-    { key1: 4, key2: 2, key3: 3, key4: 4 },
-    { key1: 5, key2: 2, key3: 3, key4: 4 },
-  ]
-
-  for (let entry = 0; entry < form.length; ++entry) {
-    console.log(head)
-    console.log(form[entry])
-    data.push([
-      form[entry]])
-  }
-
-  console.log(data)
-
-  const csvRows = []
-  for (let cell = 0; cell < Head.length; ++cell)
-    csvRows.push(Head[cell].join(','))
-
-  const csvString = csvRows.join('\n')
+  form.forEach((element) => {
+    Object.values(element).forEach((value, index) => {
+      (index === Object.values(element).length - 1) ? csvString += `${value}` : csvString += `${value},`
+    })
+    csvString += '\n'
+  })
   const csvFile = new Blob([csvString], { type: 'text/csv' })
   const downloadLink = document.createElement('a')
-  downloadLink.download = 'MYCSVFILE.csv'
+  downloadLink.download = 'avistamentos.csv'
   downloadLink.href = window.URL.createObjectURL(csvFile)
   downloadLink.style.display = 'none'
   document.body.appendChild(downloadLink)
@@ -59,6 +40,7 @@ function exportData() {
     <p>
       {{ t('records.title') }}
     </p>
+    The form bellow is a fake form, feature //TODO to read records history from local storage
   </div>
   <div class="py-4" />
   <div class="table">
