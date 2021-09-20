@@ -18,7 +18,8 @@ const form = [
 const { t } = useI18n()
 
 function exportData() {
-  const Head = [Object.keys(form[0])]
+  const head = Object.keys(form[0])
+  const data = head
 
   const row = [
     { key1: 1, key2: 2, key3: 3, key4: 4 },
@@ -29,12 +30,13 @@ function exportData() {
   ]
 
   for (let entry = 0; entry < form.length; ++entry) {
-    for (let key = 0; key < form[entry].length; ++key) {
-      Head.push([
-        form[entry].key,
-      ])
-    }
+    console.log(head)
+    console.log(form[entry])
+    data.push([
+      form[entry]])
   }
+
+  console.log(data)
 
   const csvRows = []
   for (let cell = 0; cell < Head.length; ++cell)

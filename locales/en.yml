@@ -24,7 +24,8 @@ intro:
   desc: Sightings of animals report page.
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
-  select-date: Select a data
+  select-date: 'Date '
+  select-time: 'Time '
   whats-the-company-name: What is the company name?
   whats-the-latitude: What's the latitude?
   whats-the-longitude: What's the longitude?

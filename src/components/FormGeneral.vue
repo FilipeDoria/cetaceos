@@ -112,7 +112,7 @@ function convertDMS(lat, lng) {
       >
     </div>
     <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.select-date') }}</label>
+      <label class="" for="input">{{ t('intro.select-date') }}</label>
       <input
         id="input"
         v-model="form.date"
@@ -128,7 +128,7 @@ function convertDMS(lat, lng) {
       >
     </div>
     <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.select-time') }}</label>
+      <label class="" for="input">{{ t('intro.select-time') }}</label>
       <input
         id="input"
         v-model="form.time"
