@@ -24,6 +24,8 @@ intro:
   desc: Página de registo de avistamentos de animais.
   dynamic-route: Demonstração de rota dinâmica
   hi: Olá, {name}!
+  select-date: 'Data '
+  select-time: 'Hora '
   whats-the-latitude: Qual é a latitude?
   whats-the-longitude: Qual é a longitude?
   whats-the-sea-like: Qual é o estado do mar?
