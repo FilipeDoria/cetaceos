@@ -43,7 +43,7 @@ function exportData() {
     The form bellow is a fake form, feature //TODO to read records history from local storage
   </div>
   <div class="py-4" />
-  <div class="table">
+  <div class="table center">
     <div class="table-header-group">
       <div class="table-row">
         <div v-for="key in Object.keys(form[0])" :key="key" class="table-cell">

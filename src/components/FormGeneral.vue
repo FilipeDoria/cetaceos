@@ -149,7 +149,6 @@ function convertDMS(lat, lng) {
         id=""
         v-model="form.seaConditions"
         name=""
-        type="select"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -158,7 +157,7 @@ function convertDMS(lat, lng) {
         outline="none active:none"
         required
       >
-        <option value="" disabled select hidden>
+        <option value="" disabled selected hidden>
           {{ t('intro.whats-the-sea-like') }}
         </option>
         <option v-for="option in options" :key="option.value" :value="option.value">
@@ -215,7 +214,7 @@ function convertDMS(lat, lng) {
         {{ t('button.go') }}
       </button>
     </div>
-    <span v-if="form.valid">
+    <span v-if="!form.valid">
       Form values saved on localStorage:
       {{ form.company }}
       {{ form.ship }}
