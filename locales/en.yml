@@ -35,3 +35,11 @@ intro:
 not-found: Not found
 records:
   title: Records of previous Sightings
+species:
+  behaviour: How is the animals behaviour?
+  child: How many are child?
+  observations: Any ther information to add?
+  otherSpecies: Did you seen a new specie?
+  reaction: What was the animals reaction?
+  total: What's the animal count?
+  whats-the-specie: What species was seen?

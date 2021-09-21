@@ -1,25 +1,20 @@
 <script setup lang="ts">
-const specie = ref('')
-const total = 0
-const child = 0
-const behaviour = ref('')
-const reaction = ref('')
-const observations = ref('')
-const otherInfo = ref('')
+import { useUserStore } from '~/stores/cetacean'
+const cetacean = useUserStore()
 
 const mysticetisSpeciesOptions = [
-  { text: 'Baleia Comum', value: '0' },
+  { text: 'Baleia Comum', value: '7' },
   { text: 'Baleia de Bryde', value: '1' },
   { text: 'Baleia Sardinheira', value: '2' },
   { text: 'Baleia Azul', value: '3' },
   { text: 'Baleia de Bossa', value: '4' },
   { text: 'Baleia Anã', value: '5' },
   { text: 'Baleia Franca', value: '6' },
-  { text: 'Outro', value: '7' },
+  { text: 'Outro', value: '0' },
 ]
 
 const odontocetisSpeciesOptions = [
-  { text: 'Golfinho Roaz', value: '0' },
+  { text: 'Golfinho Roaz', value: '21' },
   { text: 'Golfinho Pintado', value: '1' },
   { text: 'Golfinho Riscado', value: '2' },
   { text: 'Golfinho Comum', value: '3' },
@@ -40,10 +35,10 @@ const odontocetisSpeciesOptions = [
   { text: 'Baleia Bico De Gervais', value: '18' },
   { text: 'Baleia Bico De Sowerby', value: '19' },
   { text: 'Baleia Bico De Garrafa', value: '20' },
-  { text: 'Outro', value: '21' },
+  { text: 'Outro', value: '0' },
 ]
 
-const SpeciesOptions = []
+const speciesOptions = []
 
 const behaviourOptions = [
   { text: 'Deslocação', value: '0' },
@@ -63,10 +58,6 @@ const reactionOptions = [
 const router = useRouter()
 const path = computed(() => router.currentRoute.value.path)
 
-function whichSpeciesToLoad() {
-  console.log(path)
-}
-
 const { t } = useI18n()
 
 // todo function child number cant be smaller than total number
@@ -75,55 +66,52 @@ const { t } = useI18n()
 
 <template>
   <div>
-    <p>Cetacian Form here</p>
-    <label class="hidden" for="input">{{ t('species.whats-the-specie') }}</label>
-    <select
-      v-if="(path == '/form/misticetos') ? SpeciesOptions = mysticetisSpeciesOptions : SpeciesOptions = odontocetisSpeciesOptions"
-      id=""
-      v-model="specie"
-      :placeholder="t('species.whats-the-specie')"
-      name=""
-      type="select"
-      p="x-4 y-2"
-      w="250px"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-      required
-    >
-      <option value="" disabled select hidden>
-        {{ t('species.whats-the-specie') }}
-      </option>
-      <option
-        v-for="option in SpeciesOptions"
-        :key="option.value"
-        :value="option.value"
-      >
-        {{ option.text }}
-      </option>
-    </select>
     <div class="py-1">
-      <label class="hidden" for="input">{{ t('species.otherInfo') }}</label>
-      <input
-        id="input"
-        v-model="otherInfo"
-        :placeholder="t('species.otherInfo')"
-        type="string"
-        autocomplete="false"
+      <select
+        v-if="(path == '/form/misticetos') ? speciesOptions = mysticetisSpeciesOptions : speciesOptions = odontocetisSpeciesOptions"
+        v-model="cetacean.coisa"
         p="x-4 y-2"
         w="250px"
         text="center"
         bg="transparent"
         border="~ rounded gray-200 dark:gray-700"
         outline="none active:none"
+        required
       >
+        <option value="" disabled selected hidden>
+          isto é um teste
+        </option>
+        <option
+          v-for="option in speciesOptions"
+          :key="option.value"
+          :value="option.value"
+        >
+          {{ option.text }}
+        </option>
+      </select>
+      <div class="py-1">
+        <label class="hidden" for="input">{{ t('species.otherSpecies') }}</label>
+        <input
+          v-if="cetacean.coisa === '0'"
+          id="input"
+          v-model="cetacean.otherSpecies"
+          :placeholder="t('species.otherSpecies')"
+          type="string"
+          autocomplete="false"
+          p="x-4 y-2"
+          w="250px"
+          text="center"
+          bg="transparent"
+          border="~ rounded gray-200 dark:gray-700"
+          outline="none active:none"
+        >
+      </div>
     </div>
     <div class="py-1">
       <label class="hidden" for="input">{{ t('species.total') }}</label>
       <input
         id="input"
-        v-model="total"
+        v-model="cetacean.total"
         :placeholder="t('species.total')"
         type="number"
         autocomplete="false"
@@ -139,7 +127,7 @@ const { t } = useI18n()
       <label class="hidden" for="input">{{ t('species.child') }}</label>
       <input
         id="input"
-        v-model="child"
+        v-model="cetacean.child"
         :placeholder="t('species.child')"
         type="number"
         autocomplete="false"
@@ -155,10 +143,9 @@ const { t } = useI18n()
       <label class="hidden" for="input">{{ t('species.behaviour') }}</label>
       <select
         id=""
-        v-model="behaviour"
+        v-model="cetacean.behaviour"
         :placeholder="t('species.behaviour')"
         name=""
-        type="select"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -179,10 +166,9 @@ const { t } = useI18n()
       <label class="hidden" for="input">{{ t('species.reaction') }}</label>
       <select
         id=""
-        v-model="reaction"
+        v-model="cetacean.reaction"
         :placeholder="t('species.reaction')"
         name=""
-        type="select"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -203,7 +189,7 @@ const { t } = useI18n()
       <label class="hidden" for="input">{{ t('species.observations') }}</label>
       <input
         id="input"
-        v-model="observations"
+        v-model="cetacean.observations"
         :placeholder="t('species.observations')"
         type="string"
         autocomplete="false"
@@ -215,5 +201,15 @@ const { t } = useI18n()
         outline="none active:none"
       >
     </div>
+    <span>
+      Form values <br />
+      specie:{{ cetacean.coisa }}<br />
+      total:{{ cetacean.total }}<br />
+      child:{{ cetacean.child }}<br />
+      behaviour:{{ cetacean.behaviour }}<br />
+      reaction:{{ cetacean.reaction }}<br />
+      observation:{{ cetacean.observations }}<br />
+      otherSpecies:{{ cetacean.otherSpecies }}
+    </span>
   </div>
 </template>
