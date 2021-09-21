@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/cetacean'
-const cetacean = useUserStore()
+import { useCetaceanStore } from '~/stores/cetacean'
+const cetacean = useCetaceanStore()
 
-const mysticetisSpeciesOptions = [
+const mysticetosSpeciesOptions = [
   { text: 'Baleia Comum', value: '7' },
   { text: 'Baleia de Bryde', value: '1' },
   { text: 'Baleia Sardinheira', value: '2' },
@@ -38,7 +38,7 @@ const odontocetisSpeciesOptions = [
   { text: 'Outro', value: '0' },
 ]
 
-const speciesOptions = []
+const options = []
 
 const behaviourOptions = [
   { text: 'Deslocação', value: '0' },
@@ -47,7 +47,6 @@ const behaviourOptions = [
   { text: 'Socialização', value: '3' },
   { text: 'Outro', value: '4' },
 ]
-
 const reactionOptions = [
   { text: 'Nenhuma/Indiferença', value: '0' },
   { text: 'Atração/aproximação', value: '1' },
@@ -68,7 +67,7 @@ const { t } = useI18n()
   <div>
     <div class="py-1">
       <select
-        v-if="(path == '/form/misticetos') ? speciesOptions = mysticetisSpeciesOptions : speciesOptions = odontocetisSpeciesOptions"
+        v-if="path === '/form/misticetos' ? options = mysticetosSpeciesOptions : options = odontocetisSpeciesOptions"
         v-model="cetacean.coisa"
         p="x-4 y-2"
         w="250px"
@@ -79,10 +78,10 @@ const { t } = useI18n()
         required
       >
         <option value="" disabled selected hidden>
-          isto é um teste
+          {{ t('species.whats-the-specie') }}
         </option>
         <option
-          v-for="option in speciesOptions"
+          v-for="option in options"
           :key="option.value"
           :value="option.value"
         >

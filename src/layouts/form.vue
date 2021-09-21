@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-const router = useRouter()
-const path = computed(() => router.currentRoute.value.path)
 
 </script>
 
@@ -9,7 +7,7 @@ const path = computed(() => router.currentRoute.value.path)
     <Header />
     <FormGeneral />
     <router-view />
-    <FormCetacian />
+    <FormCetacean />
     <Footer />
     <div class="mt-5 mx-auto text-center opacity-25 text-sm">
       [Form Layout]
