@@ -38,7 +38,7 @@ const odontocetisSpeciesOptions = [
   { text: 'Outro', value: '0' },
 ]
 
-const options = []
+let options
 
 const behaviourOptions = [
   { text: 'Deslocação', value: '0' },
