@@ -200,7 +200,7 @@ const { t } = useI18n()
         outline="none active:none"
       >
     </div>
-    <span>
+    <!-- <span>
       Form values <br />
       specie:{{ cetacean.coisa }}<br />
       total:{{ cetacean.total }}<br />
@@ -209,6 +209,6 @@ const { t } = useI18n()
       reaction:{{ cetacean.reaction }}<br />
       observation:{{ cetacean.observations }}<br />
       otherSpecies:{{ cetacean.otherSpecies }}
-    </span>
+    </span> -->
   </div>
 </template>

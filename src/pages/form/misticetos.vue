@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>Misticetos Form here</p>
   </div>
 </template>
 

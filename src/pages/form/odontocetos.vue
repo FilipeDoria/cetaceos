@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>Odontocetos component here</p>
   </div>
 </template>
 

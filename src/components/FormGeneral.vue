@@ -214,7 +214,7 @@ function convertDMS(lat, lng) {
         {{ t('button.go') }}
       </button>
     </div>
-    <span v-if="!form.valid">
+    <!-- <span v-if="!form.valid">
       Form values saved on localStorage:
       {{ form.company }}
       {{ form.ship }}
@@ -223,6 +223,6 @@ function convertDMS(lat, lng) {
       {{ form.latitude }}
       {{ form.longitude }}
       {{ form.seaConditions }}
-    </span>
+    </span> -->
   </div>
 </template>
