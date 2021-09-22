@@ -18,6 +18,8 @@ export const useUserStore = defineStore('user', () => {
   let date
   let time
   const valid = false
+  const multipleSpecies = false
+  let multipleSpeciesNumber
 
   /**
    * Changes the current name of the user and saves the one that was used

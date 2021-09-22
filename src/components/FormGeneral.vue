@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import { get, set, update } from 'idb-keyval'
 import { useUserStore } from '~/stores/form'
-
 const form = useUserStore()
 
 const message = ref('')
 // const router = useRouter()
-const go = () => {
+const go = async() => {
   if (form.seaConditions) {
     form.valid = !form.valid
     // to save form items on local storage to formData variable
     localStorage.setItem('formData', JSON.stringify(form))
     // eslint-disable-next-line no-console
     console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
+    await set('form1', form)
+      .then(() => console.log('Data saved in the DB'))
+      .catch(err => console.log('Data saving failed!', err))
   }
 }
 
@@ -51,6 +54,7 @@ const options = [
 
 form.company = 'H2O Madeira'
 form.ship = 'Cetus'
+let misto = false
 
 function toDegreesMinutesAndSeconds(coordinate) {
   const absolute = Math.abs(coordinate)
@@ -117,6 +121,7 @@ function convertDMS(lat, lng) {
         id="input"
         v-model="form.date"
         :placeholder="t('intro.select-date')"
+        aria-labelledby="date-label date-instructions"
         type="date"
         autocomplete="false"
         p="x-4 y-2"
@@ -214,6 +219,9 @@ function convertDMS(lat, lng) {
         {{ t('button.go') }}
       </button>
     </div>
+<label for="checkbox">Avistamento misto? </label>
+    <input type="checkbox" id="checkbox" v-model="misto" />
+
     <!-- <span v-if="!form.valid">
       Form values saved on localStorage:
       {{ form.company }}

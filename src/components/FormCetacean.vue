@@ -110,10 +110,9 @@ const { t } = useI18n()
       <label class="hidden" for="input">{{ t('species.total') }}</label>
       <input
         id="input"
-        v-model="cetacean.total"
+        v-model.number="cetacean.total"
         :placeholder="t('species.total')"
         type="number"
-        autocomplete="false"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -126,10 +125,9 @@ const { t } = useI18n()
       <label class="hidden" for="input">{{ t('species.child') }}</label>
       <input
         id="input"
-        v-model="cetacean.child"
+        v-model.number="cetacean.child"
         :placeholder="t('species.child')"
         type="number"
-        autocomplete="false"
         p="x-4 y-2"
         w="250px"
         text="center"
