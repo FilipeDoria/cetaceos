@@ -83,6 +83,7 @@ function convertDMS(lat, lng) {
     <Header />
 <div class="p-1">
     {{ t('form.header-message') }}
+    <form action="">
     <div class="py-1">
       <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
       <input
@@ -233,6 +234,7 @@ function convertDMS(lat, lng) {
       <div class="mt-5 mx-auto text-center opacity-25 text-sm">
         [Form Layout]
       </div>
+      </form>
     </div>
     <Footer />
   </main>

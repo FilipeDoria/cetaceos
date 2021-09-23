@@ -54,6 +54,12 @@ const reactionOptions = [
   { text: 'Outro', value: '3' },
 ]
 
+// this checks the value and updates it on the control, if needed
+function checkValue() {
+  if (cetacean.child > cetacean.total)
+    cetacean.child = cetacean.total
+}
+
 const router = useRouter()
 const path = computed(() => router.currentRoute.value.path)
 
@@ -114,6 +120,7 @@ const { t } = useI18n()
         :placeholder="t('species.total')"
         type="number"
         min="1"
+        step="1"
         autocomplete="off"
         p="x-4 y-2"
         w="250px"
@@ -124,25 +131,27 @@ const { t } = useI18n()
         required
       >
       <div class="py-1">
-      <label class="hidden" for="input">{{ t('species.child') }}</label>
-      <input
-        id="input"
-        v-if="cetacean.total !== 0"
-        v-model.number="cetacean.child"
-        :placeholder="t('species.child')"
-        min="0"
-        autocomplete="off"
-        type="number"
-        p="x-4 y-2"
-        w="250px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-        required
-      >
+        <label class="hidden" for="input">{{ t('species.child') }}</label>
+        <input
+          v-if="typeof cetacean.total !== 'undefined'"
+          id="input"
+          v-model.number="cetacean.child"
+          :placeholder="t('species.child')"
+          min="0"
+          step="1"
+          autocomplete="off"
+          type="number"
+          p="x-4 y-2"
+          w="250px"
+          text="center"
+          bg="transparent"
+          border="~ rounded gray-200 dark:gray-700"
+          outline="none active:none"
+          required
+          @input="checkValue()"
+        >
       </div>
-      </div>
+    </div>
     <div class="py-1">
       <label class="hidden" for="input">{{ t('species.behaviour') }}</label>
       <select
