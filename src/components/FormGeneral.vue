@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { get, set, update } from 'idb-keyval'
-import { useUserStore } from '~/stores/form'
-const form = useUserStore()
+import { useFormStore } from '~/stores/form'
+const form = useFormStore()
 
 const message = ref('')
 // const router = useRouter()
@@ -90,7 +90,7 @@ function convertDMS(lat, lng) {
         v-model="form.company"
         :placeholder="t('intro.whats-the-company-name')"
         type="text"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -106,7 +106,7 @@ function convertDMS(lat, lng) {
         v-model="form.ship"
         :placeholder="t('intro.whats-the-ship-name')"
         type="text"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -123,7 +123,7 @@ function convertDMS(lat, lng) {
         :placeholder="t('intro.select-date')"
         aria-labelledby="date-label date-instructions"
         type="date"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -139,7 +139,7 @@ function convertDMS(lat, lng) {
         v-model="form.time"
         :placeholder="t('intro.select-time')"
         type="time"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -177,7 +177,7 @@ function convertDMS(lat, lng) {
         v-model="form.latitude"
         :placeholder="t('intro.whats-the-latitude')"
         type="string"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -193,7 +193,7 @@ function convertDMS(lat, lng) {
         v-model="form.longitude"
         :placeholder="t('intro.whats-the-longitude')"
         type="string"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"

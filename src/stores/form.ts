@@ -1,8 +1,8 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-export const useUserStore = defineStore('user', () => {
+export const useFormStore = defineStore('form', () => {
   /**
-   * Current named of the user.
+   * Current named of the form.
    */
   const savedName = ref('')
   const previousNames = ref(new Set<string>())
@@ -46,8 +46,10 @@ export const useUserStore = defineStore('user', () => {
     date,
     time,
     valid,
+    multipleSpecies,
+    multipleSpeciesNumber
   }
 })
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useFormStore, import.meta.hot))

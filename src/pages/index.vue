@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/form'
+import { useFormStore } from '~/stores/form'
 
-const user = useUserStore()
+const user = useFormStore()
 const name = ref(user.savedName)
 
 const router = useRouter()

@@ -96,7 +96,7 @@ const { t } = useI18n()
           v-model="cetacean.otherSpecies"
           :placeholder="t('species.otherSpecies')"
           type="string"
-          autocomplete="false"
+          autocomplete="off"
           p="x-4 y-2"
           w="250px"
           text="center"
@@ -113,20 +113,25 @@ const { t } = useI18n()
         v-model.number="cetacean.total"
         :placeholder="t('species.total')"
         type="number"
+        min="1"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
         bg="transparent"
         border="~ rounded gray-200 dark:gray-700"
         outline="none active:none"
+        required
       >
-    </div>
-    <div class="py-1">
+      <div class="py-1">
       <label class="hidden" for="input">{{ t('species.child') }}</label>
       <input
         id="input"
+        v-if="cetacean.total !== 0"
         v-model.number="cetacean.child"
         :placeholder="t('species.child')"
+        min="0"
+        autocomplete="off"
         type="number"
         p="x-4 y-2"
         w="250px"
@@ -134,8 +139,10 @@ const { t } = useI18n()
         bg="transparent"
         border="~ rounded gray-200 dark:gray-700"
         outline="none active:none"
+        required
       >
-    </div>
+      </div>
+      </div>
     <div class="py-1">
       <label class="hidden" for="input">{{ t('species.behaviour') }}</label>
       <select
@@ -189,7 +196,7 @@ const { t } = useI18n()
         v-model="cetacean.observations"
         :placeholder="t('species.observations')"
         type="string"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"

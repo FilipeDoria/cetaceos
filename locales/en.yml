@@ -41,5 +41,6 @@ species:
   observations: Any ther information to add?
   otherSpecies: Did you seen a new specie?
   reaction: What was the animals reaction?
+  species-count: How many?
   total: What's the animal count?
   whats-the-specie: What species was seen?

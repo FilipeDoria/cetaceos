@@ -1,6 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-export const useUserStore = defineStore('user', () => {
+export const useUserStore = defineStore('form', () => {
   /**
    * Current named of the user.
    */

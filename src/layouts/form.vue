@@ -1,8 +1,8 @@
 
 <script setup lang="ts">
 import { get, set, update } from 'idb-keyval'
-import { useUserStore } from '~/stores/form'
-const form = useUserStore()
+import { useFormStore } from '~/stores/form'
+const form = useFormStore()
 
 const message = ref('')
 // const router = useRouter()
@@ -90,7 +90,7 @@ function convertDMS(lat, lng) {
         v-model="form.company"
         :placeholder="t('intro.whats-the-company-name')"
         type="text"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -106,7 +106,7 @@ function convertDMS(lat, lng) {
         v-model="form.ship"
         :placeholder="t('intro.whats-the-ship-name')"
         type="text"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -123,7 +123,7 @@ function convertDMS(lat, lng) {
         :placeholder="t('intro.select-date')"
         aria-labelledby="date-label date-instructions"
         type="date"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         text="center"
         bg="transparent"
@@ -138,7 +138,7 @@ function convertDMS(lat, lng) {
         v-model="form.time"
         :placeholder="t('intro.select-time')"
         type="time"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         text="center"
         bg="transparent"
@@ -175,7 +175,7 @@ function convertDMS(lat, lng) {
         v-model="form.latitude"
         :placeholder="t('intro.whats-the-latitude')"
         type="string"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -191,7 +191,7 @@ function convertDMS(lat, lng) {
         v-model="form.longitude"
         :placeholder="t('intro.whats-the-longitude')"
         type="string"
-        autocomplete="false"
+        autocomplete="off"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -210,23 +210,24 @@ function convertDMS(lat, lng) {
       <FormCetacean />
     <div class="py-1">
     <label for="checkbox">Are there other species? </label>
-    <input type="checkbox" id="checkbox" v-model="form.multipleSpecies">
-    {{ form.multipleSpecies }}
-      <label class="hidden" for="input">{{ t('species.species-count') }}</label>
+    <input type="checkbox" id="checkbox" v-model="form.multipleSpecies" border="~ rounded gray-200 dark:gray-700">
+    <span class="px-2">
       <input
         id="input"
         v-if="form.multipleSpecies == true"
         v-model.number="form.multipleSpeciesNumber"
         :placeholder="t('species.species-count')"
         type="number"
-        autocomplete="false"
-        p="x-4 y-2"
-        w="250px"
+        autocomplete="off"
+        p="x-2 y-2"
+        w="120px"
         text="center"
         bg="transparent"
         border="~ rounded gray-200 dark:gray-700"
         outline="none active:none"
+        min="1"
       >
+      </span>
     </div>
     
       <div class="mt-5 mx-auto text-center opacity-25 text-sm">
