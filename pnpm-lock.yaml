@@ -41,7 +41,6 @@ specifiers:
   vue-tsc: ^0.3.0
 
 dependencies:
-  '@vueform/toggle': 2.0.1
   '@vueuse/core': 6.3.2_vue@3.2.11
   '@vueuse/head': 0.6.0_vue@3.2.11
   idb-keyval: 6.0.2
@@ -1992,10 +1991,6 @@ packages:
     resolution: {integrity: sha512-+CifxkLVhjKT14g/LMZil8//SdCzkMkS8VfRX0cqNJiFKK4AWvxj0KV1dhbr8czikY0DZUGQew3tRMRRChMGtA==}
     dev: true
 
-  /@vueform/toggle/2.0.1:
-    resolution: {integrity: sha512-Hx26jK+hJUndP4zUBXdScYnTlDwXhkRl+sPW1srkOHqImAcyV2932LzavZQIqK1MhBBukKt+X0wkR5cJL7duYw==}
-    dev: false
-
   /@vueuse/core/6.3.2_vue@3.2.11:
     resolution: {integrity: sha512-Uq8XT4iH9tq7uIxsxDWeH3YXo5GJAJC9cB7q58oVMym3o34oO6AaMVDJd6HlqjzoIwoOAlsrd3ZLHrEUjBGPsw==}
     peerDependencies:
@@ -3528,6 +3523,7 @@ packages:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+    requiresBuild: true
     dev: true
     optional: true
 
