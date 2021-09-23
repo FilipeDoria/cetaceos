@@ -8,6 +8,7 @@ button:
   ok: OK
   position: Obter posição
   records: Registos
+  submit: Submeter
   toggle_dark: Alternar modo escuro
   toggle_langs: Mudar de idioma
 cetacean:
@@ -37,6 +38,7 @@ species:
   behaviour: Como é o comportamento dos animais?
   child: Quantos animais são crias?
   observations: Mais alguma informação?
+  other-species: 'Foram avistadas mais espécies? '
   otherSpecies: Qual foi a espécie avistada?
   reaction: Qual foi a reação dos animais em relação à embarcação?
   total: Quantos animais podem ser avistados?

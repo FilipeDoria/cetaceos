@@ -8,6 +8,7 @@ button:
   ok: OK
   position: Get position
   records: Records
+  submit: Submit
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
 cetacean:
@@ -41,6 +42,7 @@ species:
   behaviour: How is the animals behaviour?
   child: How many are child?
   observations: Any ther information to add?
+  other-species: 'Are there other species? '
   otherSpecies: Did you seen a new specie?
   reaction: What was the animals reaction?
   species-count: How many?

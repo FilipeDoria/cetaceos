@@ -218,8 +218,13 @@ function convertDMS(lat, lng) {
         </button>
         <FormCetacean />
         <div class="py-1">
-          <label for="checkbox">Are there other species? </label>
-          <input id="checkbox" v-model="form.multipleSpecies" type="checkbox" border="~ rounded gray-200 dark:gray-700">
+          <label for="checkbox">{{ t('species.other-species') }}</label>
+          <input
+            id="checkbox"
+            v-model="form.multipleSpecies"
+            type="checkbox"
+            border="~ rounded gray-200 dark:gray-700"
+          >
           <span v-if="form.multipleSpecies" class="px-1">Yes</span>
           <span v-else-if="!form.multipleSpecies" class="px-1">No</span>
         </div>
@@ -231,6 +236,7 @@ function convertDMS(lat, lng) {
               :placeholder="t('species.species-count')"
               type="number"
               autocomplete="off"
+              w="120px"
               p="x-2 y-2"
               text="center"
               bg="transparent"
@@ -250,6 +256,14 @@ function convertDMS(lat, lng) {
             >
               {{ t('button.ok') }}
             </button>
+          </span>
+        </div>
+        <div>
+          <span v-for="n in form.multipleSpeciesNumber">
+            <div class="py-1">
+              <p class="text">Species {{ n + 1 }}</p>
+              <FormCetacean />
+            </div>
           </span>
         </div>
         <button
