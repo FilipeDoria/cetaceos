@@ -6,7 +6,7 @@ const form = useFormStore()
 
 const message = ref('')
 // const router = useRouter()
-const go = async() => {
+const onSubmit = async() => {
   if (form.seaConditions) {
     form.valid = !form.valid
     // to save form items on local storage to formData variable
@@ -19,8 +19,10 @@ const go = async() => {
   }
 }
 
-function getPosition() {
-  message.value = 'Getting coordinates...'
+function getPosition(event) {
+  event.stopPropagation()
+  event.preventDefault()
+  message.value = t('intro.location-message')
   const options = {
     enableHighAccuracy: true,
     timeout: 10000,
@@ -81,159 +83,187 @@ function convertDMS(lat, lng) {
 <template>
   <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
     <Header />
-<div class="p-1">
-    {{ t('form.header-message') }}
-    <form action="">
-    <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
-      <input
-        id="input"
-        v-model="form.company"
-        :placeholder="t('intro.whats-the-company-name')"
-        type="text"
-        autocomplete="off"
-        p="x-4 y-2"
-        w="250px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-      >
-    </div>
-    <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-the-ship-name') }}</label>
-      <input
-        id="input"
-        v-model="form.ship"
-        :placeholder="t('intro.whats-the-ship-name')"
-        type="text"
-        autocomplete="off"
-        p="x-4 y-2"
-        w="250px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-      >
-    </div>
-    <div class="py-1">
-      <label class="" for="input">{{ t('intro.select-date') }}</label>
-      <input
-        id="input"
-        v-model="form.date"
-        :placeholder="t('intro.select-date')"
-        aria-labelledby="date-label date-instructions"
-        type="date"
-        autocomplete="off"
-        p="x-4 y-2"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-      >
-    </div>
-    <div class="py-1">
-      <label class="" for="input">{{ t('intro.select-time') }}</label>
-      <input
-        id="input"
-        v-model="form.time"
-        :placeholder="t('intro.select-time')"
-        type="time"
-        autocomplete="off"
-        p="x-4 y-2"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-      >
-    </div>
-    <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-the-sea-like') }}</label>
-      <select
-        id=""
-        v-model="form.seaConditions"
-        name=""
-        p="x-4 y-2"
-        w="250px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-        required
-      >
-        <option value="" disabled selected hidden>
-          {{ t('intro.whats-the-sea-like') }}
-        </option>
-        <option v-for="option in options" :key="option.value" :value="option.value">
-          {{ option.text }}
-        </option>
-      </select>
-    </div>
-    <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-the-latitude') }}</label>
-      <input
-        id="input"
-        v-model="form.latitude"
-        :placeholder="t('intro.whats-the-latitude')"
-        type="string"
-        autocomplete="off"
-        p="x-4 y-2"
-        w="250px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-      >
-    </div>
-    <div class="py-1">
-      <label class="hidden" for="input">{{ t('intro.whats-the-longitude') }}</label>
-      <input
-        id="input"
-        v-model="form.longitude"
-        :placeholder="t('intro.whats-the-longitude')"
-        type="string"
-        autocomplete="off"
-        p="x-4 y-2"
-        w="250px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-      >
-    </div>
-    {{ message }}
- <button
-        class="m-3 text-sm btn"
-        @click="getPosition"
-      >
-        {{ t('button.position') }}
-      </button>
-      <FormCetacean />
-    <div class="py-1">
-    <label for="checkbox">Are there other species? </label>
-    <input type="checkbox" id="checkbox" v-model="form.multipleSpecies" border="~ rounded gray-200 dark:gray-700">
-    <span class="px-2">
-      <input
-        id="input"
-        v-if="form.multipleSpecies == true"
-        v-model.number="form.multipleSpeciesNumber"
-        :placeholder="t('species.species-count')"
-        type="number"
-        autocomplete="off"
-        p="x-2 y-2"
-        w="120px"
-        text="center"
-        bg="transparent"
-        border="~ rounded gray-200 dark:gray-700"
-        outline="none active:none"
-        min="1"
-      >
-      </span>
-    </div>
-    
-      <div class="mt-5 mx-auto text-center opacity-25 text-sm">
-        [Form Layout]
-      </div>
+    <div class="p-1">
+      {{ t('form.header-message') }}
+      <form action="" @submit.prevent>
+        <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
+          <input
+            id="input"
+            v-model="form.company"
+            :placeholder="t('intro.whats-the-company-name')"
+            type="text"
+            autocomplete="off"
+            p="x-4 y-2"
+            w="250px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+          >
+        </div>
+        <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.whats-the-ship-name') }}</label>
+          <input
+            id="input"
+            v-model="form.ship"
+            :placeholder="t('intro.whats-the-ship-name')"
+            type="text"
+            autocomplete="off"
+            p="x-4 y-2"
+            w="250px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+          >
+        </div>
+        <div class="py-1">
+          <label class="" for="input">{{ t('intro.select-date') }}</label>
+          <input
+            id="input"
+            v-model="form.date"
+            :placeholder="t('intro.select-date')"
+            aria-labelledby="date-label date-instructions"
+            type="date"
+            autocomplete="off"
+            p="x-4 y-2"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+            required
+          >
+        </div>
+        <div class="py-1">
+          <label class="" for="input">{{ t('intro.select-time') }}</label>
+          <input
+            id="input"
+            v-model="form.time"
+            :placeholder="t('intro.select-time')"
+            type="time"
+            autocomplete="off"
+            p="x-4 y-2"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+            required
+          >
+        </div>
+        <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.whats-the-sea-like') }}</label>
+          <select
+            id=""
+            v-model="form.seaConditions"
+            name=""
+            p="x-4 y-2"
+            w="250px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+            required
+          >
+            <option value="" disabled selected hidden>
+              {{ t('intro.whats-the-sea-like') }}
+            </option>
+            <option v-for="option in options" :key="option.value" :value="option.value">
+              {{ option.text }}
+            </option>
+          </select>
+        </div>
+        <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.whats-the-latitude') }}</label>
+          <input
+            id="input"
+            v-model="form.latitude"
+            :placeholder="t('intro.whats-the-latitude')"
+            type="string"
+            autocomplete="off"
+            p="x-4 y-2"
+            w="250px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+          >
+        </div>
+        <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.whats-the-longitude') }}</label>
+          <input
+            id="input"
+            v-model="form.longitude"
+            :placeholder="t('intro.whats-the-longitude')"
+            type="string"
+            autocomplete="off"
+            p="x-4 y-2"
+            w="250px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+          >
+        </div>
+        <p>{{ message }}</p>
+        <button
+          type="button"
+          bg="dark-50"
+          hover="bg-dark-100"
+          p="x-2 y-2"
+          class="m-3 text-sm btn"
+          @click="getPosition"
+        >
+          {{ t('button.position') }}
+        </button>
+        <FormCetacean />
+        <div class="py-1">
+          <label for="checkbox">Are there other species? </label>
+          <input id="checkbox" v-model="form.multipleSpecies" type="checkbox" border="~ rounded gray-200 dark:gray-700">
+          <span v-if="form.multipleSpecies" class="px-1">Yes</span>
+          <span v-else-if="!form.multipleSpecies" class="px-1">No</span>
+        </div>
+        <div>
+          <span v-if="form.multipleSpecies == true" class="px-2">
+            <input
+              id="input"
+              v-model.number="form.multipleSpeciesNumber"
+              :placeholder="t('species.species-count')"
+              type="number"
+              autocomplete="off"
+              p="x-2 y-2"
+              text="center"
+              bg="transparent"
+              border="~ rounded gray-200 dark:gray-700"
+              outline="none active:none"
+              min="1"
+            >
+            <button
+              type="button"
+              p="x-2 y-2"
+              bg="dark-50"
+              hover="bg-dark-100"
+              border="~ rounded green-900 dark:gray-700"
+              class="m-3 text-sm btn"
+              @click="onSubmit"
+              @keyup.enter="onSubmit"
+            >
+              {{ t('button.ok') }}
+            </button>
+          </span>
+        </div>
+        <button
+          type="submit"
+          class="m-3 text-sm btn"
+
+          @click="onSubmit"
+          @keyup.enter="onSubmit"
+        >
+          {{ t('button.submit') }}
+        </button>
+        <div class="mt-5 mx-auto text-center opacity-25 text-sm">
+          [Form Layout]
+        </div>
       </form>
     </div>
     <Footer />

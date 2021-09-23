@@ -5,14 +5,15 @@ button:
   go: Next
   home: Home
   newForm: New Form
+  ok: OK
   position: Get position
   records: Records
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
 cetacean:
   choose-animal-class: Choose an animal class
-  misticetos: Mysticetis
-  odontocetos: Odontocetis
+  mysticetis: Mysticetis
+  odontocetis: Odontocetis
 form:
   header-message: Please register as much information as possible
 general:
@@ -24,6 +25,7 @@ intro:
   desc: Sightings of animals report page.
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
+  location-message: Getting location...
   select-date: 'Date '
   select-time: 'Time '
   whats-the-company-name: What is the company name?

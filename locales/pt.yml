@@ -5,14 +5,15 @@ button:
   go: Avançar
   home: Início
   newForm: Novo Formulário
+  ok: OK
   position: Obter posição
   records: Registos
   toggle_dark: Alternar modo escuro
   toggle_langs: Mudar de idioma
 cetacean:
   choose-animal-class: 'Escolha a opção pretendida para o registo de Cetáceos:'
-  misticetos: Mysticetis
-  odontocetos: Odontocetis
+  mysticetis: Mysticetis
+  odontocetis: Odontocetis
 form:
   header-message: Por favor registe o máximo de informação possível.
 general:
@@ -24,6 +25,7 @@ intro:
   desc: Página de registo de avistamentos de animais.
   dynamic-route: Demonstração de rota dinâmica
   hi: Olá, {name}!
+  location-message: A obter localização...
   select-date: 'Data '
   select-time: 'Hora '
   whats-the-latitude: Qual é a latitude?

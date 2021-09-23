@@ -5,11 +5,11 @@ const { t } = useI18n()
 <template>
   <p>{{ t('cetacean.choose-animal-class') }}</p>
   <div>
-    <router-link class="btn m-3 text-sm mt-8" to="/form/odontocetos" :title="t('cetacean.odontocetos')">
-      {{ t('cetacean.odontocetos') }}
+    <router-link class="btn m-3 text-sm mt-8" to="/form/odontocetis" :title="t('cetacean.odontocetis')">
+      {{ t('cetacean.odontocetis') }}
     </router-link>
-    <router-link class="btn m-3 text-sm mt-8" to="/form/misticetos" :title="t('cetacean.misticetos')">
-      {{ t('cetacean.misticetos') }}
+    <router-link class="btn m-3 text-sm mt-8" to="/form/mysticetis" :title="t('cetacean.mysticetis')">
+      {{ t('cetacean.mysticetis') }}
     </router-link>
   </div>
   <router-view />
