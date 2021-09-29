@@ -2,15 +2,15 @@
 <script setup lang="ts">
 import { db, Cetacean } from '~/appdb'
 import { useFormStore } from '~/stores/form'
+import { useCetaceanStore } from '~/stores/cetacean'
 const form = useFormStore()
+const cetacean = useCetaceanStore()
 
 const message = ref('')
 const onSubmit = async() => {
   if (form.seaConditions) {
-    form.valid = !form.valid
     // to save form items on local storage to formData variable
     localStorage.setItem('formData', JSON.stringify(form))
-    console.log(form)
     console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
     await savingCetaceans()
       .then(() => console.log('Data saved in the DB'))
@@ -94,13 +94,13 @@ async function savingCetaceans() {
         form.seaConditions,
         form.latitude,
         form.longitude,
-        'especie',
-        12,
-        0,
-        'behaviour',
-        'reaction',
-        'otherInfo',
-        'otherSpecies',
+        cetacean.coisa,
+        cetacean.total,
+        cetacean.child,
+        cetacean.behaviour,
+        cetacean.reaction,
+        cetacean.otherInfo,
+        cetacean.otherSpecies,
       ))
     },
   )
@@ -242,7 +242,7 @@ async function savingCetaceans() {
         >
           {{ t('button.position') }}
         </button>
-        <FormCetacean />
+        <FormCetacean :form="form" @update:form="form = $event" />
         <div class="py-1">
           <label for="checkbox">{{ t('species.other-species') }}</label>
           <input
