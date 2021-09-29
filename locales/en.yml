@@ -1,16 +1,20 @@
 button:
   about: About
   back: Back
+  cetacean: Cetacean
   getLocation: Get Location
   go: Next
   home: Home
+  lobo-marinho: Sea wolf?
   newForm: New Form
   ok: OK
   position: Get position
   records: Records
+  sea-bird: Sea bird
   submit: Submit
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
+  turtle: Turtle
 cetacean:
   choose-animal-class: Choose an animal class
   mysticetis: Mysticetis

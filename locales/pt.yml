@@ -1,16 +1,20 @@
 button:
   about: Sobre
   back: Voltar
+  cetacean: Cetácio
   getLocation: Obter Localização
   go: Avançar
   home: Início
+  lobo-marinho: Lobo-marinho
   newForm: Novo Formulário
   ok: OK
   position: Obter posição
   records: Registos
+  sea-bird: Ave marinha
   submit: Submeter
   toggle_dark: Alternar modo escuro
   toggle_langs: Mudar de idioma
+  turtle: Tartaruga
 cetacean:
   choose-animal-class: 'Escolha a opção pretendida para o registo de Cetáceos:'
   mysticetis: Mysticetis

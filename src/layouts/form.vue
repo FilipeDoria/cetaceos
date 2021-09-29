@@ -1,19 +1,18 @@
 
 <script setup lang="ts">
-import { get, set, update } from 'idb-keyval'
+import { db, Cetacean } from '~/appdb'
 import { useFormStore } from '~/stores/form'
 const form = useFormStore()
 
 const message = ref('')
-// const router = useRouter()
 const onSubmit = async() => {
   if (form.seaConditions) {
     form.valid = !form.valid
     // to save form items on local storage to formData variable
     localStorage.setItem('formData', JSON.stringify(form))
-    // eslint-disable-next-line no-console
+    console.log(form)
     console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
-    await set('form1', form)
+    await savingCetaceans()
       .then(() => console.log('Data saved in the DB'))
       .catch(err => console.log('Data saving failed!', err))
   }
@@ -78,6 +77,33 @@ function convertDMS(lat, lng) {
   const longitude = toDegreesMinutesAndSeconds(lng)
   DMSLongitude = DMSLongitude + longitude
   form.longitude = DMSLongitude
+}
+
+async function savingCetaceans() {
+  console.log('Seeding database with some cetaceans...')
+  await db.transaction(
+    'rw',
+    db.cetaceans,
+    async() => {
+    // populate a cetacean
+      await db.cetaceans.add(new Cetacean(
+        form.company,
+        form.ship,
+        form.date,
+        form.time,
+        form.seaConditions,
+        form.latitude,
+        form.longitude,
+        'especie',
+        12,
+        0,
+        'behaviour',
+        'reaction',
+        'otherInfo',
+        'otherSpecies',
+      ))
+    },
+  )
 }
 </script>
 <template>

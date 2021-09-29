@@ -13,6 +13,7 @@ specifiers:
   '@vueuse/head': ^0.6.0
   critters: ^0.0.10
   cross-env: ^7.0.3
+  dexie: ^3.0.3
   eslint: ^7.32.0
   https-localhost: ^4.7.0
   idb-keyval: ^6.0.2
@@ -43,6 +44,7 @@ specifiers:
 dependencies:
   '@vueuse/core': 6.3.2_vue@3.2.11
   '@vueuse/head': 0.6.0_vue@3.2.11
+  dexie: 3.0.3
   idb-keyval: 6.0.2
   nprogress: 0.2.0
   pinia: 2.0.0-rc.8_typescript@4.4.3+vue@3.2.11
@@ -2764,6 +2766,11 @@ packages:
   /detect-node/2.1.0:
     resolution: {integrity: sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==}
     dev: true
+
+  /dexie/3.0.3:
+    resolution: {integrity: sha512-BSFhGpngnCl1DOr+8YNwBDobRMH0ziJs2vts69VilwetHYOtEDcLqo7d/XiIphM0tJZ2rPPyAGd31lgH2Ln3nw==}
+    engines: {node: '>=6.0'}
+    dev: false
 
   /dir-glob/3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}

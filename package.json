@@ -9,6 +9,7 @@
     "dependencies": {
         "@vueuse/core": "^6.3.2",
         "@vueuse/head": "^0.6.0",
+        "dexie": "^3.0.3",
         "idb-keyval": "^6.0.2",
         "nprogress": "^0.2.0",
         "pinia": "^2.0.0-rc.8",
