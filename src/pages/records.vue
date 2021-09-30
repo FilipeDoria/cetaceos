@@ -1,12 +1,11 @@
 <script setup async lang="ts">
-import { Suspense } from '@vue/runtime-test'
 import { db } from '~/appdb'
 const { t } = useI18n()
 
 let form = null
 form = await db.cetaceans.toArray()
 
-const tableHeader = Object.keys(form[0])
+const tableHeader = (form === null) ? null : Object.keys(form[0])
 console.log(tableHeader)
 
 async function exportData() {
