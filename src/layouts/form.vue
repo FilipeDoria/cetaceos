@@ -7,6 +7,7 @@ const form = useFormStore()
 const cetacean = useCetaceanStore()
 
 const message = ref('')
+
 const onSubmit = async() => {
   if (form.seaConditions) {
     // to save form items on local storage to formData variable
@@ -111,7 +112,7 @@ async function savingCetaceans() {
     <Header />
     <div class="p-1">
       {{ t('form.header-message') }}
-      <form action="" @submit.prevent>
+      <form action="/cetacean">
         <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
           <input
