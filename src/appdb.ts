@@ -12,7 +12,7 @@ export class AppDatabase extends Dexie {
     // Define tables and indexes
     //
     db.version(1).stores({
-      cetaceans: '++id, especie',
+      cetaceans: '++id, specie',
     })
 
     // Let's physically map Contact class to contacts table.

@@ -47,7 +47,7 @@ export const useFormStore = defineStore('form', () => {
     time,
     valid,
     multipleSpecies,
-    multipleSpeciesNumber
+    multipleSpeciesNumber,
   }
 })
 

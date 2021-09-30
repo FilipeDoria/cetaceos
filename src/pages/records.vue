@@ -1,16 +1,14 @@
-<script setup lang="ts">
-
-// const savedForm = JSON.parse(localStorage.getItem('formData'))
-const form = [
-  { $id: '0', savedName: '', company: 'H2O Madeira', ship: 'Cetus', longitude: '-16.90046', latitude: '32.67018', seaConditions: '1', date: '2021-09-19', time: '17:04', valid: true },
-  { $id: '1', savedName: '', company: 'H2O Madeira', ship: 'Cetus', longitude: '-16.90046', latitude: '32.67018', seaConditions: '1', date: '2021-09-19', time: '17:04', valid: true },
-  { $id: '2', savedName: '', company: 'H2O Madeira', ship: 'Cetus', longitude: '-16.90046', latitude: '32.67018', seaConditions: '1', date: '2021-09-19', time: '17:04', valid: true },
-  { $id: '3', savedName: '', company: 'H2O Madeira', ship: 'Cetus', longitude: '-16.90046', latitude: '32.67018', seaConditions: '1', date: '2021-09-19', time: '17:04', valid: true },
-]
-
+<script setup async lang="ts">
+import { db } from '~/appdb'
 const { t } = useI18n()
 
-function exportData() {
+let form = null
+form = await db.cetaceans.toArray()
+
+const tableHeader = (form === null) ? null : Object.keys(form[0])
+console.log(tableHeader)
+
+async function exportData() {
   let csvString = [] // initializing the final form string for the excel
   const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
   head.forEach((key, index) =>
@@ -40,13 +38,12 @@ function exportData() {
     <p>
       {{ t('records.title') }}
     </p>
-    The form bellow is a fake form, feature //TODO to read records history from local storage
   </div>
   <div class="py-4" />
-  <div class="table center">
+  <div v-if="form" class="table center">
     <div class="table-header-group">
       <div class="table-row">
-        <div v-for="key in Object.keys(form[0])" :key="key" class="table-cell">
+        <div v-for="key in tableHeader" class="table-cell">
           {{ key }}
         </div>
       </div>
@@ -58,6 +55,9 @@ function exportData() {
         </div>
       </div>
     </div>
+  </div>
+  <div v-else-if="!form" class="py-4">
+    <p>Loading data...</p>
   </div>
   <button
     class="m-3 text-sm btn"
