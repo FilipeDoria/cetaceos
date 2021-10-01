@@ -2,13 +2,16 @@
 import { db } from '~/appdb'
 const { t } = useI18n()
 
-let form = null
-form = await db.cetaceans.toArray()
+console.log(!window.indexedDB)
 
-const tableHeader = (form === null) ? null : Object.keys(form[0])
+let form = null
+// form = await db.cetaceans.toArray()
+
+const tableHeader = (form == null) ? null : Object.keys(form[0])
 console.log(tableHeader)
 
 async function exportData() {
+  form = await db.cetaceans.toArray()
   let csvString = [] // initializing the final form string for the excel
   const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
   head.forEach((key, index) =>
@@ -56,9 +59,9 @@ async function exportData() {
       </div>
     </div>
   </div>
-  <div v-else-if="!form" class="py-4">
-    <p>Loading data...</p>
-  </div>
+  <!-- <div v-else-if="!form" class="py-4">
+    <p>Data table</p>
+  </div> -->
   <button
     class="m-3 text-sm btn"
     @click="exportData()"
