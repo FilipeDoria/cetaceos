@@ -4,14 +4,31 @@ const { t } = useI18n()
 
 console.log(!window.indexedDB)
 
-let form = null
-// form = await db.cetaceans.toArray()
+let form = ref([])
+const error = ref(null)
 
-const tableHeader = (form == null) ? null : Object.keys(form[0])
-console.log(tableHeader)
+const load = async() => {
+  try {
+    const data = await db.cetaceans.toArray()
+    console.log(data)
+  }
+  catch (err) {
+
+  }
+}
+
+load()
+
+async function loadData() {
+  form = await db.cetaceans.toArray()
+  console.log(form)
+}
+
+// const tableHeader = (form == null) ? null : Object.keys(form[0])
+// console.log(tableHeader)
 
 async function exportData() {
-  form = await db.cetaceans.toArray()
+  await loadData()
   let csvString = [] // initializing the final form string for the excel
   const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
   head.forEach((key, index) =>
@@ -43,7 +60,7 @@ async function exportData() {
     </p>
   </div>
   <div class="py-4" />
-  <div v-if="form" class="table center">
+  <div v-if="form" v-bind="form" class="table center">
     <div class="table-header-group">
       <div class="table-row">
         <div v-for="key in tableHeader" class="table-cell">
