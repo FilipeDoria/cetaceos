@@ -1,37 +1,22 @@
 <script setup async lang="ts">
 import { db } from '~/appdb'
+import data from '~/data/db.json'
 const { t } = useI18n()
 
-console.log('indexedDB works? -> ', window.indexedDB)
+const cetaceans = data.cetaceans
+console.log(cetaceans)
+const tableHeader = Object.keys(cetaceans[0])
+console.log(tableHeader)
 
-const cetaceans = ref([])
 const error = ref(null)
-const tableHeader = ref([])
-
-const load = async() => {
-  try {
-    const data = await fetch('http://localhost:3000/cetaceans')
-    if (!data.ok)
-      throw new Error('No data')
-    cetaceans.value = await data.json()
-    tableHeader.value = Object.keys(cetaceans.value[0])
-    console.log(tableHeader.value)
-  }
-  catch (err) {
-    error.value = err.message
-    console.log(error.value)
-  }
-}
-
-load()
 
 async function exportData() {
-  const form = cetaceans.value
+  const form = cetaceans
   console.log(form)
   let csvString = [] // initializing the final form string for the excel
-  const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
-  head.forEach((key, index) =>
-    (index === Object.values(head).length - 1) ? csvString += `${key}` : csvString += `${key},`,
+  // const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
+  tableHeader.forEach((key, index) =>
+    (index === Object.values(tableHeader).length - 1) ? csvString += `${key}` : csvString += `${key},`,
   )
   csvString += '\n'
 
@@ -77,7 +62,7 @@ async function exportData() {
         </div>
       </div>
     </div>
-    <div v-for="cetacean in cetaceans" :key="cetacean.id" class="table-row-group">
+    <div v-for="cetacean in cetaceans" :key="cetacean" class="table-row-group">
       <div class="table-row">
         <div v-for="key in cetacean" class="table-cell">
           {{ key }}
