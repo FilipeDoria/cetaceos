@@ -2,33 +2,32 @@
 import { db } from '~/appdb'
 const { t } = useI18n()
 
-console.log(!window.indexedDB)
+console.log('indexedDB works? -> ', window.indexedDB)
 
-let form = ref([])
+const cetaceans = ref([])
 const error = ref(null)
+const tableHeader = ref([])
 
 const load = async() => {
   try {
-    const data = await db.cetaceans.toArray()
-    console.log(data)
+    const data = await fetch('http://localhost:3000/cetaceans')
+    if (!data.ok)
+      throw new Error('No data')
+    cetaceans.value = await data.json()
+    tableHeader.value = Object.keys(cetaceans.value[0])
+    console.log(tableHeader.value)
   }
   catch (err) {
-
+    error.value = err.message
+    console.log(error.value)
   }
 }
 
 load()
 
-async function loadData() {
-  form = await db.cetaceans.toArray()
-  console.log(form)
-}
-
-// const tableHeader = (form == null) ? null : Object.keys(form[0])
-// console.log(tableHeader)
-
 async function exportData() {
-  await loadData()
+  const form = cetaceans.value
+  console.log(form)
   let csvString = [] // initializing the final form string for the excel
   const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
   head.forEach((key, index) =>
@@ -60,17 +59,27 @@ async function exportData() {
     </p>
   </div>
   <div class="py-4" />
-  <div v-if="form" v-bind="form" class="table center">
+  <div v-if="cetaceans.length"></div>
+  <div v-else>
+    Loading...
+  </div>
+  <div v-for="cetacean in cetaceans" :key="cetacean.id">
+  </div>
+  <div class="table center">
     <div class="table-header-group">
       <div class="table-row">
-        <div v-for="key in tableHeader" class="table-cell">
+        <div
+          v-for="key in tableHeader"
+          :key="key"
+          class="table-cell"
+        >
           {{ key }}
         </div>
       </div>
     </div>
-    <div v-for="entry in form" class="table-row-group">
+    <div v-for="cetacean in cetaceans" :key="cetacean.id" class="table-row-group">
       <div class="table-row">
-        <div v-for="key in entry" class="table-cell">
+        <div v-for="key in cetacean" class="table-cell">
           {{ key }}
         </div>
       </div>

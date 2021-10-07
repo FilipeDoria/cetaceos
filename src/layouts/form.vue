@@ -9,14 +9,12 @@ const cetacean = useCetaceanStore()
 const message = ref('')
 
 const onSubmit = async() => {
-  if (form.seaConditions) {
-    // to save form items on local storage to formData variable
-    localStorage.setItem('formData', JSON.stringify(form))
-    console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
-    await savingCetaceans()
-      .then(() => console.log('Data saved in the DB'))
-      .catch(err => console.log('Data saving failed!', err))
-  }
+  // to save form items on local storage to formData variable
+  localStorage.setItem('formData', JSON.stringify(form))
+  console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
+  await savingCetaceans()
+    .then(() => console.log('Data saved in the DB'))
+    .catch(err => console.log('Data saving failed!', err))
 }
 
 function getPosition(event) {
