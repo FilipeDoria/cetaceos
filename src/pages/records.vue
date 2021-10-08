@@ -7,7 +7,7 @@ let cetaceans = ref([])
 let tableHeader = ref([])
 
 const load = async() => {
-  cetaceans = JSON.parse(localStorage.getItem('formData')).cetaceans
+  cetaceans = JSON.parse(localStorage.getItem('formData'))
   console.log(cetaceans)
   tableHeader = Object.keys(cetaceans[0])
   console.log(tableHeader)
