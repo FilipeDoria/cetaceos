@@ -3,10 +3,17 @@ import { db } from '~/appdb'
 import data from '~/data/db.json'
 const { t } = useI18n()
 
-const cetaceans = data.cetaceans
-console.log(cetaceans)
-const tableHeader = Object.keys(cetaceans[0])
-console.log(tableHeader)
+let cetaceans = ref([])
+let tableHeader = ref([])
+
+const load = async() => {
+  cetaceans = JSON.parse(localStorage.getItem('formData')).cetaceans
+  console.log(cetaceans)
+  tableHeader = Object.keys(cetaceans[0])
+  console.log(tableHeader)
+}
+
+load()
 
 const error = ref(null)
 
@@ -44,7 +51,7 @@ async function exportData() {
     </p>
   </div>
   <div class="py-4" />
-  <div v-if="cetaceans.length"></div>
+  <div v-if="cetaceans"></div>
   <div v-else>
     Loading...
   </div>

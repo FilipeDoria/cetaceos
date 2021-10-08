@@ -1,7 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
 export const useCetaceanStore = defineStore('cetacean', () => {
-  const coisa = ref('')
+  const specie = ref('')
   let total: number
   let child: number
   const behaviour = ref('')
@@ -11,7 +11,7 @@ export const useCetaceanStore = defineStore('cetacean', () => {
   const otherInfo = ref('')
 
   return {
-    coisa,
+    specie,
     total,
     child,
     behaviour,

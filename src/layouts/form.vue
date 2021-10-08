@@ -3,18 +3,42 @@
 import { db, Cetacean } from '~/appdb'
 import { useFormStore } from '~/stores/form'
 import { useCetaceanStore } from '~/stores/cetacean'
+import data from '~/data/db.json'
+
 const form = useFormStore()
 const cetacean = useCetaceanStore()
 
 const message = ref('')
 
 const onSubmit = async() => {
+  const newId = data.cetaceans.length
+  const newObservation = {
+    id: newId,
+    company: form.company,
+    ship: form.ship,
+    date: form.date,
+    time: form.time,
+    seaConditions: form.seaConditions,
+    latitude: form.latitude,
+    longitude: form.longitude,
+    specie: cetacean.specie,
+    total: cetacean.total,
+    child: cetacean.child,
+    behaviour: cetacean.behaviour,
+    reaction: cetacean.reaction,
+    otherInfo: cetacean.otherInfo,
+    otherSpecies: cetacean.otherSpecies,
+  }
+  console.log(newObservation)
+  data.cetaceans.push(newObservation)
+  console.log(`Form values saved on localStorage: ${newObservation}`)
   // to save form items on local storage to formData variable
-  localStorage.setItem('formData', JSON.stringify(form))
+  localStorage.setItem('formData', JSON.stringify(data))
+  localStorage.setItem('newObservation', JSON.stringify(newObservation))
   console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
-  await savingCetaceans()
-    .then(() => console.log('Data saved in the DB'))
-    .catch(err => console.log('Data saving failed!', err))
+  // await savingCetaceans()
+  //   .then(() => console.log('Data saved in the DB'))
+  //   .catch(err => console.log('Data saving failed!', err))
 }
 
 function getPosition(event) {
