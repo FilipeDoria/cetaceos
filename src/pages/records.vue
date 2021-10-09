@@ -1,18 +1,29 @@
 <script setup async lang="ts">
 import { db } from '~/appdb'
+import data from '~/data/db.json'
 const { t } = useI18n()
 
-let form = null
-form = await db.cetaceans.toArray()
+let cetaceans = ref([])
+let tableHeader = ref([])
 
-const tableHeader = (form === null) ? null : Object.keys(form[0])
-console.log(tableHeader)
+const load = async() => {
+  cetaceans = JSON.parse(localStorage.getItem('formData'))
+  console.log(cetaceans)
+  tableHeader = Object.keys(cetaceans[0])
+  console.log(tableHeader)
+}
+
+load()
+
+const error = ref(null)
 
 async function exportData() {
+  const form = cetaceans
+  console.log(form)
   let csvString = [] // initializing the final form string for the excel
-  const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
-  head.forEach((key, index) =>
-    (index === Object.values(head).length - 1) ? csvString += `${key}` : csvString += `${key},`,
+  // const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
+  tableHeader.forEach((key, index) =>
+    (index === Object.values(tableHeader).length - 1) ? csvString += `${key}` : csvString += `${key},`,
   )
   csvString += '\n'
 
@@ -40,25 +51,35 @@ async function exportData() {
     </p>
   </div>
   <div class="py-4" />
-  <div v-if="form" class="table center">
+  <div v-if="cetaceans"></div>
+  <div v-else>
+    Loading...
+  </div>
+  <div v-for="cetacean in cetaceans" :key="cetacean.id">
+  </div>
+  <div class="table center">
     <div class="table-header-group">
       <div class="table-row">
-        <div v-for="key in tableHeader" class="table-cell">
+        <div
+          v-for="key in tableHeader"
+          :key="key"
+          class="table-cell"
+        >
           {{ key }}
         </div>
       </div>
     </div>
-    <div v-for="entry in form" class="table-row-group">
+    <div v-for="cetacean in cetaceans" :key="cetacean" class="table-row-group">
       <div class="table-row">
-        <div v-for="key in entry" class="table-cell">
+        <div v-for="key in cetacean" class="table-cell">
           {{ key }}
         </div>
       </div>
     </div>
   </div>
-  <div v-else-if="!form" class="py-4">
-    <p>Loading data...</p>
-  </div>
+  <!-- <div v-else-if="!form" class="py-4">
+    <p>Data table</p>
+  </div> -->
   <button
     class="m-3 text-sm btn"
     @click="exportData()"

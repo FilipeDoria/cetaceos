@@ -3,20 +3,42 @@
 import { db, Cetacean } from '~/appdb'
 import { useFormStore } from '~/stores/form'
 import { useCetaceanStore } from '~/stores/cetacean'
+// import data from '~/data/db.json'
+
+const data = localStorage.getItem('formData') === null ? [] : JSON.parse(localStorage.getItem('formData'))
 const form = useFormStore()
 const cetacean = useCetaceanStore()
 
 const message = ref('')
-
-const onSubmit = async() => {
-  if (form.seaConditions) {
-    // to save form items on local storage to formData variable
-    localStorage.setItem('formData', JSON.stringify(form))
-    console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
-    await savingCetaceans()
-      .then(() => console.log('Data saved in the DB'))
-      .catch(err => console.log('Data saving failed!', err))
+function onSubmit(event) {
+  const newId = data.length
+  const newObservation = {
+    id: newId,
+    company: form.company,
+    ship: form.ship,
+    date: form.date,
+    time: form.time,
+    seaConditions: form.seaConditions,
+    latitude: form.latitude,
+    longitude: form.longitude,
+    specie: cetacean.specie,
+    total: cetacean.total,
+    child: cetacean.child,
+    behaviour: cetacean.behaviour,
+    reaction: cetacean.reaction,
+    otherInfo: cetacean.otherInfo,
+    otherSpecies: cetacean.otherSpecies,
   }
+  console.log(newObservation)
+  data.push(newObservation)
+  console.log(`Form values saved on localStorage: ${newObservation}`)
+  // to save form items on local storage to formData variable
+  localStorage.setItem('formData', JSON.stringify(data))
+  localStorage.setItem('newObservation', JSON.stringify(newObservation))
+  console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
+  // await savingCetaceans()
+  //   .then(() => console.log('Data saved in the DB'))
+  //   .catch(err => console.log('Data saving failed!', err))
 }
 
 function getPosition(event) {
@@ -80,32 +102,6 @@ function convertDMS(lat, lng) {
   form.longitude = DMSLongitude
 }
 
-async function savingCetaceans() {
-  console.log('Seeding database with some cetaceans...')
-  await db.transaction(
-    'rw',
-    db.cetaceans,
-    async() => {
-    // populate a cetacean
-      await db.cetaceans.add(new Cetacean(
-        form.company,
-        form.ship,
-        form.date,
-        form.time,
-        form.seaConditions,
-        form.latitude,
-        form.longitude,
-        cetacean.coisa,
-        cetacean.total,
-        cetacean.child,
-        cetacean.behaviour,
-        cetacean.reaction,
-        cetacean.otherInfo,
-        cetacean.otherSpecies,
-      ))
-    },
-  )
-}
 </script>
 <template>
   <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
