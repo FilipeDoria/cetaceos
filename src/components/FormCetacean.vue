@@ -2,8 +2,13 @@
 import { useCetaceanStore } from '~/stores/cetacean'
 const cetacean = useCetaceanStore()
 
+const router = useRouter()
+const path = computed(() => router.currentRoute.value.path).value
+
+const { t } = useI18n()
+
 const mysticetosSpeciesOptions = [
-  { text: 'Baleia Comum', value: '7' },
+  { text: 'Baleia Comum', value: 'baleia comum' },
   { text: 'Baleia de Bryde', value: '1' },
   { text: 'Baleia Sardinheira', value: '2' },
   { text: 'Baleia Azul', value: '3' },
@@ -39,6 +44,12 @@ const odontocetisSpeciesOptions = [
 ]
 
 let options
+console.log(path === '/form/mysticetis')
+if (path === '/form/mysticetis') {
+  options = mysticetosSpeciesOptions
+  console.log(options)
+}
+else { options = odontocetisSpeciesOptions }
 
 const behaviourOptions = [
   { text: 'Deslocação', value: '0' },
@@ -60,11 +71,6 @@ function checkValue() {
     cetacean.child = cetacean.total
 }
 
-const router = useRouter()
-const path = computed(() => router.currentRoute.value.path)
-
-const { t } = useI18n()
-
 // todo function child number cant be smaller than total number
 // total number and child number can only be greater than 0/1
 </script>
@@ -73,8 +79,7 @@ const { t } = useI18n()
   <div>
     <div class="py-1">
       <select
-        v-if="path === '/form/misticetos' ? options = mysticetosSpeciesOptions : options = odontocetisSpeciesOptions"
-        v-model="cetacean.coisa"
+        v-model="cetacean.specie"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -97,7 +102,7 @@ const { t } = useI18n()
       <div class="py-1">
         <label class="hidden" for="input">{{ t('species.otherSpecies') }}</label>
         <input
-          v-if="cetacean.coisa === '0'"
+          v-if="cetacean.specie === '0'"
           id="input"
           v-model="cetacean.otherSpecies"
           :placeholder="t('species.otherSpecies')"

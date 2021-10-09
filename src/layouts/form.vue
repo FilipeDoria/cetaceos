@@ -10,7 +10,7 @@ const form = useFormStore()
 const cetacean = useCetaceanStore()
 
 const message = ref('')
-function onSubmit(event) {
+function onSubmit() {
   const newId = data.length
   const newObservation = {
     id: newId,
@@ -41,9 +41,9 @@ function onSubmit(event) {
   //   .catch(err => console.log('Data saving failed!', err))
 }
 
-function getPosition(event) {
-  event.stopPropagation()
-  event.preventDefault()
+function getPosition() {
+  // event.stopPropagation()
+  // event.preventDefault()
   message.value = t('intro.location-message')
   const options = {
     enableHighAccuracy: true,
@@ -108,7 +108,7 @@ function convertDMS(lat, lng) {
     <Header />
     <div class="p-1">
       {{ t('form.header-message') }}
-      <form action="/cetacean">
+      <form action="/cetacean" method="">
         <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
           <input
@@ -201,6 +201,7 @@ function convertDMS(lat, lng) {
           <input
             id="input"
             v-model="form.latitude"
+            name=""
             :placeholder="t('intro.whats-the-latitude')"
             type="string"
             autocomplete="off"
@@ -239,7 +240,7 @@ function convertDMS(lat, lng) {
         >
           {{ t('button.position') }}
         </button>
-        <FormCetacean :form="form" @update:form="form = $event" />
+        <FormCetacean />
         <div class="py-1">
           <label for="checkbox">{{ t('species.other-species') }}</label>
           <input
@@ -249,7 +250,7 @@ function convertDMS(lat, lng) {
             border="~ rounded gray-200 dark:gray-700"
           >
           <span v-if="form.multipleSpecies" class="px-1">Yes</span>
-          <span v-else-if="!form.multipleSpecies" class="px-1">No</span>
+          <span v-else-if="!form.multipleSpecies" class="px-1">Yes</span>
         </div>
         <div>
           <span v-if="form.multipleSpecies == true" class="px-2">
@@ -274,8 +275,6 @@ function convertDMS(lat, lng) {
               hover="bg-dark-100"
               border="~ rounded green-900 dark:gray-700"
               class="m-3 text-sm btn"
-              @click="onSubmit"
-              @keyup.enter="onSubmit"
             >
               {{ t('button.ok') }}
             </button>
@@ -284,15 +283,14 @@ function convertDMS(lat, lng) {
         <div>
           <span v-for="n in form.multipleSpeciesNumber">
             <div class="py-1">
-              <p class="text">Species {{ n + 1 }}</p>
+              <p class="text">Specie {{ n + 1 }}</p>
               <FormCetacean />
             </div>
           </span>
         </div>
         <button
-          type="submit"
-          class="m-3 text-sm btn"
-
+          class="m-4 text-sm btn"
+          :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.child || !cetacean.behaviour || !cetacean.reaction "
           @click="onSubmit"
           @keyup.enter="onSubmit"
         >
