@@ -78,13 +78,13 @@ function error(err) {
 const { t } = useI18n()
 
 const options = [
-  { text: '0 - Calmo (< 1 Kmh)', value: '0' },
-  { text: '1 - Aragem (1 - 5 Km/h)', value: '1' },
-  { text: '2 - Brisa Leve (6 - 11 Km/h)', value: '2' },
-  { text: '3 - Brisa Fraca (12 - 19 Km/h)', value: '3' },
-  { text: '4 - Brisa Moderada (20 - 28 Km/h)', value: '4' },
-  { text: '5 - Brisa Forte (29 - 38 Km/h)Two', value: '5' },
-  { text: '6 - Vento Fresco (39 - 49 Km/h)', value: '6' },
+  { text: '0 - Calmo (< 1 Kmh)', value: '0 - calmo' },
+  { text: '1 - Aragem (1 - 5 Km/h)', value: '1 - aragem' },
+  { text: '2 - Brisa Leve (6 - 11 Km/h)', value: '2 - brisa leve' },
+  { text: '3 - Brisa Fraca (12 - 19 Km/h)', value: '3 - brisa fraca' },
+  { text: '4 - Brisa Moderada (20 - 28 Km/h)', value: '4 - brisa moderada' },
+  { text: '5 - Brisa Forte (29 - 38 Km/h)Two', value: '5 - brisa forte' },
+  { text: '6 - Vento Fresco (39 - 49 Km/h)', value: '6 - vento fresco' },
 ]
 
 form.company = 'H2O Madeira'
