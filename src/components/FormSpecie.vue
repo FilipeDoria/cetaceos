@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import Job from '~/types/Job'
 import Record from '~/types/Record'
 
 const props = defineProps<{
-  jobs?: Job[]
   records?: Record[]
   record: Record
 }>()
