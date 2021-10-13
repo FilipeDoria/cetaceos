@@ -4,15 +4,13 @@ import { useFormStore } from '~/stores/form'
 import { useCetaceanStore } from '~/stores/cetacean'
 import { useRecordsStore } from '~/stores/records'
 import Record from '~/types/Record'
-import Job from '~/types/Job'
+
+const temp = localStorage.getItem('formData')
+const data = temp === null ? [] : JSON.parse(temp)
 
 const cetacean = useCetaceanStore()
-const temp = localStorage.getItem('formData')
-console.log(temp)
-const data = temp === null ? [] : JSON.parse(temp)
 const form = useFormStore()
 const records = useRecordsStore()
-const multipleSpeciesNumber: Number = 0
 
 const message = ref('')
 
@@ -50,14 +48,6 @@ function onSubmit() {
   //   .then(() => console.log('Data saved in the DB'))
   //   .catch(err => console.log('Data saving failed!', err))
 }
-
-const jobs = ref<Job[]>([
-  { title: 'farm worker', location: 'lon lon ranch', salary: 30000, id: '1' },
-  { title: 'quarryman', location: 'death mountain', salary: 40000, id: '2' },
-  { title: 'flute player', location: 'the lost woods', salary: 35000, id: '3' },
-  { title: 'fisherman', location: 'lake hylia', salary: 21000, id: '4' },
-  { title: 'prison guard', location: 'gerudo valley', salary: 32000, id: '5' },
-])
 
 // let newRecords = ref<Record[]>([])
 
@@ -113,8 +103,8 @@ function toDegreesMinutesAndSeconds(coordinate) {
 function multipleSpeciesLoader() {
   const newRecords = new Set<Record>()
   console.log(newRecords)
-  console.log(multipleSpeciesNumber)
-  for (let i = 0; i < multipleSpeciesNumber; i++) {
+  console.log(form.multipleSpeciesNumber)
+  for (let i = 0; i < form.multipleSpeciesNumber; i++) {
     const dummy: Record = {
       id: data.length + i + 1,
       company: form.company,
@@ -133,7 +123,7 @@ function multipleSpeciesLoader() {
   records.updateRecords(newRecords)
   console.log(`this is are the newRecords: ${records.records}`)
   // console.log(JSON.stringify(newRecords))
-  form.multipleSpeciesNumber = multipleSpeciesNumber
+  form.multipleSpeciesNumber = form.multipleSpeciesNumber
 }
 
 function convertDMS(lat, lng) {
@@ -302,7 +292,7 @@ function convertDMS(lat, lng) {
           <span v-if="form.multipleSpecies == true" class="px-2">
             <input
               id="input"
-              v-model.number="multipleSpeciesNumber"
+              v-model.number="form.multipleSpeciesNumber"
               :placeholder="t('species.species-count')"
               type="number"
               autocomplete="off"
