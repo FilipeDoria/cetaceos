@@ -122,11 +122,11 @@ function multipleSpeciesLoader(number) {
       longitude: form.longitude,
     }
     newRecords.add(dummy)
-    console.log(newRecords)
+    console.log(`this is a new record: ${newRecords}`)
     // records.setNewRecord(dummy)
   }
   records.updateRecords(newRecords)
-  console.log(records.records)
+  console.log(`this is are the newRecords: ${records.records}`)
   // console.log(JSON.stringify(newRecords))
   form.multipleSpeciesNumber = number
 }
