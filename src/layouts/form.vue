@@ -1,19 +1,23 @@
 
 <script setup lang="ts">
-import { db, Cetacean } from '~/appdb'
 import { useFormStore } from '~/stores/form'
 import { useCetaceanStore } from '~/stores/cetacean'
-// import data from '~/data/db.json'
+import { useRecordsStore } from '~/stores/records'
+import Record from '~/types/Record'
+import Job from '~/types/Job'
 
+const cetacean = useCetaceanStore()
 const data = localStorage.getItem('formData') === null ? [] : JSON.parse(localStorage.getItem('formData'))
 const form = useFormStore()
-const cetacean = useCetaceanStore()
+const records = useRecordsStore()
+const multipleSpeciesNumber: number = undefined
 
 const message = ref('')
+
 function onSubmit() {
-  const newId = data.length
-  const newObservation = {
-    id: newId,
+  // const newId = data.length
+  const newObservation: Record = {
+    id: data.length,
     company: form.company,
     ship: form.ship,
     date: form.date,
@@ -23,14 +27,18 @@ function onSubmit() {
     longitude: form.longitude,
     specie: cetacean.specie,
     total: cetacean.total,
-    child: cetacean.child,
+    children: cetacean.child,
     behaviour: cetacean.behaviour,
     reaction: cetacean.reaction,
     otherInfo: cetacean.otherInfo,
     otherSpecies: cetacean.otherSpecies,
   }
-  console.log(newObservation)
+
   data.push(newObservation)
+
+  for (const item of records.records)
+    data.push(item)
+
   console.log(`Form values saved on localStorage: ${newObservation}`)
   // to save form items on local storage to formData variable
   localStorage.setItem('formData', JSON.stringify(data))
@@ -40,6 +48,16 @@ function onSubmit() {
   //   .then(() => console.log('Data saved in the DB'))
   //   .catch(err => console.log('Data saving failed!', err))
 }
+
+const jobs = ref<Job[]>([
+  { title: 'farm worker', location: 'lon lon ranch', salary: 30000, id: '1' },
+  { title: 'quarryman', location: 'death mountain', salary: 40000, id: '2' },
+  { title: 'flute player', location: 'the lost woods', salary: 35000, id: '3' },
+  { title: 'fisherman', location: 'lake hylia', salary: 21000, id: '4' },
+  { title: 'prison guard', location: 'gerudo valley', salary: 32000, id: '5' },
+])
+
+// let newRecords = ref<Record[]>([])
 
 function getPosition() {
   // event.stopPropagation()
@@ -90,6 +108,29 @@ function toDegreesMinutesAndSeconds(coordinate) {
   return coordinate
 }
 
+function multipleSpeciesLoader(number) {
+  const newRecords = new Set<Record>()
+  for (let i = 0; i < number; i++) {
+    const dummy: Record = {
+      id: data.length + i + 1,
+      company: form.company,
+      ship: form.ship,
+      date: form.date,
+      time: form.time,
+      seaConditions: form.seaConditions,
+      latitude: form.latitude,
+      longitude: form.longitude,
+    }
+    newRecords.add(dummy)
+    console.log(newRecords)
+    // records.setNewRecord(dummy)
+  }
+  records.updateRecords(newRecords)
+  console.log(records.records)
+  // console.log(JSON.stringify(newRecords))
+  form.multipleSpeciesNumber = number
+}
+
 function convertDMS(lat, lng) {
   let DMSLatitude = lat >= 0 ? 'N ' : 'S '
   const latitude = toDegreesMinutesAndSeconds(lat)
@@ -108,7 +149,7 @@ function convertDMS(lat, lng) {
     <Header />
     <div class="p-1">
       {{ t('form.header-message') }}
-      <form action="/cetacean" method="">
+      <form action="" method="">
         <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
           <input
@@ -256,7 +297,7 @@ function convertDMS(lat, lng) {
           <span v-if="form.multipleSpecies == true" class="px-2">
             <input
               id="input"
-              v-model.number="form.multipleSpeciesNumber"
+              v-model.number="multipleSpeciesNumber"
               :placeholder="t('species.species-count')"
               type="number"
               autocomplete="off"
@@ -275,19 +316,19 @@ function convertDMS(lat, lng) {
               hover="bg-dark-100"
               border="~ rounded green-900 dark:gray-700"
               class="m-3 text-sm btn"
+              @click="multipleSpeciesLoader(multipleSpeciesNumber)"
             >
               {{ t('button.ok') }}
             </button>
           </span>
         </div>
-        <div>
-          <span v-for="n in form.multipleSpeciesNumber">
-            <div class="py-1">
-              <p class="text">Specie {{ n + 1 }}</p>
-              <FormCetacean />
-            </div>
-          </span>
+        <div v-if="form.multipleSpeciesNumber">
+          <div v-for="record, index in records.records" :key="record.id" class="py-1">
+            Specie {{ index + 2 }}
+            <FormSpecie :record="record" />
+          </div>
         </div>
+
         <button
           class="m-4 text-sm btn"
           :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.child || !cetacean.behaviour || !cetacean.reaction "
