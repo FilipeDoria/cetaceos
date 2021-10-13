@@ -196,7 +196,7 @@ function checkValue() {
       <label class="hidden" for="input">{{ t('species.observations') }}</label>
       <input
         id="input"
-        v-model="record.observations"
+        v-model="record.otherInfo"
         :placeholder="t('species.observations')"
         type="string"
         autocomplete="off"

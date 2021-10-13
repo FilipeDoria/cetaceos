@@ -120,7 +120,7 @@ function multipleSpeciesLoader() {
       behaviour: '',
       reaction: '',
       otherInfo: '',
-      otherspecies: '',
+      otherSpecies: '',
     }
     console.log(`dummy object: ${JSON.stringify(dummy)}`)
     newRecords.add(dummy)
@@ -151,7 +151,7 @@ function convertDMS(lat, lng) {
     <Header />
     <div class="p-1">
       {{ t('form.header-message') }}
-      <form action="" method="">
+      <form action="/cetacean" method="">
         <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
           <input
