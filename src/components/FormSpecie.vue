@@ -6,6 +6,25 @@ const props = defineProps<{
   record: Record
 }>()
 
+const record = {
+  company: 'H2O Madeira',
+  ship: 'Cetus',
+  date: '2021-09-29',
+  time: '15:32',
+  seaConditions: '3',
+  latitude: '',
+  longitude: '',
+  specie: '',
+  total: 0,
+  children: 0,
+  behaviour: '',
+  reaction: '',
+  otherInfo: '',
+  otherspecies: '',
+}
+
+console.log(record)
+
 const { t } = useI18n()
 
 const specieOptions = [

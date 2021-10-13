@@ -326,7 +326,7 @@ function convertDMS(lat, lng) {
 
         <button
           class="m-4 text-sm btn"
-          :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.child || !cetacean.behaviour || !cetacean.reaction "
+          :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction "
           @click="onSubmit"
           @keyup.enter="onSubmit"
         >
