@@ -108,7 +108,7 @@ function toDegreesMinutesAndSeconds(coordinate) {
   return coordinate
 }
 
-function multipleSpeciesLoader(number) {
+function multipleSpeciesLoader(number: Number) {
   const newRecords = new Set<Record>()
   for (let i = 0; i < number; i++) {
     const dummy: Record = {

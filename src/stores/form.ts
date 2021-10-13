@@ -19,7 +19,7 @@ export const useFormStore = defineStore('form', () => {
   let time
   const valid = false
   const multipleSpecies = false
-  let multipleSpeciesNumber
+  const multipleSpeciesNumber: Number = 0
 
   /**
    * Changes the current name of the user and saves the one that was used
