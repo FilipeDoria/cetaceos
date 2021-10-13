@@ -12,7 +12,7 @@ console.log(temp)
 const data = temp === null ? [] : JSON.parse(temp)
 const form = useFormStore()
 const records = useRecordsStore()
-const multipleSpeciesNumber: number = undefined
+const multipleSpeciesNumber: Number = 0
 
 const message = ref('')
 
@@ -110,11 +110,11 @@ function toDegreesMinutesAndSeconds(coordinate) {
   return coordinate
 }
 
-function multipleSpeciesLoader(number: Number) {
+function multipleSpeciesLoader() {
   const newRecords = new Set<Record>()
   console.log(newRecords)
-  console.log(number)
-  for (let i = 0; i < number; i++) {
+  console.log(multipleSpeciesNumber)
+  for (let i = 0; i < multipleSpeciesNumber; i++) {
     const dummy: Record = {
       id: data.length + i + 1,
       company: form.company,
@@ -133,7 +133,7 @@ function multipleSpeciesLoader(number: Number) {
   records.updateRecords(newRecords)
   console.log(`this is are the newRecords: ${records.records}`)
   // console.log(JSON.stringify(newRecords))
-  form.multipleSpeciesNumber = number
+  form.multipleSpeciesNumber = multipleSpeciesNumber
 }
 
 function convertDMS(lat, lng) {
@@ -321,7 +321,7 @@ function convertDMS(lat, lng) {
               hover="bg-dark-100"
               border="~ rounded green-900 dark:gray-700"
               class="m-3 text-sm btn"
-              @click="multipleSpeciesLoader(multipleSpeciesNumber)"
+              @click="multipleSpeciesLoader()"
             >
               {{ t('button.ok') }}
             </button>
