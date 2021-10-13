@@ -7,7 +7,9 @@ import Record from '~/types/Record'
 import Job from '~/types/Job'
 
 const cetacean = useCetaceanStore()
-const data = localStorage.getItem('formData') === null ? [] : JSON.parse(localStorage.getItem('formData'))
+const temp = localStorage.getItem('formData')
+console.log(temp)
+const data = temp === null ? [] : JSON.parse(temp)
 const form = useFormStore()
 const records = useRecordsStore()
 const multipleSpeciesNumber: number = undefined
@@ -110,6 +112,8 @@ function toDegreesMinutesAndSeconds(coordinate) {
 
 function multipleSpeciesLoader(number: Number) {
   const newRecords = new Set<Record>()
+  console.log(newRecords)
+  console.log(number)
   for (let i = 0; i < number; i++) {
     const dummy: Record = {
       id: data.length + i + 1,
@@ -121,6 +125,7 @@ function multipleSpeciesLoader(number: Number) {
       latitude: form.latitude,
       longitude: form.longitude,
     }
+    console.log('I was here')
     newRecords.add(dummy)
     console.log(`this is a new record: ${newRecords}`)
     // records.setNewRecord(dummy)
