@@ -284,61 +284,63 @@ function convertDMS(lat, lng) {
           {{ t('button.position') }}
         </button>
         <FormCetacean />
-        <div class="py-1">
-          <label for="checkbox">{{ t('species.other-species') }}</label>
-          <input
-            id="checkbox"
-            v-model="form.multipleSpecies"
-            type="checkbox"
-            border="~ rounded gray-200 dark:gray-700"
-          >
-          <span v-if="form.multipleSpecies" class="px-1">Yes</span>
-          <span v-else-if="!form.multipleSpecies" class="px-1">Yes</span>
-        </div>
-        <div>
-          <span v-if="form.multipleSpecies == true" class="px-2">
+        <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction">
+          <div class="py-1">
+            <label for="checkbox">{{ t('species.other-species') }}</label>
             <input
-              id="input"
-              v-model.number="form.multipleSpeciesNumber"
-              :placeholder="t('species.species-count')"
-              type="number"
-              autocomplete="off"
-              w="120px"
-              p="x-2 y-2"
-              text="center"
-              bg="transparent"
+              id="checkbox"
+              v-model="form.multipleSpecies"
+              type="checkbox"
               border="~ rounded gray-200 dark:gray-700"
-              outline="none active:none"
-              min="1"
             >
-            <button
-              type="button"
-              p="x-2 y-2"
-              bg="dark-50"
-              hover="bg-dark-100"
-              border="~ rounded green-900 dark:gray-700"
-              class="m-3 text-sm btn"
-              @click="multipleSpeciesLoader()"
-            >
-              {{ t('button.ok') }}
-            </button>
-          </span>
-        </div>
-        <div v-if="records.records.size > 0">
-          <div v-for="record, index in records.records" :key="record.id" class="py-1">
-            Specie {{ index + 2 }}
-            <FormSpecie :record="record" />
+            <span v-if="form.multipleSpecies" class="px-1">Yes</span>
+            <span v-else-if="!form.multipleSpecies" class="px-1">Yes</span>
           </div>
-        </div>
+          <div>
+            <span v-if="form.multipleSpecies == true" class="px-2">
+              <input
+                id="input"
+                v-model.number="form.multipleSpeciesNumber"
+                :placeholder="t('species.species-count')"
+                type="number"
+                autocomplete="off"
+                w="120px"
+                p="x-2 y-2"
+                text="center"
+                bg="transparent"
+                border="~ rounded gray-200 dark:gray-700"
+                outline="none active:none"
+                min="1"
+              >
+              <button
+                type="button"
+                p="x-2 y-2"
+                bg="dark-50"
+                hover="bg-dark-100"
+                border="~ rounded green-900 dark:gray-700"
+                class="m-3 text-sm btn"
+                @click="multipleSpeciesLoader()"
+              >
+                {{ t('button.ok') }}
+              </button>
+            </span>
+          </div>
+          <div v-if="records.records.size > 0">
+            <div v-for="record, index in records.records" :key="record.id" class="py-1">
+              Specie {{ index + 2 }}
+              <FormSpecie :record="record" />
+            </div>
+          </div>
 
-        <button
-          class="m-4 text-sm btn"
-          :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction "
-          @click="onSubmit"
-          @keyup.enter="onSubmit"
-        >
-          {{ t('button.submit') }}
-        </button>
+          <button
+            class="m-4 text-sm btn"
+            :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction "
+            @click="onSubmit"
+            @keyup.enter="onSubmit"
+          >
+            {{ t('button.submit') }}
+          </button>
+        </div>
         <div class="mt-5 mx-auto text-center opacity-25 text-sm">
           [Form Layout]
         </div>
