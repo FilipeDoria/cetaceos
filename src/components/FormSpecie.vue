@@ -9,49 +9,49 @@ const props = defineProps<{
 const { t } = useI18n()
 
 const specieOptions = [
-  { text: 'Baleia Comum', value: '22' },
-  { text: 'Baleia de Bryde', value: '23' },
-  { text: 'Baleia Sardinheira', value: '24' },
-  { text: 'Baleia Azul', value: '25' },
-  { text: 'Baleia de Bossa', value: '26' },
-  { text: 'Baleia Anã', value: '27' },
-  { text: 'Baleia Franca', value: '28' },
-  { text: 'Golfinho Roaz', value: '21' },
-  { text: 'Golfinho Pintado', value: '1' },
-  { text: 'Golfinho Riscado', value: '2' },
-  { text: 'Golfinho Comum', value: '3' },
-  { text: 'Baleia Piloto Tropical Ou Golfinho Boca De Panela', value: '4' },
-  { text: 'Baleia Piloto De Barbatanas Longas', value: '5' },
-  { text: 'Golfinho Caldeirão', value: '6' },
-  { text: 'Golfinho Grampo', value: '7' },
-  { text: 'Falsa Orca', value: '8' },
-  { text: 'Orca', value: '9' },
-  { text: 'Orca-Pigméia', value: '10' },
-  { text: 'Golfinho Cabeça De Melão', value: '11' },
-  { text: 'Golfinho De Fraser', value: '12' },
-  { text: 'Baleia Cachalote', value: '13' },
-  { text: 'Baleia Cachalote Anão', value: '14' },
-  { text: 'Baleia Cachalote Pigmeu', value: '15' },
-  { text: 'Baleia Bico De Blainville', value: '16' },
-  { text: 'Baleia Bico De Cuvier Ou Zífio', value: '17' },
-  { text: 'Baleia Bico De Gervais', value: '18' },
-  { text: 'Baleia Bico De Sowerby', value: '19' },
-  { text: 'Baleia Bico De Garrafa', value: '20' },
-  { text: 'Outro', value: '0' },
+  { text: 'Baleia Comum', value: 'baleia comum' },
+  { text: 'Baleia de Bryde', value: 'baleia de bryde' },
+  { text: 'Baleia Sardinheira', value: 'baleia sardinheira' },
+  { text: 'Baleia Azul', value: 'baleia azul' },
+  { text: 'Baleia de Bossa', value: 'baleia de bossa' },
+  { text: 'Baleia Anã', value: 'baleia ana' },
+  { text: 'Baleia Franca', value: 'baleia franca' },
+  { text: 'Golfinho Roaz', value: 'goldinho roaz' },
+  { text: 'Golfinho Pintado', value: 'golfinho pintado' },
+  { text: 'Golfinho Riscado', value: 'golfinho riscado' },
+  { text: 'Golfinho Comum', value: 'golfinho comum' },
+  { text: 'Baleia Piloto Tropical Ou Golfinho Boca De Panela', value: 'baleia piloto tropial/golfinho  de panela' },
+  { text: 'Baleia Piloto De Barbatanas Longas', value: 'baleia piloto de barbatanas longas' },
+  { text: 'Golfinho Caldeirão', value: 'golfinho caldeirao' },
+  { text: 'Golfinho Grampo', value: 'golfinho grampo' },
+  { text: 'Falsa Orca', value: 'falsa orca' },
+  { text: 'Orca', value: 'orca' },
+  { text: 'Orca-Pigméia', value: 'orca-pigmeia' },
+  { text: 'Golfinho Cabeça De Melão', value: 'golfinho cabeca de melao' },
+  { text: 'Golfinho De Fraser', value: 'golfinho de fraser' },
+  { text: 'Baleia Cachalote', value: 'baleia cachalote' },
+  { text: 'Baleia Cachalote Anão', value: 'baleia cachalote anao' },
+  { text: 'Baleia Cachalote Pigmeu', value: 'baleia cachalote pigmeu' },
+  { text: 'Baleia Bico De Blainville', value: 'baleia bico de Blainville' },
+  { text: 'Baleia Bico De Cuvier Ou Zífio', value: 'baleia bico de cuvier' },
+  { text: 'Baleia Bico De Gervais', value: 'baleia de bico de gervais' },
+  { text: 'Baleia Bico De Sowerby', value: 'baleia de bico de sowerby' },
+  { text: 'Baleia Bico De Garrafa', value: 'baleia de bico de garrafa' },
+  { text: 'Outro', value: 'outro' },
 ]
 
 const behaviourOptions = [
-  { text: 'Deslocação', value: '0' },
-  { text: 'Alimentação', value: '1' },
-  { text: 'Repouso', value: '2' },
-  { text: 'Socialização', value: '3' },
-  { text: 'Outro', value: '4' },
+  { text: 'Deslocação', value: 'deslocacao' },
+  { text: 'Alimentação', value: 'alimentacao' },
+  { text: 'Repouso', value: 'repouso' },
+  { text: 'Socialização', value: 'socializacao' },
+  { text: 'Outro', value: 'outro' },
 ]
 const reactionOptions = [
-  { text: 'Nenhuma/Indiferença', value: '0' },
-  { text: 'Atração/aproximação', value: '1' },
-  { text: 'Evitação/afastamento', value: '2' },
-  { text: 'Outro', value: '3' },
+  { text: 'Nenhuma/Indiferença', value: 'nenhuma/indiferenca' },
+  { text: 'Atração/aproximação', value: 'atraca/aproximacao' },
+  { text: 'Evitação/afastamento', value: 'evitacao/afastamento' },
+  { text: 'Outro', value: 'outro' },
 ]
 
 // this checks the value and updates it on the control, if needed
@@ -91,7 +91,7 @@ function checkValue() {
       <div class="py-1">
         <label class="hidden" for="input">{{ t('species.otherSpecies') }}</label>
         <input
-          v-if="record.specie === '0'"
+          v-if="record.specie === 'outro'"
           id="input"
           v-model="record.otherSpecies"
           :placeholder="t('species.otherSpecies')"
