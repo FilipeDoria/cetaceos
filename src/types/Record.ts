@@ -1,4 +1,4 @@
-interface Record {
+type Record = {
   id: number
   company: string
   ship: string

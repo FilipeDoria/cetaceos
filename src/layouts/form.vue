@@ -114,8 +114,15 @@ function multipleSpeciesLoader() {
       seaConditions: form.seaConditions,
       latitude: form.latitude,
       longitude: form.longitude,
+      specie: '',
+      total: 0,
+      children: 0,
+      behaviour: '',
+      reaction: '',
+      otherInfo: '',
+      otherspecies: '',
     }
-    console.log('I was here')
+    console.log(`dummy object: ${JSON.stringify(dummy)}`)
     newRecords.add(dummy)
     console.log(`this is a new record: ${newRecords}`)
     // records.setNewRecord(dummy)
@@ -317,7 +324,7 @@ function convertDMS(lat, lng) {
             </button>
           </span>
         </div>
-        <div v-if="form.multipleSpeciesNumber">
+        <div v-if="records.records.size > 0">
           <div v-for="record, index in records.records" :key="record.id" class="py-1">
             Specie {{ index + 2 }}
             <FormSpecie :record="record" />

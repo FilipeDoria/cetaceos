@@ -6,25 +6,6 @@ const props = defineProps<{
   record: Record
 }>()
 
-const record = {
-  company: 'H2O Madeira',
-  ship: 'Cetus',
-  date: '2021-09-29',
-  time: '15:32',
-  seaConditions: '3',
-  latitude: '',
-  longitude: '',
-  specie: '',
-  total: 0,
-  children: 0,
-  behaviour: '',
-  reaction: '',
-  otherInfo: '',
-  otherspecies: '',
-}
-
-console.log(record)
-
 const { t } = useI18n()
 
 const specieOptions = [
@@ -75,8 +56,8 @@ const reactionOptions = [
 
 // this checks the value and updates it on the control, if needed
 function checkValue() {
-  if (record.child > record.total)
-    record.child = record.total
+  if (record.children > record.total)
+    record.children = record.total
 }
 
 // todo function child number cant be smaller than total number
@@ -148,7 +129,7 @@ function checkValue() {
         <input
           v-if="typeof record.total !== 'undefined'"
           id="input"
-          v-model.number="record.child"
+          v-model.number="record.children"
           :placeholder="t('species.child')"
           min="0"
           step="1"
