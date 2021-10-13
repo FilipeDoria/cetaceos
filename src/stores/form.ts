@@ -12,14 +12,14 @@ export const useFormStore = defineStore('form', () => {
 
   const company = ref('')
   const ship = ref('')
-  const longitude = ref()
+  const longitude = ref('')
   const latitude = ref('')
   const seaConditions = ref('')
-  let date
-  let time
+  const date = ref(Date)
+  const time = ref(Date)
   const valid = false
   const multipleSpecies = false
-  let multipleSpeciesNumber
+  const multipleSpeciesNumber = ref(1)
 
   /**
    * Changes the current name of the user and saves the one that was used

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useCetaceanStore } from '~/stores/cetacean'
+import Record from '~/types/Record'
 
-const cetacean = useCetaceanStore()
-
-const router = useRouter()
-const path = computed(() => router.currentRoute.value.path).value
+const props = defineProps<{
+  records?: Record[]
+  record: Record
+}>()
 
 const { t } = useI18n()
 
-const mysticetosSpeciesOptions = [
+const specieOptions = [
   { text: 'Baleia Comum', value: 'baleia comum' },
   { text: 'Baleia de Bryde', value: 'baleia de bryde' },
   { text: 'Baleia Sardinheira', value: 'baleia sardinheira' },
@@ -16,10 +16,6 @@ const mysticetosSpeciesOptions = [
   { text: 'Baleia de Bossa', value: 'baleia de bossa' },
   { text: 'Baleia Anã', value: 'baleia ana' },
   { text: 'Baleia Franca', value: 'baleia franca' },
-  { text: 'Outro', value: 'outro' },
-]
-
-const odontocetisSpeciesOptions = [
   { text: 'Golfinho Roaz', value: 'goldinho roaz' },
   { text: 'Golfinho Pintado', value: 'golfinho pintado' },
   { text: 'Golfinho Riscado', value: 'golfinho riscado' },
@@ -44,12 +40,6 @@ const odontocetisSpeciesOptions = [
   { text: 'Outro', value: 'outro' },
 ]
 
-let options
-if (path === '/form/mysticetis')
-  options = mysticetosSpeciesOptions
-
-else options = odontocetisSpeciesOptions
-
 const behaviourOptions = [
   { text: 'Deslocação', value: 'deslocacao' },
   { text: 'Alimentação', value: 'alimentacao' },
@@ -66,8 +56,8 @@ const reactionOptions = [
 
 // this checks the value and updates it on the control, if needed
 function checkValue() {
-  if (cetacean.child > cetacean.total)
-    cetacean.child = cetacean.total
+  if (record.children > record.total)
+    record.children = record.total
 }
 
 // todo function child number cant be smaller than total number
@@ -78,7 +68,7 @@ function checkValue() {
   <div>
     <div class="py-1">
       <select
-        v-model="cetacean.specie"
+        v-model="record.specie"
         p="x-4 y-2"
         w="250px"
         text="center"
@@ -91,7 +81,7 @@ function checkValue() {
           {{ t('species.whats-the-specie') }}
         </option>
         <option
-          v-for="option in options"
+          v-for="option in specieOptions"
           :key="option.value"
           :value="option.value"
         >
@@ -101,9 +91,9 @@ function checkValue() {
       <div class="py-1">
         <label class="hidden" for="input">{{ t('species.otherSpecies') }}</label>
         <input
-          v-if="cetacean.specie === 'outro'"
+          v-if="record.specie === 'outro'"
           id="input"
-          v-model="cetacean.otherSpecies"
+          v-model="record.otherSpecies"
           :placeholder="t('species.otherSpecies')"
           type="string"
           autocomplete="off"
@@ -120,7 +110,7 @@ function checkValue() {
       <label class="hidden" for="input">{{ t('species.total') }}</label>
       <input
         id="input"
-        v-model.number="cetacean.total"
+        v-model.number="record.total"
         :placeholder="t('species.total')"
         type="number"
         min="1"
@@ -137,9 +127,9 @@ function checkValue() {
       <div class="py-1">
         <label class="hidden" for="input">{{ t('species.child') }}</label>
         <input
-          v-if="typeof cetacean.total !== 'undefined'"
+          v-if="typeof record.total !== 'undefined'"
           id="input"
-          v-model.number="cetacean.child"
+          v-model.number="record.children"
           :placeholder="t('species.child')"
           min="0"
           step="1"
@@ -160,7 +150,7 @@ function checkValue() {
       <label class="hidden" for="input">{{ t('species.behaviour') }}</label>
       <select
         id=""
-        v-model="cetacean.behaviour"
+        v-model="record.behaviour"
         :placeholder="t('species.behaviour')"
         name=""
         p="x-4 y-2"
@@ -183,7 +173,7 @@ function checkValue() {
       <label class="hidden" for="input">{{ t('species.reaction') }}</label>
       <select
         id=""
-        v-model="cetacean.reaction"
+        v-model="record.reaction"
         :placeholder="t('species.reaction')"
         name=""
         p="x-4 y-2"
@@ -206,7 +196,7 @@ function checkValue() {
       <label class="hidden" for="input">{{ t('species.observations') }}</label>
       <input
         id="input"
-        v-model="cetacean.observations"
+        v-model="record.otherInfo"
         :placeholder="t('species.observations')"
         type="string"
         autocomplete="off"
@@ -218,15 +208,5 @@ function checkValue() {
         outline="none active:none"
       >
     </div>
-    <!-- <span>
-      Form values <br />
-      specie:{{ cetacean.coisa }}<br />
-      total:{{ cetacean.total }}<br />
-      child:{{ cetacean.child }}<br />
-      behaviour:{{ cetacean.behaviour }}<br />
-      reaction:{{ cetacean.reaction }}<br />
-      observation:{{ cetacean.observations }}<br />
-      otherSpecies:{{ cetacean.otherSpecies }}
-    </span> -->
   </div>
 </template>

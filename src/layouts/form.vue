@@ -1,19 +1,23 @@
 
 <script setup lang="ts">
-import { db, Cetacean } from '~/appdb'
 import { useFormStore } from '~/stores/form'
 import { useCetaceanStore } from '~/stores/cetacean'
-// import data from '~/data/db.json'
+import { useRecordsStore } from '~/stores/records'
+import Record from '~/types/Record'
 
-const data = localStorage.getItem('formData') === null ? [] : JSON.parse(localStorage.getItem('formData'))
-const form = useFormStore()
+const temp = localStorage.getItem('formData')
+const data = temp === null ? [] : JSON.parse(temp)
+
 const cetacean = useCetaceanStore()
+const form = useFormStore()
+const records = useRecordsStore()
 
 const message = ref('')
+
 function onSubmit() {
-  const newId = data.length
-  const newObservation = {
-    id: newId,
+  // const newId = data.length
+  const newObservation: Record = {
+    id: data.length,
     company: form.company,
     ship: form.ship,
     date: form.date,
@@ -23,14 +27,18 @@ function onSubmit() {
     longitude: form.longitude,
     specie: cetacean.specie,
     total: cetacean.total,
-    child: cetacean.child,
+    children: cetacean.child,
     behaviour: cetacean.behaviour,
     reaction: cetacean.reaction,
     otherInfo: cetacean.otherInfo,
     otherSpecies: cetacean.otherSpecies,
   }
-  console.log(newObservation)
+
   data.push(newObservation)
+
+  for (const item of records.records)
+    data.push(item)
+
   console.log(`Form values saved on localStorage: ${newObservation}`)
   // to save form items on local storage to formData variable
   localStorage.setItem('formData', JSON.stringify(data))
@@ -40,6 +48,8 @@ function onSubmit() {
   //   .then(() => console.log('Data saved in the DB'))
   //   .catch(err => console.log('Data saving failed!', err))
 }
+
+// let newRecords = ref<Record[]>([])
 
 function getPosition() {
   // event.stopPropagation()
@@ -68,13 +78,13 @@ function error(err) {
 const { t } = useI18n()
 
 const options = [
-  { text: '0 - Calmo (< 1 Kmh)', value: '0' },
-  { text: '1 - Aragem (1 - 5 Km/h)', value: '1' },
-  { text: '2 - Brisa Leve (6 - 11 Km/h)', value: '2' },
-  { text: '3 - Brisa Fraca (12 - 19 Km/h)', value: '3' },
-  { text: '4 - Brisa Moderada (20 - 28 Km/h)', value: '4' },
-  { text: '5 - Brisa Forte (29 - 38 Km/h)Two', value: '5' },
-  { text: '6 - Vento Fresco (39 - 49 Km/h)', value: '6' },
+  { text: '0 - Calmo (< 1 Kmh)', value: '0 - calmo' },
+  { text: '1 - Aragem (1 - 5 Km/h)', value: '1 - aragem' },
+  { text: '2 - Brisa Leve (6 - 11 Km/h)', value: '2 - brisa leve' },
+  { text: '3 - Brisa Fraca (12 - 19 Km/h)', value: '3 - brisa fraca' },
+  { text: '4 - Brisa Moderada (20 - 28 Km/h)', value: '4 - brisa moderada' },
+  { text: '5 - Brisa Forte (29 - 38 Km/h)Two', value: '5 - brisa forte' },
+  { text: '6 - Vento Fresco (39 - 49 Km/h)', value: '6 - vento fresco' },
 ]
 
 form.company = 'H2O Madeira'
@@ -88,6 +98,39 @@ function toDegreesMinutesAndSeconds(coordinate) {
   const seconds = ((minutesNotTruncated - minutes) * 60).toFixed(3)
   coordinate = `${degrees}° ${minutes}'${seconds}"`
   return coordinate
+}
+
+function multipleSpeciesLoader() {
+  const newRecords = new Set<Record>()
+  console.log(newRecords)
+  console.log(form.multipleSpeciesNumber)
+  for (let i = 0; i < form.multipleSpeciesNumber; i++) {
+    const dummy: Record = {
+      id: data.length + i + 1,
+      company: form.company,
+      ship: form.ship,
+      date: form.date,
+      time: form.time,
+      seaConditions: form.seaConditions,
+      latitude: form.latitude,
+      longitude: form.longitude,
+      specie: '',
+      total: '',
+      children: '',
+      behaviour: '',
+      reaction: '',
+      otherInfo: '',
+      otherSpecies: '',
+    }
+    console.log(`dummy object: ${JSON.stringify(dummy)}`)
+    newRecords.add(dummy)
+    console.log(`this is a new record: ${newRecords}`)
+    // records.setNewRecord(dummy)
+  }
+  records.updateRecords(newRecords)
+  console.log(`this is are the newRecords: ${records.records}`)
+  // console.log(JSON.stringify(newRecords))
+  form.multipleSpeciesNumber = form.multipleSpeciesNumber
 }
 
 function convertDMS(lat, lng) {
@@ -241,61 +284,63 @@ function convertDMS(lat, lng) {
           {{ t('button.position') }}
         </button>
         <FormCetacean />
-        <div class="py-1">
-          <label for="checkbox">{{ t('species.other-species') }}</label>
-          <input
-            id="checkbox"
-            v-model="form.multipleSpecies"
-            type="checkbox"
-            border="~ rounded gray-200 dark:gray-700"
-          >
-          <span v-if="form.multipleSpecies" class="px-1">Yes</span>
-          <span v-else-if="!form.multipleSpecies" class="px-1">Yes</span>
-        </div>
-        <div>
-          <span v-if="form.multipleSpecies == true" class="px-2">
+        <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction">
+          <div class="py-1">
+            <label for="checkbox">{{ t('species.other-species') }}</label>
             <input
-              id="input"
-              v-model.number="form.multipleSpeciesNumber"
-              :placeholder="t('species.species-count')"
-              type="number"
-              autocomplete="off"
-              w="120px"
-              p="x-2 y-2"
-              text="center"
-              bg="transparent"
+              id="checkbox"
+              v-model="form.multipleSpecies"
+              type="checkbox"
               border="~ rounded gray-200 dark:gray-700"
-              outline="none active:none"
-              min="1"
             >
-            <button
-              type="button"
-              p="x-2 y-2"
-              bg="dark-50"
-              hover="bg-dark-100"
-              border="~ rounded green-900 dark:gray-700"
-              class="m-3 text-sm btn"
-            >
-              {{ t('button.ok') }}
-            </button>
-          </span>
-        </div>
-        <div>
-          <span v-for="n in form.multipleSpeciesNumber">
-            <div class="py-1">
-              <p class="text">Specie {{ n + 1 }}</p>
-              <FormCetacean />
+            <span v-if="form.multipleSpecies" class="px-1">Yes</span>
+            <span v-else-if="!form.multipleSpecies" class="px-1">Yes</span>
+          </div>
+          <div>
+            <span v-if="form.multipleSpecies == true" class="px-2">
+              <input
+                id="input"
+                v-model.number="form.multipleSpeciesNumber"
+                :placeholder="t('species.species-count')"
+                type="number"
+                autocomplete="off"
+                w="120px"
+                p="x-2 y-2"
+                text="center"
+                bg="transparent"
+                border="~ rounded gray-200 dark:gray-700"
+                outline="none active:none"
+                min="1"
+              >
+              <button
+                type="button"
+                p="x-2 y-2"
+                bg="dark-50"
+                hover="bg-dark-100"
+                border="~ rounded green-900 dark:gray-700"
+                class="m-3 text-sm btn"
+                @click="multipleSpeciesLoader()"
+              >
+                {{ t('button.ok') }}
+              </button>
+            </span>
+          </div>
+          <div v-if="records.records.size > 0">
+            <div v-for="record, index in records.records" :key="record.id" class="py-1">
+              Specie {{ index + 2 }}
+              <FormSpecie :record="record" />
             </div>
-          </span>
+          </div>
+
+          <button
+            class="m-4 text-sm btn"
+            :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction "
+            @click="onSubmit"
+            @keyup.enter="onSubmit"
+          >
+            {{ t('button.submit') }}
+          </button>
         </div>
-        <button
-          class="m-4 text-sm btn"
-          :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.child || !cetacean.behaviour || !cetacean.reaction "
-          @click="onSubmit"
-          @keyup.enter="onSubmit"
-        >
-          {{ t('button.submit') }}
-        </button>
         <div class="mt-5 mx-auto text-center opacity-25 text-sm">
           [Form Layout]
         </div>
