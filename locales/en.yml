@@ -2,11 +2,13 @@ button:
   about: About
   back: Back
   cetacean: Cetacean
+  export-data: Export data file
   getLocation: Get Location
   go: Next
   home: Home
   lobo-marinho: Sea wolf?
   newForm: New Form
+  no-data: No data available yet, please enter some data first.
   ok: OK
   position: Get position
   records: Records

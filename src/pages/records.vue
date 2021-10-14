@@ -45,13 +45,10 @@ async function exportData() {
 </script>
 
 <template>
-  <div>
-    <p>
-      {{ t('records.title') }}
-    </p>
-  </div>
   <div class="py-4" />
-  <div v-if="cetaceans"></div>
+  <div v-if="cetaceans == undefined">
+    {{ t('button.no-data') }}
+  </div>
   <div v-else>
     Loading...
   </div>
@@ -82,6 +79,7 @@ async function exportData() {
   </div> -->
   <button
     class="m-3 text-sm btn"
+    disabled="cetaceans == undefined"
     @click="exportData()"
   >
     {{ t('button.export-data') }}

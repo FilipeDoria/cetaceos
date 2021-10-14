@@ -161,7 +161,7 @@ function convertDMS(lat, lng) {
             type="text"
             autocomplete="off"
             p="x-4 y-2"
-            w="250px"
+            w="350px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
@@ -177,7 +177,7 @@ function convertDMS(lat, lng) {
             type="text"
             autocomplete="off"
             p="x-4 y-2"
-            w="250px"
+            w="350px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
@@ -224,7 +224,7 @@ function convertDMS(lat, lng) {
             v-model="form.seaConditions"
             name=""
             p="x-4 y-2"
-            w="250px"
+            w="350px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
@@ -249,7 +249,7 @@ function convertDMS(lat, lng) {
             type="string"
             autocomplete="off"
             p="x-4 y-2"
-            w="250px"
+            w="350px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
@@ -265,7 +265,7 @@ function convertDMS(lat, lng) {
             type="string"
             autocomplete="off"
             p="x-4 y-2"
-            w="250px"
+            w="350px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
@@ -293,8 +293,8 @@ function convertDMS(lat, lng) {
               type="checkbox"
               border="~ rounded gray-200 dark:gray-700"
             >
-            <span v-if="form.multipleSpecies" class="px-1">Yes</span>
-            <span v-else-if="!form.multipleSpecies" class="px-1">Yes</span>
+            <span v-if="form.multipleSpecies" class="px-1"> Yes</span>
+            <span v-else-if="!form.multipleSpecies" class="px-1"> Yes</span>
           </div>
           <div>
             <span v-if="form.multipleSpecies == true" class="px-2">
@@ -340,9 +340,6 @@ function convertDMS(lat, lng) {
           >
             {{ t('button.submit') }}
           </button>
-        </div>
-        <div class="mt-5 mx-auto text-center opacity-25 text-sm">
-          [Form Layout]
         </div>
       </form>
     </div>

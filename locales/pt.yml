@@ -2,11 +2,13 @@ button:
   about: Sobre
   back: Voltar
   cetacean: Cetácio
+  export-data: Exportar ficheiro de dados
   getLocation: Obter Localização
   go: Avançar
   home: Início
   lobo-marinho: Lobo-marinho
   newForm: Novo Formulário
+  no-data: Ainda não existem dados disponíveis, por insira alguns.
   ok: OK
   position: Obter posição
   records: Registos
@@ -38,12 +40,14 @@ intro:
   whats-the-sea-like: Qual é o estado do mar?
   whats-your-name: Qual é o seu nome?
 not-found: Não encontrado
+records:
+  title: Registos de Avistamentos anteriores
 species:
-  behaviour: Como é o comportamento dos animais?
+  behaviour: Qual é o seu comportamento?
   child: Quantos animais são crias?
   observations: Mais alguma informação?
   other-species: 'Foram avistadas mais espécies? '
   otherSpecies: Qual foi a espécie avistada?
-  reaction: Qual foi a reação dos animais em relação à embarcação?
+  reaction: Qual a reação em relação à embarcação?
   total: Quantos animais podem ser avistados?
   whats-the-specie: Que espécie foi avistada?
