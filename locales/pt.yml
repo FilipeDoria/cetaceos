@@ -35,9 +35,11 @@ intro:
   location-message: A obter localização...
   select-date: 'Data '
   select-time: 'Hora '
+  whats-the-company-name: Qual é a empresa?
   whats-the-latitude: Qual é a latitude?
   whats-the-longitude: Qual é a longitude?
   whats-the-sea-like: Qual é o estado do mar?
+  whats-the-ship-name: Qual é a embarcação?
   whats-your-name: Qual é o seu nome?
 not-found: Não encontrado
 records:
@@ -49,5 +51,6 @@ species:
   other-species: 'Foram avistadas mais espécies? '
   otherSpecies: Qual foi a espécie avistada?
   reaction: Qual a reação em relação à embarcação?
+  species-count: Quantas espécies?
   total: Quantos animais podem ser avistados?
   whats-the-specie: Que espécie foi avistada?
