@@ -20,7 +20,7 @@ const error = ref(null)
 async function exportData() {
   const form = cetaceans
   console.log(form)
-  let csvString = [] // initializing the final form string for the excel
+  let csvString = '' // initializing the final form string for the excel
   // const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
   tableHeader.forEach((key, index) =>
     (index === Object.values(tableHeader).length - 1) ? csvString += `${key}` : csvString += `${key},`,
@@ -33,10 +33,10 @@ async function exportData() {
     })
     csvString += '\n'
   })
-  const csvFile = new Blob([csvString], { type: 'text/csv' })
+  // const csvFile = new Blob([csvString], { type: 'text/csv' })
   const downloadLink = document.createElement('a')
   downloadLink.download = 'avistamentos.csv'
-  downloadLink.href = window.URL.createObjectURL(csvFile)
+  downloadLink.href = `data:text/csv;charset=utf-8,%EF%BB%BF${encodeURI(csvString)}`
   downloadLink.style.display = 'none'
   document.body.appendChild(downloadLink)
   downloadLink.click()
