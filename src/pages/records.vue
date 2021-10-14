@@ -45,15 +45,10 @@ async function exportData() {
 </script>
 
 <template>
-  <div class="py-4" />
   <div v-if="cetaceans == undefined">
     {{ t('button.no-data') }}
   </div>
-  <div v-else>
-    Loading...
-  </div>
-  <div v-for="cetacean in cetaceans" :key="cetacean.id">
-  </div>
+
   <div class="table center">
     <div class="table-header-group">
       <div class="table-row">
@@ -68,7 +63,7 @@ async function exportData() {
     </div>
     <div v-for="cetacean in cetaceans" :key="cetacean" class="table-row-group">
       <div class="table-row">
-        <div v-for="key in cetacean" class="table-cell">
+        <div v-for="key in cetacean" :key="key.id" class="table-cell">
           {{ key }}
         </div>
       </div>
@@ -79,7 +74,7 @@ async function exportData() {
   </div> -->
   <button
     class="m-3 text-sm btn"
-    disabled="cetaceans == undefined"
+    :disabled="cetaceans == undefined"
     @click="exportData()"
   >
     {{ t('button.export-data') }}
