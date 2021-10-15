@@ -57,7 +57,7 @@ function getPosition() {
   message.value = t('intro.location-message')
   const options = {
     enableHighAccuracy: true,
-    timeout: 10000,
+    timeout: 5000,
     maximumAge: 0,
   }
 
@@ -70,7 +70,8 @@ function getPosition() {
 function success(pos) {
   const crd = pos.coords
   convertDMS(crd.latitude, crd.longitude)
-  message.value = ''
+
+  message.value = `Your current position is -> Latitude: ${crd.latitude} Longitude: ${crd.longitude} -> More or less ${crd.accuracy} meters.`
 }
 
 function error(err) {
