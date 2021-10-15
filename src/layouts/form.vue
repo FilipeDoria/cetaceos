@@ -63,6 +63,8 @@ function getPosition() {
 
   // to save form items on local storage to formData variable
   navigator.geolocation.getCurrentPosition(success, error, options)
+  message.value = t('intro.location-message')
+  navigator.geolocation.getCurrentPosition(success, error, options)
 }
 
 function success(pos) {
