@@ -70,8 +70,6 @@ function getPosition() {
 function success(pos) {
   const crd = pos.coords
   convertDMS(crd.latitude, crd.longitude)
-
-  message.value = `Your current position is -> Latitude: ${crd.latitude} Longitude: ${crd.longitude} -> More or less ${crd.accuracy} meters.`
 }
 
 function error(err) {
