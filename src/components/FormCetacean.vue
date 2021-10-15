@@ -15,7 +15,6 @@ const mysticetosSpeciesOptions = [
   { text: 'Baleia Azul', value: 'baleia azul' },
   { text: 'Baleia de Bossa', value: 'baleia de bossa' },
   { text: 'Baleia Anã', value: 'baleia ana' },
-  { text: 'Baleia Franca', value: 'baleia franca' },
   { text: 'Outro', value: 'outro' },
 ]
 
@@ -24,8 +23,7 @@ const odontocetisSpeciesOptions = [
   { text: 'Golfinho Pintado', value: 'golfinho pintado' },
   { text: 'Golfinho Riscado', value: 'golfinho riscado' },
   { text: 'Golfinho Comum', value: 'golfinho comum' },
-  { text: 'Baleia Piloto Tropical Ou Golfinho Boca De Panela', value: 'baleia piloto tropial/golfinho  de panela' },
-  { text: 'Baleia Piloto De Barbatanas Longas', value: 'baleia piloto de barbatanas longas' },
+  { text: 'Baleia Piloto', value: 'baleia piloto' },
   { text: 'Golfinho Caldeirão', value: 'golfinho caldeirao' },
   { text: 'Golfinho Grampo', value: 'golfinho grampo' },
   { text: 'Falsa Orca', value: 'falsa orca' },
