@@ -235,7 +235,13 @@ function convertDMS(lat, lng) {
             <option value="" disabled selected hidden>
               {{ t('intro.whats-the-sea-like') }}
             </option>
-            <option v-for="option in options" :key="option.value" :value="option.value">
+            <option
+              v-for="option in options"
+              :key="option.value"
+              :value="option.value"
+              style="background: #000;"
+              text-align="center"
+            >
               {{ option.text }}
             </option>
           </select>
@@ -272,21 +278,21 @@ function convertDMS(lat, lng) {
             border="~ rounded gray-200 dark:gray-700"
             outline="none active:none"
           >
+          <p>{{ message }}</p>
+          <button
+            type="button"
+            bg="dark-50"
+            hover="bg-dark-100"
+            p="x-2 y-2"
+            class="m-2 text-sm btn"
+            @click="getPosition"
+          >
+            {{ t('button.position') }}
+          </button>
         </div>
-        <p>{{ message }}</p>
-        <button
-          type="button"
-          bg="dark-50"
-          hover="bg-dark-100"
-          p="x-2 y-2"
-          class="m-3 text-sm btn"
-          @click="getPosition"
-        >
-          {{ t('button.position') }}
-        </button>
         <FormCetacean />
         <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction">
-          <div class="py-1">
+          <div class="py-1 text-base">
             <label for="checkbox">{{ t('species.other-species') }}</label>
             <input
               id="checkbox"
@@ -294,8 +300,7 @@ function convertDMS(lat, lng) {
               type="checkbox"
               border="~ rounded gray-200 dark:gray-700"
             >
-            <span v-if="form.multipleSpecies" class="px-1"> Yes</span>
-            <span v-else-if="!form.multipleSpecies" class="px-1"> Yes</span>
+            Yes
           </div>
           <div>
             <span v-if="form.multipleSpecies == true" class="px-2">
