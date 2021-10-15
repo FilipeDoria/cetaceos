@@ -95,8 +95,9 @@ function toDegreesMinutesAndSeconds(coordinate) {
   const degrees = Math.floor(absolute)
   const minutesNotTruncated = (absolute - degrees) * 60
   const minutes = Math.floor(minutesNotTruncated)
-  const seconds = ((minutesNotTruncated - minutes) * 60).toFixed(3)
-  coordinate = `${degrees}° ${minutes}'${seconds}"`
+  // const seconds = ((minutesNotTruncated - minutes) * 60).toFixed(3)
+  // coordinate = `${degrees}° ${minutes}'${seconds}"`
+  coordinate = `${degrees}° ${minutesNotTruncated.toFixed(3)}'`
   return coordinate
 }
 
