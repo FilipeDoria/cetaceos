@@ -93,6 +93,8 @@ function checkValue() {
         <option
           v-for="option in options"
           :key="option.value"
+          style="background: #000;"
+          text-align="center"
           :value="option.value"
         >
           {{ option.text }}
@@ -174,7 +176,14 @@ function checkValue() {
         <option value="" disabled select hidden>
           {{ t('species.behaviour') }}
         </option>
-        <option v-for="option in behaviourOptions" :key="option.value" :value="option.value">
+        <option
+          v-for="option in behaviourOptions"
+          :key="option.value"
+          :value="option.value"
+          style="background: #000;"
+          text-align="center"
+          border="~ rounded gray-200 dark:gray-700"
+        >
           {{ option.text }}
         </option>
       </select>
@@ -197,7 +206,13 @@ function checkValue() {
         <option value="" disabled select hidden>
           {{ t('species.reaction') }}
         </option>
-        <option v-for="option in reactionOptions" :key="option.value" :value="option.value">
+        <option
+          v-for="option in reactionOptions"
+          :key="option.value"
+          :value="option.value"
+          style="background: #000;"
+          text-align="center"
+        >
           {{ option.text }}
         </option>
       </select>

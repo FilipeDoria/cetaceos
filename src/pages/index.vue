@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import { useFormStore } from '~/stores/form'
-
-const user = useFormStore()
-const name = ref(user.savedName)
-
 const router = useRouter()
-
 const { t } = useI18n()
 </script>
 

@@ -23,6 +23,7 @@ cetacean:
   odontocetis: Odontocetis
 form:
   header-message: Por favor registe o máximo de informação possível.
+  submitted: Informação submetida com sucesso.
 general:
   name: Avistamentos
   short_name: Avistamentos
