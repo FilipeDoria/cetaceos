@@ -57,11 +57,13 @@ function getPosition() {
   message.value = t('intro.location-message')
   const options = {
     enableHighAccuracy: true,
-    timeout: 10000,
+    timeout: 5000,
     maximumAge: 0,
   }
 
   // to save form items on local storage to formData variable
+  navigator.geolocation.getCurrentPosition(success, error, options)
+  message.value = t('intro.location-message')
   navigator.geolocation.getCurrentPosition(success, error, options)
 }
 
@@ -95,8 +97,9 @@ function toDegreesMinutesAndSeconds(coordinate) {
   const degrees = Math.floor(absolute)
   const minutesNotTruncated = (absolute - degrees) * 60
   const minutes = Math.floor(minutesNotTruncated)
-  const seconds = ((minutesNotTruncated - minutes) * 60).toFixed(3)
-  coordinate = `${degrees}° ${minutes}'${seconds}"`
+  // const seconds = ((minutesNotTruncated - minutes) * 60).toFixed(3)
+  // coordinate = `${degrees}° ${minutes}'${seconds}"`
+  coordinate = `${degrees}° ${minutesNotTruncated.toFixed(3)}'`
   return coordinate
 }
 

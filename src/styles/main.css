@@ -52,3 +52,7 @@ html.dark {
 .table-cell{
   border: 1px solid black
 }
+
+input::placeholder {
+  color: grey-200;
+}
