@@ -70,6 +70,7 @@ function getPosition() {
 function success(pos) {
   const crd = pos.coords
   convertDMS(crd.latitude, crd.longitude)
+  message.value = ''
 }
 
 function error(err) {
