@@ -56,16 +56,16 @@ const behaviourOptions = [
   { text: 'Outro', value: 'outro' },
 ]
 const reactionOptions = [
-  { text: 'Nenhuma/Indiferença', value: 'nenhuma/indiferenca' },
-  { text: 'Atração/aproximação', value: 'atraca/aproximacao' },
-  { text: 'Evitação/afastamento', value: 'evitacao/afastamento' },
+  { text: 'Nenhuma/Indiferença', value: 'nenhuma / indiferença' },
+  { text: 'Atração/aproximação', value: 'atração / aproximação' },
+  { text: 'Evitação/afastamento', value: 'evitação / afastamento' },
   { text: 'Outro', value: 'outro' },
 ]
 
 // this checks the value and updates it on the control, if needed
 function checkValue() {
-  if (cetacean.child > cetacean.total)
-    cetacean.child = cetacean.total
+  if (cetacean.children > cetacean.total)
+    cetacean.children = cetacean.total
 }
 
 // todo function child number cant be smaller than total number
@@ -139,7 +139,7 @@ function checkValue() {
         <input
           v-if="typeof cetacean.total !== 'undefined'"
           id="input"
-          v-model.number="cetacean.child"
+          v-model.number="cetacean.children"
           :placeholder="t('species.child')"
           min="0"
           step="1"

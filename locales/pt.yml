@@ -44,7 +44,22 @@ intro:
   whats-your-name: Qual é o seu nome?
 not-found: Não encontrado
 records:
+  actions: Ações
+  behaviour: Comportamento
+  children: Crias
+  company: Empresa
+  date: Data
+  latitude: Latitude
+  longitude: Longitude
+  other_info: Outra informação
+  other_species: Outra espécie
+  reaction: Reação
+  sea_conditions: Condições de mar
+  ship: Embarcação
+  species: Espécies
+  time: Hora
   title: Registos de Avistamentos anteriores
+  total: Total
 species:
   behaviour: Qual é o seu comportamento?
   child: Quantos animais são crias?
@@ -55,3 +70,5 @@ species:
   species-count: Quantas espécies?
   total: Quantos animais podem ser avistados?
   whats-the-specie: Que espécie foi avistada?
+table:
+  company: company

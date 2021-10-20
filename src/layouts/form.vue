@@ -27,7 +27,7 @@ function onSubmit() {
     longitude: form.longitude,
     specie: cetacean.specie,
     total: cetacean.total,
-    children: cetacean.child,
+    children: cetacean.children,
     behaviour: cetacean.behaviour,
     reaction: cetacean.reaction,
     otherInfo: cetacean.otherInfo,
@@ -343,7 +343,7 @@ function convertDMS(lat, lng) {
 
           <button
             class="m-4 text-sm btn"
-            :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction "
+            :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || cetacean.children == undefined || !cetacean.behaviour || !cetacean.reaction "
             @click="onSubmit"
             @keyup.enter="onSubmit"
           >
