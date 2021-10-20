@@ -44,7 +44,22 @@ intro:
   whats-your-name: What's your name?
 not-found: Not found
 records:
+  actions: Actions
+  behaviour: Behaviour
+  children: Children
+  company: Company
+  date: Date
+  latitude: Latitude
+  longitude: Longitude
+  other_info: Other Info
+  other_species: Other Species
+  reaction: Reaction
+  sea_conditions: Sea Conditions
+  ship: Ship
+  species: Species
+  time: time
   title: Records of previous Sightings
+  total: Total
 species:
   behaviour: How is the animals behaviour?
   child: How many are child?
@@ -55,3 +70,5 @@ species:
   species-count: How many?
   total: What's the animal count?
   whats-the-specie: What species was seen?
+table:
+  company: Company
