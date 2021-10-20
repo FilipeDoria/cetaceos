@@ -294,7 +294,7 @@ function convertDMS(lat, lng) {
           </button>
         </div>
         <FormCetacean />
-        <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction">
+        <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || cetacean.children == undefined || !cetacean.behaviour || !cetacean.reaction">
           <div class="py-1 text-base">
             <label for="checkbox">{{ t('species.other-species') }}</label>
             <input
