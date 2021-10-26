@@ -1,5 +1,7 @@
 
 <script setup lang="ts">
+import { Geolocation } from '@capacitor/geolocation'
+
 import { useFormStore } from '~/stores/form'
 import { useCetaceanStore } from '~/stores/cetacean'
 import { useRecordsStore } from '~/stores/records'
@@ -16,6 +18,8 @@ const message = ref('')
 
 function onSubmit() {
   // const newId = data.length
+  const previousDataLength = data.length
+  const newDataLength = 0
   const newObservation: Record = {
     id: data.length,
     company: form.company,
@@ -36,8 +40,10 @@ function onSubmit() {
 
   data.push(newObservation)
 
-  for (const item of records.records)
+  for (const item of records.records) {
+    // TODO add child compo validations
     data.push(item)
+  }
 
   console.log(`Form values saved on localStorage: ${newObservation}`)
   // to save form items on local storage to formData variable
@@ -51,26 +57,33 @@ function onSubmit() {
 
 // let newRecords = ref<Record[]>([])
 
-function getPosition() {
+async function getPosition() {
+  // get the users current position
+  const position = await Geolocation.getCurrentPosition()
+  console.log(position)
+
+  // grab latitude & longitude
+  success(position)
+
   // event.stopPropagation()
   // event.preventDefault()
-  message.value = t('intro.location-message')
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  }
+  // message.value = t('intro.location-message')
+  // const options = {
+  //   enableHighAccuracy: true,
+  //   timeout: 5000,
+  //   maximumAge: 0,
+  // }
 
-  // to save form items on local storage to formData variable
-  navigator.geolocation.getCurrentPosition(success, error, options)
-  message.value = t('intro.location-message')
-  navigator.geolocation.getCurrentPosition(success, error, options)
+  // // to save form items on local storage to formData variable
+  // navigator.geolocation.getCurrentPosition(success, error, options)
+  // message.value = t('intro.location-message')
+  // navigator.geolocation.getCurrentPosition(success, error, options)
 }
 
 function success(pos) {
   const crd = pos.coords
   convertDMS(crd.latitude, crd.longitude)
-  message.value = ''
+  // message.value = ''
 }
 
 function error(err) {
