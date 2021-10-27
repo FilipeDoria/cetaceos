@@ -61,7 +61,7 @@ async function getPosition() {
   message.value = t('intro.location-message')
   const options = {
     enableHighAccuracy: true,
-    timeout: 15000,
+    timeout: 0,
     maximumAge: 0,
   }
 
