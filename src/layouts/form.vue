@@ -59,6 +59,7 @@ function onSubmit() {
 
 async function getPosition() {
   message.value = t('intro.location-message')
+  console.log(Geolocation)
   const options = {
     enableHighAccuracy: true,
     timeout: 10000,
@@ -68,7 +69,6 @@ async function getPosition() {
   // get the users current position
   const position = await Geolocation.getCurrentPosition(options)
   console.log(position)
-
   // grab latitude & longitude
   success(position)
 
@@ -90,7 +90,8 @@ async function getPosition() {
 function success(pos) {
   const crd = pos.coords
   convertDMS(crd.latitude, crd.longitude)
-  message.value = `accuracy is ${crd.accuracy} meters`
+  const time_of_pos = new Date(pos.timestamp).toLocaleString()
+  message.value = `${crd.latitude} ${crd.longitude} accuracy is ${crd.accuracy} meters at ${time_of_pos}`
 }
 
 function error(err) {
