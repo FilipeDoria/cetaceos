@@ -304,6 +304,7 @@ function convertDMS(lat, lng) {
           <p>{{ message }}</p>
           <button
             type="button"
+            :hidden="form.latitude && form.longitude"
             bg="dark-50"
             hover="bg-dark-100"
             p="x-2 y-2"
