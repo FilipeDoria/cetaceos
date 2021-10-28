@@ -87,7 +87,7 @@ async function getPosition() {
 function success(pos) {
   const crd = pos.coords
   const time_of_pos = new Date(pos.timestamp).toLocaleString()
-  if (crd.accuracy > 20 || crd.speed === null) { message.value = 'Location signal is unreliable, please reset location settings on your device and try again.' }
+  if (crd.accuracy > 20 || crd.speed === null) { message.value = 'Location signal is unreliable, please look for a better position with clear sky. Else please reset location settings on your device and try again.' }
   else {
     const id = document.getElementById('location')
     id.style.display = 'none'
