@@ -58,8 +58,6 @@ function onSubmit() {
 // let newRecords = ref<Record[]>([])
 
 async function getPosition() {
-  message.value = t('intro.location-message')
-  console.log(Geolocation)
   const options = {
     enableHighAccuracy: true,
     timeout: 10000,
@@ -67,10 +65,9 @@ async function getPosition() {
   }
 
   // get the users current position
-  const position = await Geolocation.getCurrentPosition(options)
-  console.log(position)
+  // const position = await Geolocation.getCurrentPosition(options)
   // grab latitude & longitude
-  success(position)
+  // success(position)
 
   // event.stopPropagation()
   // event.preventDefault()
@@ -82,16 +79,21 @@ async function getPosition() {
   // }
 
   // // to save form items on local storage to formData variable
-  // navigator.geolocation.getCurrentPosition(success, error, options)
+  navigator.geolocation.getCurrentPosition(success, error, options)
   // message.value = t('intro.location-message')
   // navigator.geolocation.getCurrentPosition(success, error, options)
 }
 
 function success(pos) {
   const crd = pos.coords
-  convertDMS(crd.latitude, crd.longitude)
   const time_of_pos = new Date(pos.timestamp).toLocaleString()
-  message.value = `${crd.latitude} ${crd.longitude} accuracy is ${crd.accuracy} meters at ${time_of_pos}`
+  if (crd.accuracy > 20 || crd.speed === null) { message.value = 'Location signal is unreliable, please reset location settings on your device and try again.' }
+  else {
+    const id = document.getElementById('location')
+    id.style.display = 'none'
+    message.value = `${crd.latitude} ${crd.longitude} accuracy is ${crd.accuracy} meters at ${time_of_pos}`
+    convertDMS(crd.latitude, crd.longitude)
+  }
 }
 
 function error(err) {
@@ -271,7 +273,6 @@ function convertDMS(lat, lng) {
           </select>
         </div>
         <div class="py-1">
-          <label class="hidden" for="input">{{ t('intro.whats-the-latitude') }}</label>
           <input
             id="input"
             v-model="form.latitude"
@@ -280,7 +281,22 @@ function convertDMS(lat, lng) {
             type="string"
             autocomplete="off"
             p="x-4 y-2"
-            w="320px"
+            w="150px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+          >
+          .
+          <input
+            id="input"
+            v-model="form.longitude"
+            style="padding-left:25px; padding-right:25px;"
+            :placeholder="t('intro.whats-the-longitude')"
+            type="string"
+            autocomplete="off"
+            p="x-4 y-2"
+            w="150px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
@@ -288,24 +304,10 @@ function convertDMS(lat, lng) {
           >
         </div>
         <div class="py-1">
-          <label class="hidden" for="input">{{ t('intro.whats-the-longitude') }}</label>
-          <input
-            id="input"
-            v-model="form.longitude"
-            :placeholder="t('intro.whats-the-longitude')"
-            type="string"
-            autocomplete="off"
-            p="x-4 y-2"
-            w="320px"
-            text="center"
-            bg="transparent"
-            border="~ rounded gray-200 dark:gray-700"
-            outline="none active:none"
-          >
           <p>{{ message }}</p>
           <button
+            id="location"
             type="button"
-            :hidden="form.latitude != undefined"
             bg="dark-50"
             hover="bg-dark-100"
             p="x-2 y-2"
