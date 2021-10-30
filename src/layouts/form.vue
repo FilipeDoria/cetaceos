@@ -71,7 +71,7 @@ async function getPosition() {
 
   // event.stopPropagation()
   // event.preventDefault()
-  // message.value = t('intro.location-message')
+  message.value = t('intro.location-message')
   // const options = {
   //   enableHighAccuracy: true,
   //   timeout: 5000,
@@ -87,11 +87,13 @@ async function getPosition() {
 function success(pos) {
   const crd = pos.coords
   const time_of_pos = new Date(pos.timestamp).toLocaleString()
-  if (crd.accuracy > 20 || crd.speed === null) { message.value = 'Location signal is unreliable, please look for a better position with clear sky. Else please reset location settings on your device and try again.' }
+  if (crd.accuracy > 20 || crd.speed === null || (Date(pos.timestamp) - Date.now()) > 1000) {
+    message.value = 'Location signal is unreliable, please look for a better position with clear sky. Else please reset location settings on your device and try again.'
+  }
   else {
     const id = document.getElementById('location')
     id.style.display = 'none'
-    message.value = `${crd.latitude} ${crd.longitude} accuracy is ${crd.accuracy} meters at ${time_of_pos}`
+    message.value = `${crd.latitude} ${crd.longitude}\naccuracy is ${crd.accuracy.toFixed(2)} meters\nat ${time_of_pos}`
     convertDMS(crd.latitude, crd.longitude)
   }
 }
