@@ -24,6 +24,7 @@ function onSubmit() {
     id: data.length,
     company: form.company,
     ship: form.ship,
+    trip: form.trip,
     date: form.date,
     time: form.time,
     seaConditions: form.seaConditions,
@@ -36,6 +37,7 @@ function onSubmit() {
     reaction: cetacean.reaction,
     otherInfo: cetacean.otherInfo,
     otherSpecies: cetacean.otherSpecies,
+    multipleSpecies: form.multipleSpecies,
   }
 
   data.push(newObservation)
@@ -137,6 +139,7 @@ function multipleSpeciesLoader() {
       id: data.length + i + 1,
       company: form.company,
       ship: form.ship,
+      trip: form.trip,
       date: form.date,
       time: form.time,
       seaConditions: form.seaConditions,
@@ -149,6 +152,7 @@ function multipleSpeciesLoader() {
       reaction: '',
       otherInfo: '',
       otherSpecies: '',
+      multipleSpecies: form.multipleSpecies,
     }
     console.log(`dummy object: ${JSON.stringify(dummy)}`)
     newRecords.add(dummy)
@@ -211,6 +215,53 @@ function convertDMS(lat, lng) {
             border="~ rounded gray-200 dark:gray-700"
             outline="none active:none"
           >
+        </div>
+        <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.trip') }}</label>
+          <select
+            id=""
+            v-model="form.trip"
+            name=""
+            p="x-4 y-2"
+            w="320px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+            required
+          >
+            <option value="" disabled selected hidden>
+              {{ t('intro.trip') }}
+            </option>
+            <option
+              :value="1"
+              style="background: #000;"
+              text-align="center"
+            >
+              {{ t('intro.trip1') }}
+            </option>
+            <option
+              :value="2"
+              style="background: #000;"
+              text-align="center"
+            >
+              {{ t('intro.trip2') }}
+            </option>
+            <option
+              :value="3"
+              style="background: #000;"
+              text-align="center"
+            >
+              {{ t('intro.trip3') }}
+            </option>
+            <option
+              :value="4"
+              style="background: #000;"
+              text-align="center"
+            >
+              {{ t('intro.trip4') }}
+            </option>
+          </select>
         </div>
         <div class="py-1">
           <label class="" for="input">{{ t('intro.select-date') }}</label>

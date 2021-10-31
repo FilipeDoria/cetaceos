@@ -36,6 +36,11 @@ intro:
   location-message: A obter localização...
   select-date: 'Data '
   select-time: 'Hora '
+  trip: Viagem
+  trip1: Viagem 1
+  trip2: Viagem 2
+  trip3: Viagem 3
+  trip4: Viagem 4
   whats-the-company-name: Qual é a empresa?
   whats-the-latitude: Latitude
   whats-the-longitude: Longitude

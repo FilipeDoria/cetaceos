@@ -36,6 +36,11 @@ intro:
   location-message: Getting location...
   select-date: 'Date '
   select-time: 'Time '
+  trip: Trip Number
+  trip1: Trip 1
+  trip2: Trip 2
+  trip3: Trip 3
+  trip4: Trip 4
   whats-the-company-name: What is the company name?
   whats-the-latitude: Latitude
   whats-the-longitude: Longitude
