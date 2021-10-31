@@ -89,6 +89,9 @@ const deleteSighting = (id: Number) => {
                 <th class="px-1 py-1 text-center">
                   {{ t('records.ship') }}
                 </th><th class="px-1 py-1 text-center">
+                  {{ t('records.trip') }}
+                </th>
+                <th class="px-1 py-1 text-center">
                   {{ t('records.date') }}
                 </th>
                 <th class="px-1 py-1 text-center">
@@ -123,6 +126,9 @@ const deleteSighting = (id: Number) => {
                 </th>
                 <th class="px-1 py-1 text-center">
                   {{ t('records.other_species') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.multipleSpecies') }}
                 </th>
                 <th class="px-1 py-1 text-center">
                   {{ t('records.actions') }}
