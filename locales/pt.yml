@@ -25,9 +25,11 @@ form:
   header-message: Por favor registe o máximo de informação possível.
   submitted: Informação submetida com sucesso.
 general:
+  'false': Não
   name: Avistamentos Madeira
   short_name: Avistamentos
   title: Avistamentos Madeira
+  'true': Sim
 intro:
   aka: Também conhecido como
   desc: Página de registo de avistamentos de animais.
@@ -50,6 +52,8 @@ intro:
 not-found: Não encontrado
 records:
   actions: Ações
+  actions-delete: Apagar
+  actions-edit: Editar
   behaviour: Comportamento
   children: Crias
   company: Empresa

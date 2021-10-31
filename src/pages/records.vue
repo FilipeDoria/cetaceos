@@ -138,11 +138,16 @@ const deleteSighting = (id: Number) => {
             <tbody class="bg-white">
               <tr v-for="cetacean in cetaceans" :key="cetacean" class="text-gray-700">
                 <td v-for="key in cetacean" :key="key" class="px-1 py-1 text-center text-sm border">
-                  {{ key }}
+                  <p v-if="typeof key === &quot;boolean&quot;">
+                    {{ key == false ? t('general.false') : t('general.true') }}
+                  </p>
+                  <p v-else>
+                    {{ key }}
+                  </p>
                 </td>
                 <td class="px-1 py-1 text-center text-sm border">
                   <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded m-1" @click="editSighting(cetacean.id)">
-                    Edit
+                    {{ t('records.actions-edit') }}
                   </button>
                   <button
                     class="
@@ -156,7 +161,7 @@ const deleteSighting = (id: Number) => {
                 rounded"
                     @click="deleteSighting(cetacean.id)"
                   >
-                    Delete
+                    {{ t('records.actions-delete') }}
                   </button>
                 </td>
               </tr>

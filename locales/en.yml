@@ -25,9 +25,11 @@ form:
   header-message: Please register as much information as possible
   submitted: Data submitted successfully.
 general:
+  'false': 'False'
   name: Madeira Sightings
   short_name: Sightings
   title: Madeira Sightings
+  'true': 'True'
 intro:
   aka: Also known as
   desc: Sightings of animals report page.
@@ -50,6 +52,8 @@ intro:
 not-found: Not found
 records:
   actions: Actions
+  actions-delete: Delete
+  actions-edit: Edit
   behaviour: Behaviour
   children: Children
   company: Company
