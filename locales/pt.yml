@@ -25,9 +25,11 @@ form:
   header-message: Por favor registe o máximo de informação possível.
   submitted: Informação submetida com sucesso.
 general:
+  'false': Não
   name: Avistamentos Madeira
   short_name: Avistamentos
   title: Avistamentos Madeira
+  'true': Sim
 intro:
   aka: Também conhecido como
   desc: Página de registo de avistamentos de animais.
@@ -36,21 +38,29 @@ intro:
   location-message: A obter localização...
   select-date: 'Data '
   select-time: 'Hora '
+  trip: Viagem
+  trip1: Viagem 1
+  trip2: Viagem 2
+  trip3: Viagem 3
+  trip4: Viagem 4
   whats-the-company-name: Qual é a empresa?
-  whats-the-latitude: Qual é a latitude?
-  whats-the-longitude: Qual é a longitude?
+  whats-the-latitude: Latitude
+  whats-the-longitude: Longitude
   whats-the-sea-like: Qual é o estado do mar?
   whats-the-ship-name: Qual é a embarcação?
   whats-your-name: Qual é o seu nome?
 not-found: Não encontrado
 records:
   actions: Ações
+  actions-delete: Apagar
+  actions-edit: Editar
   behaviour: Comportamento
   children: Crias
   company: Empresa
   date: Data
   latitude: Latitude
   longitude: Longitude
+  multipleSpecies: Misto
   other_info: Outra informação
   other_species: Outra espécie
   reaction: Reação
@@ -60,6 +70,7 @@ records:
   time: Hora
   title: Registos de Avistamentos anteriores
   total: Total
+  trip: Viagem
 species:
   behaviour: Qual é o seu comportamento?
   child: Quantos animais são crias?
