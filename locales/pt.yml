@@ -25,9 +25,9 @@ form:
   header-message: Por favor registe o máximo de informação possível.
   submitted: Informação submetida com sucesso.
 general:
-  name: Avistamentos
+  name: Avistamentos Madeira
   short_name: Avistamentos
-  title: Avistamentos
+  title: Avistamentos Madeira
 intro:
   aka: Também conhecido como
   desc: Página de registo de avistamentos de animais.

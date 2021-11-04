@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Geolocation } from 'capacitor/geolocation'
 import { get, set, update } from 'idb-keyval'
 import { useFormStore } from '~/stores/form'
 const form = useFormStore()
@@ -19,26 +20,36 @@ const go = async() => {
 }
 
 function getPosition() {
-  message.value = 'Getting coordinates...'
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 10000,
-    maximumAge: 0,
-  }
+  // get the users current position
+  const position = await Geolocation.getCurrentPosition()
 
-  // to save form items on local storage to formData variable
-  navigator.geolocation.getCurrentPosition(success, error, options)
+  // grab latitude & longitude
+  const capacitor_latitude = position.coords.latitude
+  const capacitor_longitude = position.coords.longitude
+  message.value = `capacitor measured latitude is ${capacitor_latitude} and longitude ${capacitor_longitude}`
+
+  // convertDMS(capacitor_latitude, capacitor_longitude)
+
+  // message.value = 'Getting coordinates...'
+  // const options = {
+  //   enableHighAccuracy: true,
+  //   timeout: 10000,
+  //   maximumAge: 0,
+  // }
+
+  // // to save form items on local storage to formData variable
+  // navigator.geolocation.getCurrentPosition(success, error, options)
 }
 
-function success(pos) {
-  const crd = pos.coords
-  convertDMS(crd.latitude, crd.longitude)
-  message.value = ''
-}
+// function success(pos) {
+//   const crd = pos.coords
+//   convertDMS(crd.latitude, crd.longitude)
+//   message.value = ''
+// }
 
-function error(err) {
-  message.value = err.message
-}
+// function error(err) {
+//   message.value = err.message
+// }
 
 const { t } = useI18n()
 
@@ -54,7 +65,7 @@ const options = [
 
 form.company = 'H2O Madeira'
 form.ship = 'Cetus'
-let misto = false
+const misto = false
 
 function toDegreesMinutesAndSeconds(coordinate) {
   const absolute = Math.abs(coordinate)
@@ -219,8 +230,8 @@ function convertDMS(lat, lng) {
         {{ t('button.go') }}
       </button>
     </div>
-<label for="checkbox">Avistamento misto? </label>
-    <input type="checkbox" id="checkbox" v-model="misto" />
+    <label for="checkbox">Avistamento misto? </label>
+    <input id="checkbox" v-model="misto" type="checkbox" />
 
     <!-- <span v-if="!form.valid">
       Form values saved on localStorage:

@@ -2,6 +2,8 @@ lockfileVersion: 5.3
 
 specifiers:
   '@antfu/eslint-config': ^0.8.1
+  '@capacitor/core': ^3.2.5
+  '@capacitor/geolocation': ^1.1.2
   '@iconify/json': ^1.1.400
   '@intlify/vite-plugin-vue-i18n': ^2.4.0
   '@types/markdown-it-link-attributes': ^3.0.1
@@ -44,6 +46,8 @@ specifiers:
   vue3-table-lite: ^1.0.7
 
 dependencies:
+  '@capacitor/core': 3.2.5
+  '@capacitor/geolocation': 1.1.2_@capacitor+core@3.2.5
   '@vueuse/core': 6.3.2_vue@3.2.11
   '@vueuse/head': 0.6.0_vue@3.2.11
   dexie: 3.0.3
@@ -1326,6 +1330,20 @@ packages:
       '@babel/helper-validator-identifier': 7.15.7
       to-fast-properties: 2.0.0
     dev: true
+
+  /@capacitor/core/3.2.5:
+    resolution: {integrity: sha512-sr5ZhbdCUL6FAiyNEDpSKDEzjHCOsCA5R32inRergcPFRpOArsQi/NfhoMLHaZwZ78HAn9bfFV7JkoSr46NDDw==}
+    dependencies:
+      tslib: 2.3.1
+    dev: false
+
+  /@capacitor/geolocation/1.1.2_@capacitor+core@3.2.5:
+    resolution: {integrity: sha512-J71RqyGNmQ9dIBPK831YgOPZ6Z1wj8tNlVbORIjgz+Q/Q0PzKdjxfELjbgD0hexd+YVu5++hI/atTj71ESKfWg==}
+    peerDependencies:
+      '@capacitor/core': ^3.0.0
+    dependencies:
+      '@capacitor/core': 3.2.5
+    dev: false
 
   /@emmetio/abbreviation/2.2.2:
     resolution: {integrity: sha512-TtE/dBnkTCct8+LntkqVrwqQao6EnPAs1YN3cUgxOxTaBlesBCY37ROUAVZrRlG64GNnVShdl/b70RfAI3w5lw==}
@@ -6303,6 +6321,10 @@ packages:
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
+
+  /tslib/2.3.1:
+    resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
+    dev: false
 
   /tsup/4.14.0_typescript@4.4.3:
     resolution: {integrity: sha512-77rWdzhikTP9mQ34XMRzK83tw++LF6f4ox/HNERlgesB7g6g5VQ1iJlueG9O0P9HAZGVKavUwyoZv0+322p6rg==}

@@ -6,7 +6,7 @@ button:
   getLocation: Get Location
   go: Next
   home: Home
-  lobo-marinho: Sea wolf
+  lobo-marinho: Monk Seal
   newForm: New Form
   no-data: No data available yet, please enter some data first.
   ok: OK
@@ -25,9 +25,9 @@ form:
   header-message: Please register as much information as possible
   submitted: Data submitted successfully.
 general:
-  name: Sightings
+  name: Madeira Sightings
   short_name: Sightings
-  title: Sightings
+  title: Madeira Sightings
 intro:
   aka: Also known as
   desc: Sightings of animals report page.

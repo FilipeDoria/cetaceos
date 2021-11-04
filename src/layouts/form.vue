@@ -1,5 +1,7 @@
 
 <script setup lang="ts">
+import { Geolocation } from '@capacitor/geolocation'
+
 import { useFormStore } from '~/stores/form'
 import { useCetaceanStore } from '~/stores/cetacean'
 import { useRecordsStore } from '~/stores/records'
@@ -16,6 +18,8 @@ const message = ref('')
 
 function onSubmit() {
   // const newId = data.length
+  const previousDataLength = data.length
+  const newDataLength = 0
   const newObservation: Record = {
     id: data.length,
     company: form.company,
@@ -36,8 +40,10 @@ function onSubmit() {
 
   data.push(newObservation)
 
-  for (const item of records.records)
+  for (const item of records.records) {
+    // TODO add child compo validations
     data.push(item)
+  }
 
   console.log(`Form values saved on localStorage: ${newObservation}`)
   // to save form items on local storage to formData variable
@@ -51,26 +57,41 @@ function onSubmit() {
 
 // let newRecords = ref<Record[]>([])
 
-function getPosition() {
-  // event.stopPropagation()
-  // event.preventDefault()
+async function getPosition() {
   message.value = t('intro.location-message')
+  console.log(Geolocation)
   const options = {
     enableHighAccuracy: true,
-    timeout: 5000,
+    timeout: 10000,
     maximumAge: 0,
   }
 
-  // to save form items on local storage to formData variable
-  navigator.geolocation.getCurrentPosition(success, error, options)
-  message.value = t('intro.location-message')
-  navigator.geolocation.getCurrentPosition(success, error, options)
+  // get the users current position
+  const position = await Geolocation.getCurrentPosition(options)
+  console.log(position)
+  // grab latitude & longitude
+  success(position)
+
+  // event.stopPropagation()
+  // event.preventDefault()
+  // message.value = t('intro.location-message')
+  // const options = {
+  //   enableHighAccuracy: true,
+  //   timeout: 5000,
+  //   maximumAge: 0,
+  // }
+
+  // // to save form items on local storage to formData variable
+  // navigator.geolocation.getCurrentPosition(success, error, options)
+  // message.value = t('intro.location-message')
+  // navigator.geolocation.getCurrentPosition(success, error, options)
 }
 
 function success(pos) {
   const crd = pos.coords
   convertDMS(crd.latitude, crd.longitude)
-  message.value = ''
+  const time_of_pos = new Date(pos.timestamp).toLocaleString()
+  message.value = `${crd.latitude} ${crd.longitude} accuracy is ${crd.accuracy} meters at ${time_of_pos}`
 }
 
 function error(err) {
@@ -284,6 +305,7 @@ function convertDMS(lat, lng) {
           <p>{{ message }}</p>
           <button
             type="button"
+            :hidden="form.latitude != undefined"
             bg="dark-50"
             hover="bg-dark-100"
             p="x-2 y-2"
@@ -294,7 +316,7 @@ function convertDMS(lat, lng) {
           </button>
         </div>
         <FormCetacean />
-        <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction">
+        <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || cetacean.children == undefined || !cetacean.behaviour || !cetacean.reaction">
           <div class="py-1 text-base">
             <label for="checkbox">{{ t('species.other-species') }}</label>
             <input
