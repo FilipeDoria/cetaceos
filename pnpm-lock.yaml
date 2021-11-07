@@ -2,6 +2,8 @@ lockfileVersion: 5.3
 
 specifiers:
   '@antfu/eslint-config': ^0.8.1
+  '@capacitor/core': ^3.2.5
+  '@capacitor/geolocation': ^1.1.2
   '@iconify/json': ^1.1.400
   '@intlify/vite-plugin-vue-i18n': ^2.4.0
   '@types/markdown-it-link-attributes': ^3.0.1
@@ -41,8 +43,11 @@ specifiers:
   vue-i18n: ^9.1.7
   vue-router: ^4.0.11
   vue-tsc: ^0.3.0
+  vue3-table-lite: ^1.0.7
 
 dependencies:
+  '@capacitor/core': 3.2.5
+  '@capacitor/geolocation': 1.1.2_@capacitor+core@3.2.5
   '@vueuse/core': 6.3.2_vue@3.2.11
   '@vueuse/head': 0.6.0_vue@3.2.11
   dexie: 3.0.3
@@ -55,6 +60,7 @@ dependencies:
   vue-demi: 0.11.4_vue@3.2.11
   vue-i18n: 9.1.7_vue@3.2.11
   vue-router: 4.0.11_vue@3.2.11
+  vue3-table-lite: 1.0.7
 
 devDependencies:
   '@antfu/eslint-config': 0.8.1_eslint@7.32.0+typescript@4.4.3
@@ -1324,6 +1330,20 @@ packages:
       '@babel/helper-validator-identifier': 7.15.7
       to-fast-properties: 2.0.0
     dev: true
+
+  /@capacitor/core/3.2.5:
+    resolution: {integrity: sha512-sr5ZhbdCUL6FAiyNEDpSKDEzjHCOsCA5R32inRergcPFRpOArsQi/NfhoMLHaZwZ78HAn9bfFV7JkoSr46NDDw==}
+    dependencies:
+      tslib: 2.3.1
+    dev: false
+
+  /@capacitor/geolocation/1.1.2_@capacitor+core@3.2.5:
+    resolution: {integrity: sha512-J71RqyGNmQ9dIBPK831YgOPZ6Z1wj8tNlVbORIjgz+Q/Q0PzKdjxfELjbgD0hexd+YVu5++hI/atTj71ESKfWg==}
+    peerDependencies:
+      '@capacitor/core': ^3.0.0
+    dependencies:
+      '@capacitor/core': 3.2.5
+    dev: false
 
   /@emmetio/abbreviation/2.2.2:
     resolution: {integrity: sha512-TtE/dBnkTCct8+LntkqVrwqQao6EnPAs1YN3cUgxOxTaBlesBCY37ROUAVZrRlG64GNnVShdl/b70RfAI3w5lw==}
@@ -2667,6 +2687,11 @@ packages:
       browserslist: 4.16.8
       semver: 7.0.0
     dev: true
+
+  /core-js/3.18.3:
+    resolution: {integrity: sha512-tReEhtMReZaPFVw7dajMx0vlsz3oOb8ajgPoHVYGxr8ErnZ6PcYEvvmjGmXlfpnxpkYSdOQttjB+MvVbCGfvLw==}
+    requiresBuild: true
+    dev: false
 
   /core-util-is/1.0.2:
     resolution: {integrity: sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=}
@@ -6297,6 +6322,10 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
+  /tslib/2.3.1:
+    resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
+    dev: false
+
   /tsup/4.14.0_typescript@4.4.3:
     resolution: {integrity: sha512-77rWdzhikTP9mQ34XMRzK83tw++LF6f4ox/HNERlgesB7g6g5VQ1iJlueG9O0P9HAZGVKavUwyoZv0+322p6rg==}
     hasBin: true
@@ -6987,6 +7016,13 @@ packages:
       '@vue/runtime-dom': 3.2.9
       '@vue/shared': 3.2.9
     dev: true
+
+  /vue3-table-lite/1.0.7:
+    resolution: {integrity: sha512-Cni00Hl0D1S8ufdzTqBRCvlEBCUP8aJmtFmhV+esZcmxzic0fosYUBSBC+Py6i+L2dW80ThYvk2+hcWaVZn0Eg==}
+    dependencies:
+      core-js: 3.18.3
+      vue: 3.2.11
+    dev: false
 
   /w3c-hr-time/1.0.2:
     resolution: {integrity: sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ==}

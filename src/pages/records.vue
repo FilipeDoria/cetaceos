@@ -1,16 +1,15 @@
 <script setup async lang="ts">
-import { db } from '~/appdb'
-import data from '~/data/db.json'
+
 const { t } = useI18n()
 
 let cetaceans = ref([])
 let tableHeader = ref([])
+const router = useRouter()
 
 const load = async() => {
   cetaceans = JSON.parse(localStorage.getItem('formData'))
-  console.log(cetaceans)
-  tableHeader = Object.keys(cetaceans[0])
-  console.log(tableHeader)
+  if (cetaceans.length > 0)
+    tableHeader = Object.keys(cetaceans[0])
 }
 
 load()
@@ -41,47 +40,143 @@ async function exportData() {
   document.body.appendChild(downloadLink)
   downloadLink.click()
 }
-
+const deleteSighting = (id: Number) => {
+  cetaceans = cetaceans.filter((ele) => {
+    return ele.id != id
+  })
+  localStorage.setItem('formData', JSON.stringify(cetaceans))
+  router.go('/')
+}
 </script>
 
 <template>
-  <div v-if="cetaceans == undefined">
+  <div v-if="(cetaceans == undefined || cetaceans.length==0)">
     {{ t('button.no-data') }}
   </div>
 
-  <div class="table center">
-    <div class="table-header-group">
-      <div class="table-row">
-        <div
+  <!-- <div id="table-demo" class="container">
+    <table :class="{'with-header': `${true}`}">
+      <tr :class="{bold: true}">
+        <td
           v-for="key in tableHeader"
           :key="key"
-          class="table-cell"
         >
           {{ key }}
-        </div>
-      </div>
-    </div>
-    <div v-for="cetacean in cetaceans" :key="cetacean" class="table-row-group">
-      <div class="table-row">
-        <div v-for="key in cetacean" :key="key.id" class="table-cell">
+        </td>
+      </tr>
+      <tr v-for="cetacean in cetaceans" :key="cetacean" class="table-row">
+        <td v-for="key in cetacean" :key="key.id" class="table-cell">
           {{ key }}
+        </td>
+      </tr>
+    </table>
+  </div> -->
+
+  <!-- component -->
+  <div v-else>
+    <section class="container mx-auto font-mono">
+      <div class="w-full mb-4 overflow-hidden rounded-lg shadow-lg">
+        <div class="w-full overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                <th class="px-1 py-1 text-center">
+                  Id
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.company') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.ship') }}
+                </th><th class="px-1 py-1 text-center">
+                  {{ t('records.trip') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.date') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.time') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.sea_conditions') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.latitude') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.longitude') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.species') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.total') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.children') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.behaviour') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.reaction') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.other_info') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.other_species') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.multipleSpecies') }}
+                </th>
+                <th class="px-1 py-1 text-center">
+                  {{ t('records.actions') }}
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <tr v-for="cetacean in cetaceans" :key="cetacean" class="text-gray-700">
+                <td v-for="key in cetacean" :key="key" class="px-1 py-1 text-center text-sm border">
+                  <p v-if="typeof key === &quot;boolean&quot;">
+                    {{ key == false ? t('general.false') : t('general.true') }}
+                  </p>
+                  <p v-else>
+                    {{ key }}
+                  </p>
+                </td>
+                <td class="px-1 py-1 text-center text-sm border">
+                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded m-1" @click="editSighting(cetacean.id)">
+                    {{ t('records.actions-edit') }}
+                  </button>
+                  <button
+                    class="
+                bg-red-500
+                hover:bg-red-700
+                text-white
+                font-bold
+                py-1 px-2
+                border
+                border-red-500
+                rounded"
+                    @click="deleteSighting(cetacean.id)"
+                  >
+                    {{ t('records.actions-delete') }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
+    </section>
   </div>
-  <!-- <div v-else-if="!form" class="py-4">
-    <p>Data table</p>
-  </div> -->
+
   <button
     class="m-3 text-sm btn"
-    :disabled="cetaceans == undefined"
+    :disabled="cetaceans == undefined || cetaceans.length==0"
     @click="exportData()"
   >
     {{ t('button.export-data') }}
   </button>
 </template>
-
-<route lang="yaml">
-meta:
-  layout: default
-</route>
