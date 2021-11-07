@@ -100,8 +100,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
       manifest: {
-        name: 'Avistamentos',
-        short_name: 'Avistamentos',
+        name: 'Avistamentos Madeira',
+        short_name: 'Avistamentos Madeira',
         theme_color: '#ffffff',
         icons: [
           {

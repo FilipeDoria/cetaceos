@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const router = useRouter()
+
 </script>
 <template>
   <div>
@@ -12,7 +14,5 @@ const { t } = useI18n()
     <p>
       <em class="text-sm opacity-75">{{ t('intro.desc') }}</em>
     </p>
-
-    <div class="py-4" />
-  </div>
+  <div class="py-4" />
 </template>

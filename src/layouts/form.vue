@@ -1,5 +1,7 @@
 
 <script setup lang="ts">
+import { Geolocation } from '@capacitor/geolocation'
+
 import { useFormStore } from '~/stores/form'
 import { useCetaceanStore } from '~/stores/cetacean'
 import { useRecordsStore } from '~/stores/records'
@@ -16,10 +18,13 @@ const message = ref('')
 
 function onSubmit() {
   // const newId = data.length
+  const previousDataLength = data.length
+  const newDataLength = 0
   const newObservation: Record = {
     id: data.length,
     company: form.company,
     ship: form.ship,
+    trip: form.trip,
     date: form.date,
     time: form.time,
     seaConditions: form.seaConditions,
@@ -27,17 +32,20 @@ function onSubmit() {
     longitude: form.longitude,
     specie: cetacean.specie,
     total: cetacean.total,
-    children: cetacean.child,
+    children: cetacean.children,
     behaviour: cetacean.behaviour,
     reaction: cetacean.reaction,
     otherInfo: cetacean.otherInfo,
     otherSpecies: cetacean.otherSpecies,
+    multipleSpecies: form.multipleSpecies,
   }
 
   data.push(newObservation)
 
-  for (const item of records.records)
+  for (const item of records.records) {
+    // TODO add child compo validations
     data.push(item)
+  }
 
   console.log(`Form values saved on localStorage: ${newObservation}`)
   // to save form items on local storage to formData variable
@@ -51,24 +59,45 @@ function onSubmit() {
 
 // let newRecords = ref<Record[]>([])
 
-function getPosition() {
-  // event.stopPropagation()
-  // event.preventDefault()
-  message.value = t('intro.location-message')
+async function getPosition() {
   const options = {
     enableHighAccuracy: true,
     timeout: 10000,
     maximumAge: 0,
   }
 
-  // to save form items on local storage to formData variable
+  // get the users current position
+  // const position = await Geolocation.getCurrentPosition(options)
+  // grab latitude & longitude
+  // success(position)
+
+  // event.stopPropagation()
+  // event.preventDefault()
+  message.value = t('intro.location-message')
+  // const options = {
+  //   enableHighAccuracy: true,
+  //   timeout: 5000,
+  //   maximumAge: 0,
+  // }
+
+  // // to save form items on local storage to formData variable
   navigator.geolocation.getCurrentPosition(success, error, options)
+  // message.value = t('intro.location-message')
+  // navigator.geolocation.getCurrentPosition(success, error, options)
 }
 
 function success(pos) {
   const crd = pos.coords
-  convertDMS(crd.latitude, crd.longitude)
-  message.value = ''
+  const time_of_pos = new Date(pos.timestamp).toLocaleString()
+  if (crd.accuracy > 20 || crd.speed === null || (Date(pos.timestamp) - Date.now()) > 1000) {
+    message.value = 'Location signal is unreliable, please look for a better position with clear sky. Else please reset location settings on your device and try again.'
+  }
+  else {
+    const id = document.getElementById('location')
+    id.style.display = 'none'
+    message.value = `${crd.latitude} ${crd.longitude}\naccuracy is ${crd.accuracy.toFixed(2)} meters\nat ${time_of_pos}`
+    convertDMS(crd.latitude, crd.longitude)
+  }
 }
 
 function error(err) {
@@ -110,6 +139,7 @@ function multipleSpeciesLoader() {
       id: data.length + i + 1,
       company: form.company,
       ship: form.ship,
+      trip: form.trip,
       date: form.date,
       time: form.time,
       seaConditions: form.seaConditions,
@@ -122,6 +152,7 @@ function multipleSpeciesLoader() {
       reaction: '',
       otherInfo: '',
       otherSpecies: '',
+      multipleSpecies: form.multipleSpecies,
     }
     console.log(`dummy object: ${JSON.stringify(dummy)}`)
     newRecords.add(dummy)
@@ -186,6 +217,53 @@ function convertDMS(lat, lng) {
           >
         </div>
         <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.trip') }}</label>
+          <select
+            id=""
+            v-model="form.trip"
+            name=""
+            p="x-4 y-2"
+            w="320px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+            required
+          >
+            <option value="" disabled selected hidden>
+              {{ t('intro.trip') }}
+            </option>
+            <option
+              :value="1"
+              style="background: #000;"
+              text-align="center"
+            >
+              {{ t('intro.trip1') }}
+            </option>
+            <option
+              :value="2"
+              style="background: #000;"
+              text-align="center"
+            >
+              {{ t('intro.trip2') }}
+            </option>
+            <option
+              :value="3"
+              style="background: #000;"
+              text-align="center"
+            >
+              {{ t('intro.trip3') }}
+            </option>
+            <option
+              :value="4"
+              style="background: #000;"
+              text-align="center"
+            >
+              {{ t('intro.trip4') }}
+            </option>
+          </select>
+        </div>
+        <div class="py-1">
           <label class="" for="input">{{ t('intro.select-date') }}</label>
           <input
             id="input"
@@ -248,7 +326,6 @@ function convertDMS(lat, lng) {
           </select>
         </div>
         <div class="py-1">
-          <label class="hidden" for="input">{{ t('intro.whats-the-latitude') }}</label>
           <input
             id="input"
             v-model="form.latitude"
@@ -257,7 +334,22 @@ function convertDMS(lat, lng) {
             type="string"
             autocomplete="off"
             p="x-4 y-2"
-            w="320px"
+            w="150px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+          >
+          .
+          <input
+            id="input"
+            v-model="form.longitude"
+            style="padding-left:25px; padding-right:25px;"
+            :placeholder="t('intro.whats-the-longitude')"
+            type="string"
+            autocomplete="off"
+            p="x-4 y-2"
+            w="150px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
@@ -265,22 +357,9 @@ function convertDMS(lat, lng) {
           >
         </div>
         <div class="py-1">
-          <label class="hidden" for="input">{{ t('intro.whats-the-longitude') }}</label>
-          <input
-            id="input"
-            v-model="form.longitude"
-            :placeholder="t('intro.whats-the-longitude')"
-            type="string"
-            autocomplete="off"
-            p="x-4 y-2"
-            w="320px"
-            text="center"
-            bg="transparent"
-            border="~ rounded gray-200 dark:gray-700"
-            outline="none active:none"
-          >
           <p>{{ message }}</p>
           <button
+            id="location"
             type="button"
             bg="dark-50"
             hover="bg-dark-100"
@@ -292,7 +371,7 @@ function convertDMS(lat, lng) {
           </button>
         </div>
         <FormCetacean />
-        <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction">
+        <div class="py-1" :hidden="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || cetacean.children == undefined || !cetacean.behaviour || !cetacean.reaction">
           <div class="py-1 text-base">
             <label for="checkbox">{{ t('species.other-species') }}</label>
             <input
@@ -341,7 +420,7 @@ function convertDMS(lat, lng) {
 
           <button
             class="m-4 text-sm btn"
-            :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || !cetacean.behaviour || !cetacean.reaction "
+            :disabled="!form.date || !form.time || !form.seaConditions || !form.latitude || !form.longitude || !cetacean.specie || !cetacean.total || cetacean.children == undefined || !cetacean.behaviour || !cetacean.reaction "
             @click="onSubmit"
             @keyup.enter="onSubmit"
           >

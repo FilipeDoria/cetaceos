@@ -12,6 +12,7 @@ export const useFormStore = defineStore('form', () => {
 
   const company = ref('')
   const ship = ref('')
+  const trip = ref('')
   const longitude = ref('')
   const latitude = ref('')
   const seaConditions = ref('')
@@ -40,6 +41,7 @@ export const useFormStore = defineStore('form', () => {
     savedName,
     company,
     ship,
+    trip,
     longitude,
     latitude,
     seaConditions,
