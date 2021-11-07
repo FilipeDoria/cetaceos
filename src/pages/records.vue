@@ -1,16 +1,16 @@
 <script setup async lang="ts">
-import { db } from '~/appdb'
-import data from '~/data/db.json'
 const { t } = useI18n()
 
 let cetaceans = ref([])
 let tableHeader = ref([])
 
 const load = async() => {
-  cetaceans = JSON.parse(localStorage.getItem('formData'))
-  console.log(cetaceans)
-  tableHeader = Object.keys(cetaceans[0])
-  console.log(tableHeader)
+  if (typeof window !== 'undefined') {
+    cetaceans = JSON.parse(localStorage.getItem('formData'))
+    console.log(cetaceans)
+    tableHeader = Object.keys(cetaceans[0])
+    console.log(tableHeader)
+  }
 }
 
 load()
