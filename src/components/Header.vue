@@ -4,7 +4,7 @@ const { t } = useI18n()
 <template>
   <div>
     <p class="text-4xl">
-      <carbon-campsite class="inline-block" />
+      <noto-seal class="inline-block" />
     </p>
     <p>
       {{ t('general.title') }}
