@@ -14,5 +14,6 @@ const router = useRouter()
     <p>
       <em class="text-sm opacity-75">{{ t('intro.desc') }}</em>
     </p>
+  </div>
   <div class="py-4" />
 </template>
