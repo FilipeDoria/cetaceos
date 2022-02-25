@@ -1,15 +1,16 @@
 <script setup async lang="ts">
-
 const { t } = useI18n()
-
 let cetaceans = ref([])
 let tableHeader = ref([])
 const router = useRouter()
 
 const load = async() => {
-  cetaceans = JSON.parse(localStorage.getItem('formData'))
-  if (cetaceans.length > 0)
+  if (typeof window !== 'undefined') {
+    cetaceans = JSON.parse(localStorage.getItem('formData'))
+    console.log(cetaceans)
     tableHeader = Object.keys(cetaceans[0])
+    console.log(tableHeader)
+  }
 }
 
 load()

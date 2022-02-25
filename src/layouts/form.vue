@@ -7,7 +7,7 @@ import { useCetaceanStore } from '~/stores/cetacean'
 import { useRecordsStore } from '~/stores/records'
 import Record from '~/types/Record'
 
-const temp = localStorage.getItem('formData')
+const temp = typeof window !== 'undefined' ? localStorage.getItem('formData') : null
 const data = temp === null ? [] : JSON.parse(temp)
 
 const cetacean = useCetaceanStore()

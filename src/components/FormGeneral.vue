@@ -1,6 +1,9 @@
 <script setup lang="ts">
+<<<<<<< HEAD
+=======
 import { Geolocation } from 'capacitor/geolocation'
 import { get, set, update } from 'idb-keyval'
+>>>>>>> a8115f3601875529e15cb71e09c3a08b182a7c3b
 import { useFormStore } from '~/stores/form'
 const form = useFormStore()
 
@@ -10,12 +13,15 @@ const go = async() => {
   if (form.seaConditions) {
     form.valid = !form.valid
     // to save form items on local storage to formData variable
-    localStorage.setItem('formData', JSON.stringify(form))
-    // eslint-disable-next-line no-console
-    console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
-    await set('form1', form)
-      .then(() => console.log('Data saved in the DB'))
-      .catch(err => console.log('Data saving failed!', err))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('formData', JSON.stringify(form))
+      // eslint-disable-next-line no-console
+
+      console.log(`Form values saved on localStorage: ${localStorage.getItem('formData')}`)
+      await set('form1', form)
+        .then(() => console.log('Data saved in the DB'))
+        .catch(err => console.log('Data saving failed!', err))
+    }
   }
 }
 
