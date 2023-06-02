@@ -117,7 +117,12 @@ const options = [
 ]
 
 form.company = 'H2O Madeira'
-form.ship = 'Cetus'
+form.ship = ''
+
+const shipOptions = [
+  { text: 'Cetus', value: 'Cetus' },
+  { text: 'Pakicetus', value: 'Pakicetus' },
+]
 
 function toDegreesMinutesAndSeconds(coordinate) {
   const absolute = Math.abs(coordinate)
@@ -202,19 +207,31 @@ function convertDMS(lat, lng) {
         </div>
         <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.whats-the-ship-name') }}</label>
-          <input
-            id="input"
+          <select
+            id=""
             v-model="form.ship"
-            :placeholder="t('intro.whats-the-ship-name')"
-            type="text"
-            autocomplete="off"
+            name=""
             p="x-4 y-2"
-            w="320px"
+            w="250px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
             outline="none active:none"
+            required
           >
+            <option value="" disabled selected hidden>
+              {{ t('intro.whats-the-ship-name') }}
+            </option>
+            <option
+              v-for="option in shipOptions"
+              :key="option.value"
+              :value="option.value"
+              style="background: transparent"
+              text-align="center"
+            >
+              {{ option.text }}
+            </option>
+          </select>
         </div>
         <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.trip') }}</label>
@@ -235,28 +252,28 @@ function convertDMS(lat, lng) {
             </option>
             <option
               :value="1"
-              style="background: #000;"
+              style="background: transparent"
               text-align="center"
             >
               {{ t('intro.trip1') }}
             </option>
             <option
               :value="2"
-              style="background: #000;"
+              style="background: transparent"
               text-align="center"
             >
               {{ t('intro.trip2') }}
             </option>
             <option
               :value="3"
-              style="background: #000;"
+              style="background: transparent"
               text-align="center"
             >
               {{ t('intro.trip3') }}
             </option>
             <option
               :value="4"
-              style="background: #000;"
+              style="background: transparent"
               text-align="center"
             >
               {{ t('intro.trip4') }}

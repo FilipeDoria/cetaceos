@@ -1,9 +1,6 @@
 <script setup lang="ts">
-<<<<<<< HEAD
-=======
 import { Geolocation } from 'capacitor/geolocation'
 import { get, set, update } from 'idb-keyval'
->>>>>>> a8115f3601875529e15cb71e09c3a08b182a7c3b
 import { useFormStore } from '~/stores/form'
 const form = useFormStore()
 
@@ -69,8 +66,13 @@ const options = [
   { text: '6 - Vento Fresco (39 - 49 Km/h)', value: '6' },
 ]
 
+const shipOptions = [
+  { text: 'Cetus', value: 'Cetus' },
+  { text: 'Pakicetus', value: 'Pakicetus' },
+]
+
 form.company = 'H2O Madeira'
-form.ship = 'Cetus'
+// form.ship = ''
 const misto = false
 
 function toDegreesMinutesAndSeconds(coordinate) {
@@ -118,19 +120,25 @@ function convertDMS(lat, lng) {
     </div>
     <div class="py-1">
       <label class="hidden" for="input">{{ t('intro.whats-the-ship-name') }}</label>
-      <input
-        id="input"
+      <select
+        id=""
         v-model="form.ship"
-        :placeholder="t('intro.whats-the-ship-name')"
-        type="text"
-        autocomplete="off"
+        name=""
         p="x-4 y-2"
         w="250px"
         text="center"
         bg="transparent"
         border="~ rounded gray-200 dark:gray-700"
         outline="none active:none"
+        required
       >
+        <option value="" disabled selected hidden>
+          {{ t('intro.whats-the-ship-name') }}
+        </option>
+        <option v-for="option in shipOptions" :key="option.value" :value="option.value">
+          {{ option.text }}
+        </option>
+      </select>
     </div>
     <div class="py-1">
       <label class="" for="input">{{ t('intro.select-date') }}</label>
