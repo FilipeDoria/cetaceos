@@ -194,7 +194,7 @@ function checkValue() {
         :placeholder="t('species.reaction')"
         name=""
         p="x-4 y-2"
-        w="320px"
+        w="350px"
         text="center"
         bg="transparent"
         border="~ rounded gray-200 dark:gray-700"

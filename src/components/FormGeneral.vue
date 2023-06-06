@@ -71,7 +71,7 @@ const shipOptions = [
   { text: 'Pakicetus', value: 'Pakicetus' },
 ]
 
-form.company = 'H2O Madeira'
+// form.company = 'H2O Madeira'
 // form.ship = ''
 const misto = false
 

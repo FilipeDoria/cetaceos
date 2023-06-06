@@ -116,11 +116,16 @@ const options = [
   { text: '6 - Vento Fresco (39 - 49 Km/h)', value: '6 - vento fresco' },
 ]
 
-form.company = 'H2O Madeira'
+// form.company = 'H2O Madeira'
+const companyOptions = [
+  { text: 'H2O Madeira', value: 'h2omadeira' },
+  { text: 'Madeira Wil Blue', value: 'madeirawildblue' },
+]
+
 form.ship = ''
 
 const shipOptions = [
-  { text: 'Cetus', value: 'Cetus' },
+  { text: 'Cetos', value: 'Cetus' },
   { text: 'Pakicetus', value: 'Pakicetus' },
 ]
 
@@ -189,7 +194,7 @@ function convertDMS(lat, lng) {
     <div class="p-1">
       {{ t('form.header-message') }}
       <form action="/cetacean" method="">
-        <div class="py-1">
+        <!-- <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
           <input
             id="input"
@@ -204,11 +209,39 @@ function convertDMS(lat, lng) {
             border="~ rounded gray-200 dark:gray-700"
             outline="none active:none"
           >
+        </div> -->
+        <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
+          <select
+            id="company"
+            v-model="form.company"
+            name=""
+            p="x-4 y-2"
+            w="270px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+            required
+          >
+            <option value="" disabled selected hidden>
+              {{ t('intro.whats-the-company-name') }}
+            </option>
+            <option
+              v-for="option in companyOptions"
+              :key="option.value"
+              :value="option.value"
+              style="background: transparent"
+              text-align="center"
+            >
+              {{ option.text }}
+            </option>
+          </select>
         </div>
         <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.whats-the-ship-name') }}</label>
           <select
-            id=""
+            id="ship"
             v-model="form.ship"
             name=""
             p="x-4 y-2"
@@ -240,7 +273,7 @@ function convertDMS(lat, lng) {
             v-model="form.trip"
             name=""
             p="x-4 y-2"
-            w="320px"
+            w="150px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
