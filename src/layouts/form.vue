@@ -118,14 +118,14 @@ const options = [
 
 // form.company = 'H2O Madeira'
 const companyOptions = [
-  { text: 'H2O Madeira', value: 'h2omadeira' },
-  { text: 'Madeira Wil Blue', value: 'madeirawildblue' },
+  { text: 'H2O Madeira', value: 'H2O Madeira' },
+  { text: 'Madeira Wild Blue', value: 'Madeira Wild Blue' },
 ]
 
 form.ship = ''
 
 const shipOptions = [
-  { text: 'Cetos', value: 'Cetus' },
+  { text: 'Cetos', value: 'Cetos' },
   { text: 'Pakicetus', value: 'Pakicetus' },
 ]
 

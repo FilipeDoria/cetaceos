@@ -9,6 +9,8 @@ const load = async() => {
     cetaceans = JSON.parse(localStorage.getItem('formData'))
     console.log(cetaceans)
     tableHeader = Object.keys(cetaceans[0])
+    cetaceans = cetaceans.reverse()
+    console.log(cetaceans)
     console.log(tableHeader)
   }
 }
