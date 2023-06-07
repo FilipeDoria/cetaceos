@@ -21,7 +21,7 @@ function onSubmit() {
   const previousDataLength = data.length
   const newDataLength = 0
   const newObservation: Record = {
-    id: data.length,
+    id: data.length + 1,
     company: form.company,
     ship: form.ship,
     trip: form.trip,

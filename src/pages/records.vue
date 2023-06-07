@@ -19,7 +19,7 @@ const load = (): void => {
     const parsedData: Cetacean[] = JSON.parse(formData)
     cetaceans.value = parsedData.map((ele, index) => ({
       ...ele,
-      id: index + 1,
+      id: index,
     }))
   }
   cetaceans.value = cetaceans.value.reverse()
@@ -31,7 +31,7 @@ const deleteSighting = (id: number): void => {
     if (index !== -1) {
       cetaceans.value.splice(index, 1) // Remove the entry from the array
 
-      localStorage.setItem('formData', JSON.stringify(cetaceans.value))
+      localStorage.setItem('formData', JSON.stringify(cetaceans.value.reverse()))
       router.go('/')
     }
   }
