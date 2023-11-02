@@ -52,12 +52,14 @@ async function exportData() {
   )
   csvString += '\n'
 
-  form.forEach((element) => {
-    Object.values(element).forEach((value, index) => {
-      (index === Object.values(element).length - 1) ? csvString += `${value}` : csvString += `${value},`
+  // Assuming form is a Ref and its value is an array
+  form.value.forEach((element) => {
+    Object.values(element).forEach((value, index, array) => {
+      csvString += (index === array.length - 1) ? `${value}` : `${value},`
     })
     csvString += '\n'
   })
+
   // const csvFile = new Blob([csvString], { type: 'text/csv' })
   const downloadLink = document.createElement('a')
   downloadLink.download = 'avistamentos.csv'
