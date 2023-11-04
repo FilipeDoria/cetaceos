@@ -1,18 +1,43 @@
 <script setup async lang="ts">
+import { ref } from 'vue'
 const { t } = useI18n()
-let cetaceans = ref([])
-let tableHeader = ref([])
+const tableHeader = ref([])
 const router = useRouter()
 
-const load = async() => {
-  if (typeof window !== 'undefined') {
-    cetaceans = JSON.parse(localStorage.getItem('formData'))
-    console.log(cetaceans)
-    tableHeader = Object.keys(cetaceans[0])
-    console.log(tableHeader)
+// Define the type of the array elements
+interface Cetacean {
+  id: number
+  // Other properties...
+}
+
+// Create a ref for the cetaceans array
+const cetaceans = ref<Cetacean[]>([])
+
+const load = (): void => {
+  const formData = localStorage.getItem('formData')
+  if (formData) {
+    const parsedData: Cetacean[] = JSON.parse(formData)
+    cetaceans.value = parsedData.map((ele, index) => ({
+      ...ele,
+      id: index,
+    }))
+  }
+  cetaceans.value = cetaceans.value.reverse()
+}
+
+const deleteSighting = (id: number): void => {
+  if (Array.isArray(cetaceans.value)) {
+    const index = cetaceans.value.findIndex(ele => ele.id === id)
+    if (index !== -1) {
+      cetaceans.value.splice(index, 1) // Remove the entry from the array
+
+      localStorage.setItem('formData', JSON.stringify(cetaceans.value.reverse()))
+      router.go('/')
+    }
   }
 }
 
+// Call the load function to initialize the data on page load
 load()
 
 const error = ref(null)
@@ -22,17 +47,19 @@ async function exportData() {
   console.log(form)
   let csvString = '' // initializing the final form string for the excel
   // const head = Object.keys(form[0]) // getting all the form keys in usage to fill the export first row
-  tableHeader.forEach((key, index) =>
+  tableHeader.value.forEach((key, index) =>
     (index === Object.values(tableHeader).length - 1) ? csvString += `${key}` : csvString += `${key},`,
   )
   csvString += '\n'
 
-  form.forEach((element) => {
-    Object.values(element).forEach((value, index) => {
-      (index === Object.values(element).length - 1) ? csvString += `${value}` : csvString += `${value},`
+  // Assuming form is a Ref and its value is an array
+  form.value.forEach((element) => {
+    Object.values(element).forEach((value, index, array) => {
+      csvString += (index === array.length - 1) ? `${value}` : `${value},`
     })
     csvString += '\n'
   })
+
   // const csvFile = new Blob([csvString], { type: 'text/csv' })
   const downloadLink = document.createElement('a')
   downloadLink.download = 'avistamentos.csv'
@@ -40,13 +67,6 @@ async function exportData() {
   downloadLink.style.display = 'none'
   document.body.appendChild(downloadLink)
   downloadLink.click()
-}
-const deleteSighting = (id: Number) => {
-  cetaceans = cetaceans.filter((ele) => {
-    return ele.id != id
-  })
-  localStorage.setItem('formData', JSON.stringify(cetaceans))
-  router.go('/')
 }
 </script>
 

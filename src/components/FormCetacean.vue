@@ -14,7 +14,7 @@ const mysticetosSpeciesOptions = [
   { text: 'Baleia Sardinheira', value: 'baleia sardinheira' },
   { text: 'Baleia Azul', value: 'baleia azul' },
   { text: 'Baleia de Bossa', value: 'baleia de bossa' },
-  { text: 'Baleia Anã', value: 'baleia ana' },
+  { text: 'Baleia Anã', value: 'baleia anã' },
   { text: 'Outro', value: 'outro' },
 ]
 
@@ -24,15 +24,15 @@ const odontocetisSpeciesOptions = [
   { text: 'Golfinho Riscado', value: 'golfinho riscado' },
   { text: 'Golfinho Comum', value: 'golfinho comum' },
   { text: 'Baleia Piloto', value: 'baleia piloto' },
-  { text: 'Golfinho Caldeirão', value: 'golfinho caldeirao' },
+  { text: 'Golfinho Caldeirão', value: 'golfinho caldeirão' },
   { text: 'Golfinho Grampo', value: 'golfinho grampo' },
   { text: 'Falsa Orca', value: 'falsa orca' },
   { text: 'Orca', value: 'orca' },
   { text: 'Orca-Pigméia', value: 'orca-pigmeia' },
-  { text: 'Golfinho Cabeça De Melão', value: 'golfinho cabeca de melao' },
+  { text: 'Golfinho Cabeça De Melão', value: 'golfinho cabeça de melão' },
   { text: 'Golfinho De Fraser', value: 'golfinho de fraser' },
   { text: 'Baleia Cachalote', value: 'baleia cachalote' },
-  { text: 'Baleia Cachalote Anão', value: 'baleia cachalote anao' },
+  { text: 'Baleia Cachalote Anão', value: 'baleia cachalote anão' },
   { text: 'Baleia Cachalote Pigmeu', value: 'baleia cachalote pigmeu' },
   { text: 'Baleia Bico De Blainville', value: 'baleia bico de Blainville' },
   { text: 'Baleia Bico De Cuvier Ou Zífio', value: 'baleia bico de cuvier' },
@@ -194,7 +194,7 @@ function checkValue() {
         :placeholder="t('species.reaction')"
         name=""
         p="x-4 y-2"
-        w="320px"
+        w="350px"
         text="center"
         bg="transparent"
         border="~ rounded gray-200 dark:gray-700"

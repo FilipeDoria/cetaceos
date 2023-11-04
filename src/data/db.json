@@ -1,8 +1,8 @@
 {
     "cetaceans": [{
         "id": 0,
-        "company": "H2O Madeira",
-        "ship": "Cetus",
+        "company": "",
+        "ship": "",
         "date": "2021-09-29",
         "time": "15:32",
         "seaConditions": "3",

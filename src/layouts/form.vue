@@ -21,7 +21,7 @@ function onSubmit() {
   const previousDataLength = data.length
   const newDataLength = 0
   const newObservation: Record = {
-    id: data.length,
+    id: data.length + 1,
     company: form.company,
     ship: form.ship,
     trip: form.trip,
@@ -116,8 +116,18 @@ const options = [
   { text: '6 - Vento Fresco (39 - 49 Km/h)', value: '6 - vento fresco' },
 ]
 
-form.company = 'H2O Madeira'
-form.ship = 'Cetus'
+// form.company = 'H2O Madeira'
+const companyOptions = [
+  { text: 'H2O Madeira', value: 'H2O Madeira' },
+  { text: 'Madeira Wild Blue', value: 'Madeira Wild Blue' },
+]
+
+form.ship = ''
+
+const shipOptions = [
+  { text: 'Cetos', value: 'Cetos' },
+  { text: 'Pakicetus', value: 'Pakicetus' },
+]
 
 function toDegreesMinutesAndSeconds(coordinate) {
   const absolute = Math.abs(coordinate)
@@ -184,7 +194,7 @@ function convertDMS(lat, lng) {
     <div class="p-1">
       {{ t('form.header-message') }}
       <form action="/cetacean" method="">
-        <div class="py-1">
+        <!-- <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
           <input
             id="input"
@@ -199,22 +209,62 @@ function convertDMS(lat, lng) {
             border="~ rounded gray-200 dark:gray-700"
             outline="none active:none"
           >
-        </div>
+        </div> -->
         <div class="py-1">
-          <label class="hidden" for="input">{{ t('intro.whats-the-ship-name') }}</label>
-          <input
-            id="input"
-            v-model="form.ship"
-            :placeholder="t('intro.whats-the-ship-name')"
-            type="text"
-            autocomplete="off"
+          <label class="hidden" for="input">{{ t('intro.whats-the-company-name') }}</label>
+          <select
+            id="company"
+            v-model="form.company"
+            name=""
             p="x-4 y-2"
-            w="320px"
+            w="270px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
             outline="none active:none"
+            required
           >
+            <option value="" disabled selected hidden>
+              {{ t('intro.whats-the-company-name') }}
+            </option>
+            <option
+              v-for="option in companyOptions"
+              :key="option.value"
+              :value="option.value"
+              style="background: transparent"
+              text-align="center"
+            >
+              {{ option.text }}
+            </option>
+          </select>
+        </div>
+        <div class="py-1">
+          <label class="hidden" for="input">{{ t('intro.whats-the-ship-name') }}</label>
+          <select
+            id="ship"
+            v-model="form.ship"
+            name=""
+            p="x-4 y-2"
+            w="250px"
+            text="center"
+            bg="transparent"
+            border="~ rounded gray-200 dark:gray-700"
+            outline="none active:none"
+            required
+          >
+            <option value="" disabled selected hidden>
+              {{ t('intro.whats-the-ship-name') }}
+            </option>
+            <option
+              v-for="option in shipOptions"
+              :key="option.value"
+              :value="option.value"
+              style="background: transparent"
+              text-align="center"
+            >
+              {{ option.text }}
+            </option>
+          </select>
         </div>
         <div class="py-1">
           <label class="hidden" for="input">{{ t('intro.trip') }}</label>
@@ -223,7 +273,7 @@ function convertDMS(lat, lng) {
             v-model="form.trip"
             name=""
             p="x-4 y-2"
-            w="320px"
+            w="150px"
             text="center"
             bg="transparent"
             border="~ rounded gray-200 dark:gray-700"
@@ -235,28 +285,28 @@ function convertDMS(lat, lng) {
             </option>
             <option
               :value="1"
-              style="background: #000;"
+              style="background: transparent"
               text-align="center"
             >
               {{ t('intro.trip1') }}
             </option>
             <option
               :value="2"
-              style="background: #000;"
+              style="background: transparent"
               text-align="center"
             >
               {{ t('intro.trip2') }}
             </option>
             <option
               :value="3"
-              style="background: #000;"
+              style="background: transparent"
               text-align="center"
             >
               {{ t('intro.trip3') }}
             </option>
             <option
               :value="4"
-              style="background: #000;"
+              style="background: transparent"
               text-align="center"
             >
               {{ t('intro.trip4') }}

@@ -47,7 +47,7 @@ intro:
   whats-the-latitude: Latitude
   whats-the-longitude: Longitude
   whats-the-sea-like: How are the sea conditions?
-  whats-the-ship-name: What is the ship name?
+  whats-the-ship-name: What is the vessel name?
   whats-your-name: What's your name?
 not-found: Not found
 records:
@@ -65,7 +65,7 @@ records:
   other_species: Other Species
   reaction: Reaction
   sea_conditions: Sea Conditions
-  ship: Ship
+  ship: Vessel
   species: Species
   time: time
   title: Records of previous Sightings
